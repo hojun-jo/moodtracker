@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:moodtracker/core/theme/mood_color.dart';
+import 'package:moodtracker/core/theme/mood_text_theme.dart';
 import 'package:moodtracker/core/theme/mood_theme_type.dart';
 
 ThemeData moodThemeData(MoodThemeType appBackground) {
@@ -15,9 +15,6 @@ ThemeData moodThemeData(MoodThemeType appBackground) {
     iconTheme: const IconThemeData(
       color: MoodColor.lightgrey,
     ),
-    textTheme: GoogleFonts.dongleTextTheme().apply(
-      bodyColor: MoodColor.black,
-      displayColor: MoodColor.black,
-    ),
+    textTheme: MoodTextTheme.data,
   );
 }
