@@ -15,4 +15,7 @@ abstract class MoodColor {
 
   // text
   static const black = Color(0xff2F3130);
+  static const darkgrey = Color(0xff4F4F4F);
+  static const grey = Color(0xff8A8A8A);
+  static const lightgrey = Color(0xffBFBFBF);
 }
