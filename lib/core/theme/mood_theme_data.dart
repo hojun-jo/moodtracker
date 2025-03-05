@@ -15,6 +15,15 @@ ThemeData moodThemeData(MoodThemeType appBackground) {
     iconTheme: const IconThemeData(
       color: MoodColor.grey,
     ),
+    inputDecorationTheme: const InputDecorationTheme(
+      border: InputBorder.none,
+    ),
     textTheme: MoodTextTheme.data,
+    textSelectionTheme: TextSelectionThemeData(
+      cursorColor: MoodColor.black,
+      selectionColor: appBackground.toColor(),
+      selectionHandleColor: appBackground.toColor(),
+    ),
+    cardColor: MoodColor.white,
   );
 }

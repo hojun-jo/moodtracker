@@ -5,9 +5,7 @@ import 'package:moodtracker/core/theme/mood_color.dart';
 abstract class MoodTextTheme {
   MoodTextTheme._();
 
-  static final data = TextTheme(
-    bodyMedium: GoogleFonts.dongle(
-      fontSize: 18,
-    ),
+  static final data = GoogleFonts.dongleTextTheme().copyWith(
+    bodyMedium: GoogleFonts.dongle(fontSize: 30),
   );
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:moodtracker/core/theme/mood_color.dart';
 import 'package:moodtracker/core/widgets/small_icon_button.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -19,7 +18,6 @@ class HomeScreen extends StatelessWidget {
                 vertical: 10,
               ),
               child: Card(
-                color: MoodColor.white,
                 elevation: 0,
                 margin: EdgeInsets.zero,
                 child: Padding(
