@@ -22,7 +22,15 @@ class _MainNavigationBarState extends State<MainNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: widget.child),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 15,
+            vertical: 10,
+          ),
+          child: widget.child,
+        ),
+      ),
       bottomNavigationBar: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(top: 20),

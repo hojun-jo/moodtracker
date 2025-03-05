@@ -9,6 +9,7 @@ final GoRouter router = GoRouter(
   initialLocation: AppRoute.home,
   routes: [
     ShellRoute(
+      // TODO: transition
       builder: (context, state, child) => MainNavigationBar(child: child),
       routes: [
         GoRoute(

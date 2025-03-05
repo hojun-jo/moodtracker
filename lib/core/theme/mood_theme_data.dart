@@ -15,8 +15,9 @@ ThemeData moodThemeData(MoodThemeType appBackground) {
     iconTheme: const IconThemeData(
       color: MoodColor.grey,
     ),
-    inputDecorationTheme: const InputDecorationTheme(
+    inputDecorationTheme: InputDecorationTheme(
       border: InputBorder.none,
+      hintStyle: MoodTextTheme.data.bodySmall,
     ),
     textTheme: MoodTextTheme.data,
     textSelectionTheme: TextSelectionThemeData(
@@ -24,6 +25,14 @@ ThemeData moodThemeData(MoodThemeType appBackground) {
       selectionColor: appBackground.toColor(),
       selectionHandleColor: appBackground.toColor(),
     ),
-    cardColor: MoodColor.white,
+    cardTheme: const CardTheme(
+      elevation: 0,
+      margin: EdgeInsets.zero,
+      color: MoodColor.white,
+    ),
+    listTileTheme: ListTileThemeData(
+      tileColor: MoodColor.white,
+      titleTextStyle: MoodTextTheme.data.bodyMedium,
+    ),
   );
 }
