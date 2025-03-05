@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:moodtracker/core/models/mood/mood_type.dart';
+import 'package:moodtracker/core/widgets/mood_card.dart';
 import 'package:moodtracker/core/widgets/small_icon_button.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -17,9 +19,7 @@ class HomeScreen extends StatelessWidget {
                 horizontal: 15,
                 vertical: 10,
               ),
-              child: Card(
-                elevation: 0,
-                margin: EdgeInsets.zero,
+              child: MoodCard(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 20,
@@ -31,10 +31,13 @@ class HomeScreen extends StatelessWidget {
                       Row(
                         spacing: 10,
                         children: [
-                          const FaIcon(FontAwesomeIcons.faceLaugh),
+                          Icon(
+                            MoodType.smile.toIcon(),
+                            size: 30,
+                          ),
                           Text(
                             "Date",
-                            style: Theme.of(context).textTheme.bodyMedium,
+                            style: Theme.of(context).textTheme.bodySmall,
                           ),
                           const Spacer(),
                           SmallIconButton(
@@ -44,7 +47,7 @@ class HomeScreen extends StatelessWidget {
                         ],
                       ),
                       const Text(
-                          "asdlkfjoiewhjkl;jas jd fopqwaiuhefpoiuhas dfhow dfas dfasd fas df  fasdfasd fasd f f fdsa fsa df asdf asd f asdfasd f a sdf as df asdfas dfas d asd f f dfasdfefjo sadojkfo i pasodifj lka;sdfj w3qpoeij laskdjfoiuwaefpoi asdf")
+                          "asdlkfjoiewhjkl;jas jd fopqwaiuhefpoiuhas dfhow dfas dfasd fas df  fasdfasd fasd f f fdsa fsa df asdf asd f asdfasd f a sdf as df asdfas dfas d asd f f dfasdfefjo sadojkfo i pasodifj lka;sdfj w3qpoeij laskdjfoiuwaefpoi asdf"),
                     ],
                   ),
                 ),

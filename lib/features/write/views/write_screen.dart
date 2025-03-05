@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moodtracker/core/models/mood/mood_type.dart';
+import 'package:moodtracker/core/widgets/mood_card.dart';
 import 'package:moodtracker/features/write/views/widgets/write_icon_button.dart';
 
 class WriteScreen extends StatelessWidget {
@@ -16,9 +17,7 @@ class WriteScreen extends StatelessWidget {
         child: Column(
           spacing: 8,
           children: [
-            Card(
-              elevation: 0,
-              margin: EdgeInsets.zero,
+            MoodCard(
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 child: Row(
@@ -34,9 +33,7 @@ class WriteScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Card(
-              elevation: 0,
-              margin: EdgeInsets.zero,
+            MoodCard(
               child: Padding(
                 padding: const EdgeInsets.all(10),
                 child: TextField(
@@ -48,9 +45,7 @@ class WriteScreen extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {},
-              child: const Card(
-                elevation: 0,
-                margin: EdgeInsets.zero,
+              child: const MoodCard(
                 child: Padding(
                   padding: EdgeInsets.all(10),
                   child: Row(
