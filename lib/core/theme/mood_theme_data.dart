@@ -13,7 +13,7 @@ ThemeData moodThemeData(MoodThemeType appBackground) {
       ),
     ),
     iconTheme: const IconThemeData(
-      color: MoodColor.lightgrey,
+      color: MoodColor.grey,
     ),
     textTheme: MoodTextTheme.data,
   );

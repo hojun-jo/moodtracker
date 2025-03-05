@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:moodtracker/core/constants/app_route.dart';
 import 'package:moodtracker/core/models/main_navigation/main_navigation_type.dart';
-import 'package:moodtracker/core/widgets/main_navigation/widgets/main_navigation_bar_item.dart';
+import 'package:moodtracker/core/widgets/main_navigation/main_navigation_bar_item.dart';
 
 class MainNavigationBar extends StatefulWidget {
   final Widget child;
@@ -24,17 +24,20 @@ class _MainNavigationBarState extends State<MainNavigationBar> {
     return Scaffold(
       body: SafeArea(child: widget.child),
       bottomNavigationBar: SafeArea(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            ...MainNavigationType.values.map((value) {
-              return MainNavigationBarItem(
-                onTap: () => _selecteTap(value),
-                icon: value.toIcon(),
-                isSelected: _currentIndex == value.toIndex(),
-              );
-            }),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.only(top: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              ...MainNavigationType.values.map((value) {
+                return MainNavigationBarItem(
+                  onTap: () => _selecteTap(value),
+                  icon: value.toIcon(),
+                  isSelected: _currentIndex == value.toIndex(),
+                );
+              }),
+            ],
+          ),
         ),
       ),
     );

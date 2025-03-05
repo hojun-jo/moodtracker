@@ -4,11 +4,11 @@ abstract class MoodColor {
   MoodColor._();
 
   // app background
-  static const Color appRed = Color(0xffFBD5BD);
-  static const Color appWhite = Color(0xffFAEEEE);
-  static const Color appGreen = Color(0xffDEE0D1);
-  static const Color appBlue = Color(0xffDBE2EE);
-  static const Color appPurple = Color(0xffE3DBEE);
+  static const Color appRed = Color(0xffe0a4af);
+  static const Color appOrange = Color(0xfff2d0a9);
+  static const Color appWhite = Color(0xfff1e3d3);
+  static const Color appGreen = Color(0xffa6c9c2);
+  static const Color appPurple = Color(0xffbeb6d9);
 
   // widget background
   static const Color white = Color(0xffF5F6F5);

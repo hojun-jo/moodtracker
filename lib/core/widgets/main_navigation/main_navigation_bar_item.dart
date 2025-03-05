@@ -20,7 +20,7 @@ class MainNavigationBarItem extends StatelessWidget {
       onTap: onTap,
       child: FaIcon(
         icon,
-        color: isSelected ? MoodColor.darkgrey : MoodColor.lightgrey,
+        color: isSelected ? MoodColor.darkgrey : MoodColor.grey,
       ),
     );
   }
