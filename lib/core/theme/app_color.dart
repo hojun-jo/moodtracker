@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-abstract class MoodColor {
-  MoodColor._();
+abstract class AppColor {
+  AppColor._();
 
   // app background
   static const Color appRed = Color(0xffe0a4af);

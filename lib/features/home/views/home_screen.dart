@@ -9,6 +9,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: firestore에서 데이터 가져오기
     return CustomScrollView(
       slivers: [
         SliverList.separated(

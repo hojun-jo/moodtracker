@@ -1,7 +1,7 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
-import 'package:moodtracker/core/theme/mood_theme_data.dart';
-import 'package:moodtracker/core/theme/mood_theme_type.dart';
+import 'package:moodtracker/core/theme/app_theme_data.dart';
+import 'package:moodtracker/core/theme/app_theme_type.dart';
 import 'package:moodtracker/router.dart';
 
 class MoodTrackerApp extends StatelessWidget {
@@ -12,7 +12,7 @@ class MoodTrackerApp extends StatelessWidget {
     return MaterialApp.router(
       routerConfig: router,
       title: "Mood Tracker",
-      theme: moodThemeData(MoodThemeType.white),
+      theme: appThemeData(AppThemeType.white),
       builder: DevicePreview.appBuilder,
       locale: DevicePreview.locale(context),
     );

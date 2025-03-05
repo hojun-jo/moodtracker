@@ -1,16 +1,16 @@
 import 'package:google_fonts/google_fonts.dart';
-import 'package:moodtracker/core/theme/mood_color.dart';
+import 'package:moodtracker/core/theme/app_color.dart';
 
-abstract class MoodTextTheme {
-  MoodTextTheme._();
+abstract class AppTextTheme {
+  AppTextTheme._();
 
   static final data = GoogleFonts.dongleTextTheme().copyWith(
     bodyMedium: GoogleFonts.dongle(
-      color: MoodColor.black,
+      color: AppColor.black,
       fontSize: 30,
     ),
     bodySmall: GoogleFonts.dongle(
-      color: MoodColor.grey,
+      color: AppColor.grey,
       fontSize: 24,
     ),
   );

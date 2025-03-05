@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:moodtracker/core/theme/mood_color.dart';
+import 'package:moodtracker/core/theme/app_color.dart';
 
 class MainNavigationBarItem extends StatelessWidget {
   final VoidCallback onTap;
@@ -20,7 +20,7 @@ class MainNavigationBarItem extends StatelessWidget {
       onTap: onTap,
       child: FaIcon(
         icon,
-        color: isSelected ? MoodColor.darkgrey : MoodColor.grey,
+        color: isSelected ? AppColor.darkgrey : AppColor.grey,
       ),
     );
   }

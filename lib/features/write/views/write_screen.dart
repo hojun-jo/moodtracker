@@ -7,6 +7,8 @@ class WriteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: 아이콘 선택 색상 구현
+    // TODO: post 기능(파이어스토어에 저장) 구현
     return SingleChildScrollView(
       child: Column(
         spacing: 8,

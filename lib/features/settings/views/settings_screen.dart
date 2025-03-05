@@ -9,14 +9,17 @@ class SettingsScreen extends StatelessWidget {
     return Column(
       spacing: 8,
       children: [
+        // TODO: app color select 구현
         SettingsItem(
           onTap: () {},
           text: "Theme",
         ),
+        // TODO: lisence 페이지 구현
         SettingsItem(
           onTap: () {},
           text: "Lisence",
         ),
+        // TODO: logout 구현
         SettingsItem(
           onTap: () {},
           text: "Logout",

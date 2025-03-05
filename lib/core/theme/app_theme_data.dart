@@ -1,38 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:moodtracker/core/theme/mood_color.dart';
-import 'package:moodtracker/core/theme/mood_text_theme.dart';
-import 'package:moodtracker/core/theme/mood_theme_type.dart';
+import 'package:moodtracker/core/theme/app_color.dart';
+import 'package:moodtracker/core/theme/app_text_theme.dart';
+import 'package:moodtracker/core/theme/app_theme_type.dart';
 
-ThemeData moodThemeData(MoodThemeType appBackground) {
+ThemeData appThemeData(AppThemeType appBackground) {
   return ThemeData(
     scaffoldBackgroundColor: appBackground.toColor(),
     appBarTheme: AppBarTheme(
       backgroundColor: appBackground.toColor(),
       iconTheme: const IconThemeData(
-        color: MoodColor.darkgrey,
+        color: AppColor.darkgrey,
       ),
     ),
     iconTheme: const IconThemeData(
-      color: MoodColor.grey,
+      color: AppColor.grey,
     ),
     inputDecorationTheme: InputDecorationTheme(
       border: InputBorder.none,
-      hintStyle: MoodTextTheme.data.bodySmall,
+      hintStyle: AppTextTheme.data.bodySmall,
     ),
-    textTheme: MoodTextTheme.data,
+    textTheme: AppTextTheme.data,
     textSelectionTheme: TextSelectionThemeData(
-      cursorColor: MoodColor.black,
+      cursorColor: AppColor.black,
       selectionColor: appBackground.toColor(),
       selectionHandleColor: appBackground.toColor(),
     ),
     cardTheme: const CardTheme(
       elevation: 0,
       margin: EdgeInsets.zero,
-      color: MoodColor.white,
+      color: AppColor.white,
     ),
     listTileTheme: ListTileThemeData(
-      tileColor: MoodColor.white,
-      titleTextStyle: MoodTextTheme.data.bodyMedium,
+      tileColor: AppColor.white,
+      titleTextStyle: AppTextTheme.data.bodyMedium,
     ),
   );
 }
