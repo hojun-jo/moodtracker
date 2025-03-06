@@ -1,23 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:moodtracker/core/constants/app_route.dart';
 import 'package:moodtracker/core/models/main_navigation/main_navigation_type.dart';
 import 'package:moodtracker/core/widgets/main_navigation/main_navigation_bar_item.dart';
 
-class MainNavigationBar extends StatefulWidget {
-  final Widget child;
+class MainNavigationBar extends StatelessWidget {
+  final StatefulNavigationShell navigationShell;
 
   const MainNavigationBar({
     super.key,
-    required this.child,
+    required this.navigationShell,
   });
-
-  @override
-  State<MainNavigationBar> createState() => _MainNavigationBarState();
-}
-
-class _MainNavigationBarState extends State<MainNavigationBar> {
-  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +20,7 @@ class _MainNavigationBarState extends State<MainNavigationBar> {
             horizontal: 15,
             vertical: 10,
           ),
-          child: widget.child,
+          child: navigationShell,
         ),
       ),
       bottomNavigationBar: SafeArea(
@@ -39,9 +31,9 @@ class _MainNavigationBarState extends State<MainNavigationBar> {
             children: [
               ...MainNavigationType.values.map((value) {
                 return MainNavigationBarItem(
-                  onTap: () => _selecteTap(value),
+                  onTap: () => _navigateTo(value),
                   icon: value.toIcon(),
-                  isSelected: _currentIndex == value.toIndex(),
+                  isSelected: navigationShell.currentIndex == value.toIndex(),
                 );
               }),
             ],
@@ -51,20 +43,14 @@ class _MainNavigationBarState extends State<MainNavigationBar> {
     );
   }
 
-  void _selecteTap(MainNavigationType value) {
-    _currentIndex = value.toIndex();
-    _navigate(value);
-    setState(() {});
-  }
-
-  void _navigate(MainNavigationType value) {
+  void _navigateTo(MainNavigationType value) {
     switch (value) {
       case MainNavigationType.home:
-        context.go(AppRoute.home);
+        navigationShell.goBranch(MainNavigationType.home.toIndex());
       case MainNavigationType.write:
-        context.go(AppRoute.write);
+        navigationShell.goBranch(MainNavigationType.write.toIndex());
       case MainNavigationType.settings:
-        context.go(AppRoute.settings);
+        navigationShell.goBranch(MainNavigationType.settings.toIndex());
     }
   }
 }

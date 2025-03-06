@@ -1,5 +1,5 @@
-abstract class AppRoute {
-  AppRoute._();
+abstract class RoutePath {
+  RoutePath._();
 
   static const String home = "/";
   static const String write = "/write";
