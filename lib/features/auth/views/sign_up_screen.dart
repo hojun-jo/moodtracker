@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:moodtracker/route/route_path.dart';
 
-class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -25,7 +23,7 @@ class _SignInScreenState extends State<SignInScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Welcome!",
+          "Create Account",
           style: TextStyle(
             fontSize: 40,
           ),
@@ -63,23 +61,12 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
               ),
               GestureDetector(
-                onTap: _signIn,
+                onTap: _signUp,
                 child: const Card(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Sign In"),
-                    ],
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: _goToSignUp,
-                child: const Card(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Create Account"),
+                      Text("Sign Up"),
                     ],
                   ),
                 ),
@@ -91,9 +78,5 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  void _signIn() {}
-
-  void _goToSignUp() {
-    context.push(RoutePath.signUp);
-  }
+  void _signUp() {}
 }
