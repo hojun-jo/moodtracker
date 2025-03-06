@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:moodtracker/features/auth/views/widgets/auth_app_bar.dart';
+import 'package:moodtracker/features/auth/views/widgets/auth_text_field.dart';
 import 'package:moodtracker/route/route_path.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -23,14 +25,7 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Welcome!",
-          style: TextStyle(
-            fontSize: 40,
-          ),
-        ),
-      ),
+      appBar: const AuthAppBar(title: "Welcome!"),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(20),
@@ -38,29 +33,15 @@ class _SignInScreenState extends State<SignInScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             spacing: 20,
             children: [
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: TextField(
-                    controller: _emailController,
-                    decoration: const InputDecoration(
-                      hintText: "Email",
-                      errorText: "asdf",
-                    ),
-                  ),
-                ),
+              AuthTextField(
+                emailController: _emailController,
+                hintText: "Email",
+                errorText: "asdf",
               ),
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: TextField(
-                    controller: _passwordController,
-                    decoration: const InputDecoration(
-                      hintText: "Password",
-                      errorText: "asdf",
-                    ),
-                  ),
-                ),
+              AuthTextField(
+                emailController: _passwordController,
+                hintText: "Password",
+                errorText: "asdf",
               ),
               GestureDetector(
                 onTap: _signIn,

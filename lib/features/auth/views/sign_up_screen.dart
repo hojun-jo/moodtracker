@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:moodtracker/features/auth/views/widgets/auth_app_bar.dart';
+import 'package:moodtracker/features/auth/views/widgets/auth_text_field.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -21,14 +23,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Create Account",
-          style: TextStyle(
-            fontSize: 40,
-          ),
-        ),
-      ),
+      appBar: const AuthAppBar(title: "Create Account"),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(20),
@@ -36,29 +31,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             spacing: 20,
             children: [
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: TextField(
-                    controller: _emailController,
-                    decoration: const InputDecoration(
-                      hintText: "Email",
-                      errorText: "asdf",
-                    ),
-                  ),
-                ),
+              AuthTextField(
+                emailController: _emailController,
+                hintText: "Email",
+                errorText: "asdf",
               ),
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: TextField(
-                    controller: _passwordController,
-                    decoration: const InputDecoration(
-                      hintText: "Password",
-                      errorText: "asdf",
-                    ),
-                  ),
-                ),
+              AuthTextField(
+                emailController: _passwordController,
+                hintText: "Password",
+                errorText: "asdf",
               ),
               GestureDetector(
                 onTap: _signUp,
