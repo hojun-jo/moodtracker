@@ -9,8 +9,21 @@ class UserModel {
     required this.email,
   });
 
+  UserModel.empty()
+      : uid = "",
+        name = "",
+        email = "";
+
   UserModel.fromJson(Map<String, dynamic> json)
       : uid = json["uid"],
         name = json["name"],
         email = json["email"];
+
+  Map<String, dynamic> toJson() {
+    return {
+      "uid": uid,
+      "name": name,
+      "email": email,
+    };
+  }
 }
