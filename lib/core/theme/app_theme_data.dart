@@ -34,5 +34,9 @@ ThemeData appThemeData(AppThemeType appBackground) {
       tileColor: AppColor.white,
       titleTextStyle: AppTextTheme.data.bodyMedium,
     ),
+    indicatorColor: AppColor.black,
+    dialogTheme: const DialogThemeData(
+      backgroundColor: AppColor.white,
+    ),
   );
 }

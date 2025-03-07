@@ -12,6 +12,10 @@ class HomeRepository {
         .orderBy("createdAt", descending: true)
         .snapshots();
   }
+
+  Future<void> deleteMood({required String uid, required String id}) async {
+    _db.collection("users").doc(uid).collection("moods").doc(id).delete();
+  }
 }
 
 final homeRepo = Provider(

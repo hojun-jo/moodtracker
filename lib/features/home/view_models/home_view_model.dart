@@ -26,6 +26,10 @@ class HomeViewModel extends StreamNotifier<List<MoodModel>> {
     });
   }
 
+  Future<void> deleteMood(MoodModel mood) async {
+    await _repository.deleteMood(uid: mood.uid, id: mood.id);
+  }
+
   String formatDate(DateTime date) {
     return DateFormater.format(date);
   }

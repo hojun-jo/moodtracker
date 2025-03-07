@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:moodtracker/core/models/mood/mood_model.dart';
 import 'package:moodtracker/features/home/view_models/home_view_model.dart';
 import 'package:moodtracker/features/home/views/widgets/mood_card.dart';
@@ -26,7 +27,8 @@ class HomeScreen extends ConsumerWidget {
                     itemCount: data.length,
                     itemBuilder: (context, index) {
                       return MoodCard(
-                        onTrashTap: () => _deleteMood(data[index]),
+                        onTrashTap: () =>
+                            _deleteMood(data[index], context, ref),
                         moodType: data[index].moodType,
                         createdAt: viewModel.formatDate(data[index].createdAt),
                         description: data[index].description,
@@ -49,5 +51,49 @@ class HomeScreen extends ConsumerWidget {
     );
   }
 
-  void _deleteMood(MoodModel mood) {}
+  void _deleteMood(MoodModel mood, BuildContext context, WidgetRef ref) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          child: SizedBox(
+            width: 200,
+            height: 150,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text("Confirm Delete?"),
+                const Divider(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        ref.read(homeProvider.notifier).deleteMood(mood);
+                        context.pop();
+                      },
+                      child: const Text(
+                        "Delete",
+                        style: TextStyle(
+                          color: Colors.red,
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        context.pop();
+                      },
+                      child: const Text(
+                        "Cancel",
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 }
