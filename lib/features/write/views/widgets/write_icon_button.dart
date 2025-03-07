@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 class WriteIconButton extends StatelessWidget {
   final VoidCallback onTap;
   final IconData icon;
+  final Color color;
+  final bool isSelected;
 
   const WriteIconButton({
     super.key,
     required this.onTap,
     required this.icon,
+    required this.color,
+    required this.isSelected,
   });
 
   @override
@@ -17,6 +21,7 @@ class WriteIconButton extends StatelessWidget {
       child: Icon(
         icon,
         size: 36,
+        color: isSelected ? color : null,
       ),
     );
   }

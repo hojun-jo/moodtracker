@@ -14,4 +14,14 @@ class MoodModel {
     required this.description,
     required this.createdAt,
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      "uid": uid,
+      "id": id,
+      "moodType": moodType.toString(),
+      "description": description,
+      "createdAt": createdAt,
+    };
+  }
 }

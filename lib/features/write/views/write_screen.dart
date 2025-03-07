@@ -1,14 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:moodtracker/core/models/mood/mood_type.dart';
+import 'package:moodtracker/features/write/view_models/write_view_model.dart';
 import 'package:moodtracker/features/write/views/widgets/write_icon_button.dart';
+import 'package:moodtracker/route/route_path.dart';
 
-class WriteScreen extends StatelessWidget {
+class WriteScreen extends ConsumerStatefulWidget {
   const WriteScreen({super.key});
 
   @override
+  ConsumerState<WriteScreen> createState() => _WriteScreenState();
+}
+
+class _WriteScreenState extends ConsumerState<WriteScreen> {
+  final TextEditingController _controller = TextEditingController();
+
+  MoodType? _selectedMood;
+  String? _moodErrorMessage;
+  String? _textErrorMessage;
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // TODO: 아이콘 선택 색상 구현
-    // TODO: post 기능(파이어스토어에 저장) 구현
     return SingleChildScrollView(
       child: Column(
         spacing: 8,
@@ -21,18 +40,28 @@ class WriteScreen extends StatelessWidget {
                 children: [
                   ...MoodType.values.map((mood) {
                     return WriteIconButton(
-                      onTap: () {},
+                      onTap: () => _selectMood(mood),
                       icon: mood.toIcon(),
+                      color: mood.toColor(),
+                      isSelected: _selectedMood == mood,
                     );
                   }),
                 ],
               ),
             ),
           ),
+          if (_moodErrorMessage != null)
+            Text(
+              _moodErrorMessage!,
+              style: const TextStyle(
+                color: Colors.red,
+              ),
+            ),
           Card(
             child: Padding(
               padding: const EdgeInsets.all(10),
               child: TextField(
+                controller: _controller,
                 autocorrect: false,
                 maxLines: null,
                 style: Theme.of(context).textTheme.bodyMedium,
@@ -42,8 +71,15 @@ class WriteScreen extends StatelessWidget {
               ),
             ),
           ),
+          if (_textErrorMessage != null)
+            Text(
+              _textErrorMessage!,
+              style: const TextStyle(
+                color: Colors.red,
+              ),
+            ),
           GestureDetector(
-            onTap: () {},
+            onTap: _postMood,
             child: const Card(
               child: Padding(
                 padding: EdgeInsets.all(10),
@@ -59,5 +95,37 @@ class WriteScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _selectMood(MoodType mood) {
+    _selectedMood = mood;
+    setState(() {});
+  }
+
+  void _postMood() {
+    if (_selectedMood == null) {
+      _moodErrorMessage = "Please select your feeling.";
+      setState(() {});
+      return;
+    }
+    if (_controller.text.isEmpty) {
+      _textErrorMessage = "Please write your feeling.";
+      setState(() {});
+      return;
+    }
+
+    final viewModel = ref.read(writeProvider.notifier);
+
+    viewModel.post(_selectedMood!, _controller.text);
+    _resetWriteScreen();
+    context.go(RoutePath.home);
+  }
+
+  void _resetWriteScreen() {
+    _controller.text = "";
+    _selectedMood = null;
+    _moodErrorMessage = null;
+    _textErrorMessage = null;
+    setState(() {});
   }
 }
