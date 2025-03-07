@@ -34,6 +34,7 @@ class MoodCard extends StatelessWidget {
                 Icon(
                   moodType.toIcon(),
                   size: 30,
+                  color: moodType.toColor(),
                 ),
                 Text(
                   createdAt,

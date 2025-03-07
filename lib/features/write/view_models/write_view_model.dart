@@ -27,7 +27,7 @@ class WriteViewModel extends AsyncNotifier {
         createdAt: DateTime.now(),
       );
 
-      await _repository.post(moodModel);
+      await _repository.post(moodModel.uid, moodModel.toJson());
     });
   }
 }

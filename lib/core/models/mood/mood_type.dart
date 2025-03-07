@@ -3,9 +3,17 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:moodtracker/core/theme/app_color.dart';
 
 enum MoodType {
-  angry,
-  blank,
-  smile;
+  angry("angry"),
+  blank("blank"),
+  smile("smmile");
+
+  final String text;
+
+  const MoodType(this.text);
+
+  factory MoodType.fromString(String text) {
+    return values.firstWhere((e) => e.text == text);
+  }
 
   IconData toIcon() {
     switch (this) {
