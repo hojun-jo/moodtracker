@@ -4,11 +4,11 @@ abstract class AppColor {
   AppColor._();
 
   // app background
-  static const Color appRed = Color(0xffe0a4af);
-  static const Color appOrange = Color(0xfff2d0a9);
-  static const Color appWhite = Color(0xfff1e3d3);
-  static const Color appGreen = Color(0xffa6c9c2);
-  static const Color appPurple = Color(0xffbeb6d9);
+  static const Color appCherryBlossom = Color(0xffe0a4af);
+  static const Color appApricot = Color(0xfff2d0a9);
+  static const Color appAlmond = Color(0xfff1e3d3);
+  static const Color appAshGray = Color(0xffa6c9c2);
+  static const Color appThistle = Color(0xffbeb6d9);
 
   // widget background
   static const Color white = Color(0xffF5F6F5);

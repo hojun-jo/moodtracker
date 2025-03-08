@@ -16,17 +16,27 @@ class SettingsItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      clipBehavior: Clip.hardEdge,
-      child: ListTile(
-        onTap: onTap,
-        title: Text(
-          text,
-          style: TextStyle(
-            color: textColor,
+    return GestureDetector(
+      onTap: onTap,
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 14,
+            vertical: 4,
+          ),
+          child: Row(
+            children: [
+              Text(
+                text,
+                style: TextStyle(
+                  color: textColor,
+                ),
+              ),
+              const Spacer(),
+              if (trailing != null) trailing!,
+            ],
           ),
         ),
-        trailing: trailing,
       ),
     );
   }
