@@ -26,6 +26,9 @@ class AuthFormField extends StatelessWidget {
           ),
           validator: validator,
           onChanged: onChanged,
+          style: const TextStyle(
+            fontSize: 22,
+          ),
         ),
       ),
     );

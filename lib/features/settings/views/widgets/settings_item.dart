@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 class SettingsItem extends StatelessWidget {
   final VoidCallback onTap;
   final String text;
-  final bool isShowTrailing;
+  final Color? textColor;
+  final Widget? trailing;
 
   const SettingsItem({
     super.key,
     required this.onTap,
     required this.text,
-    this.isShowTrailing = true,
+    this.textColor,
+    this.trailing,
   });
 
   @override
@@ -18,8 +20,13 @@ class SettingsItem extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       child: ListTile(
         onTap: onTap,
-        title: Text(text),
-        trailing: isShowTrailing ? const Icon(Icons.chevron_right) : null,
+        title: Text(
+          text,
+          style: TextStyle(
+            color: textColor,
+          ),
+        ),
+        trailing: trailing,
       ),
     );
   }
