@@ -8,6 +8,7 @@ ThemeData appThemeData(AppThemeType appBackground) {
     scaffoldBackgroundColor: appBackground.toColor(),
     appBarTheme: AppBarTheme(
       backgroundColor: appBackground.toColor(),
+      surfaceTintColor: appBackground.toColor(),
       iconTheme: const IconThemeData(
         color: AppColor.darkgrey,
       ),

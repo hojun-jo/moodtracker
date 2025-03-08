@@ -18,9 +18,8 @@ class SettingsScreen extends ConsumerWidget {
           onTap: () {},
           text: "Theme",
         ),
-        // TODO: lisence 페이지 구현
         SettingsItem(
-          onTap: () {},
+          onTap: () => showLicensePage(context: context),
           text: "Lisence",
           trailing: const Icon(Icons.chevron_right),
         ),
