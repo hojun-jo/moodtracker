@@ -35,7 +35,9 @@ ThemeData appThemeData(AppThemeType appBackground) {
       tileColor: AppColor.white,
       titleTextStyle: AppTextTheme.data.bodyMedium,
     ),
-    indicatorColor: AppColor.black,
+    progressIndicatorTheme: const ProgressIndicatorThemeData(
+      color: AppColor.black,
+    ),
     dialogTheme: const DialogThemeData(
       backgroundColor: AppColor.white,
     ),

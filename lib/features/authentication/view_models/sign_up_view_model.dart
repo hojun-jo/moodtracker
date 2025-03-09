@@ -21,7 +21,8 @@ class SignUpViewModel extends AsyncNotifier {
     state = await AsyncValue.guard(() async {
       final userCredential = await _authRepo.signUp(email, password);
 
-      ref.read(userProvider.notifier).createUser(userCredential);
+      await _authRepo.signIn(email, password);
+      await ref.read(userProvider.notifier).createUser(userCredential);
     });
   }
 

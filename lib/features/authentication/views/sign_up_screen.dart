@@ -19,6 +19,8 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   final Map<String, String> _formData = {};
   late final SignUpViewModel _viewModel;
 
+  bool _isLoading = false;
+
   @override
   void initState() {
     super.initState();
@@ -63,11 +65,13 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
               ),
               GestureDetector(
                 onTap: _signUp,
-                child: const Card(
+                child: Card(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Sign Up"),
+                      _isLoading
+                          ? const CircularProgressIndicator()
+                          : const Text("Sign Up"),
                     ],
                   ),
                 ),
@@ -112,14 +116,16 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
     }
   }
 
-  void _signUp() {
+  void _signUp() async {
     if (_formKey.currentState == null) return;
     if (_formKey.currentState!.validate()) {
       try {
-        _viewModel.signUp(
+        _setIsLoading(true);
+        await _viewModel.signUp(
           _formData["email"]!,
           _formData["password"]!,
         );
+        _setIsLoading(false);
         context.go(RoutePath.home);
       } catch (e) {
         showErrorDialog(
@@ -128,5 +134,10 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
         );
       }
     }
+  }
+
+  void _setIsLoading(bool value) {
+    _isLoading = value;
+    setState(() {});
   }
 }
