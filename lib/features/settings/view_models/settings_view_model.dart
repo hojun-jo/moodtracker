@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:moodtracker/features/authentication/repos/authentication_repository.dart';
 
-class SettingsViewModel extends Notifier {
+class SettingsViewModel extends AutoDisposeNotifier {
   late final AuthenticationRepository _authRepository;
 
   @override
@@ -14,6 +14,6 @@ class SettingsViewModel extends Notifier {
   }
 }
 
-final settingsProvider = NotifierProvider(
+final settingsProvider = NotifierProvider.autoDispose(
   () => SettingsViewModel(),
 );

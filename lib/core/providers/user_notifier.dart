@@ -6,7 +6,7 @@ import 'package:moodtracker/core/models/user/user_model.dart';
 import 'package:moodtracker/core/repos/user_repository.dart';
 import 'package:moodtracker/features/authentication/repos/authentication_repository.dart';
 
-class UserNotifier extends AsyncNotifier<UserModel> {
+class UserNotifier extends AutoDisposeAsyncNotifier<UserModel> {
   late final UserRepository _userRepository;
   late final AuthenticationRepository _authenticationRepository;
 
@@ -46,6 +46,6 @@ class UserNotifier extends AsyncNotifier<UserModel> {
   }
 }
 
-final userProvider = AsyncNotifierProvider<UserNotifier, UserModel>(
+final userProvider = AsyncNotifierProvider.autoDispose<UserNotifier, UserModel>(
   () => UserNotifier(),
 );

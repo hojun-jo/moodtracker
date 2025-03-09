@@ -4,7 +4,7 @@ import 'package:moodtracker/core/utils/date_formater.dart';
 import 'package:moodtracker/features/authentication/repos/authentication_repository.dart';
 import 'package:moodtracker/features/home/repos/home_repository.dart';
 
-class HomeViewModel extends StreamNotifier<List<MoodModel>> {
+class HomeViewModel extends AutoDisposeStreamNotifier<List<MoodModel>> {
   late final HomeRepository _repository;
 
   @override
@@ -35,6 +35,7 @@ class HomeViewModel extends StreamNotifier<List<MoodModel>> {
   }
 }
 
-final homeProvider = StreamNotifierProvider<HomeViewModel, List<MoodModel>>(
+final homeProvider =
+    StreamNotifierProvider.autoDispose<HomeViewModel, List<MoodModel>>(
   () => HomeViewModel(),
 );

@@ -5,7 +5,7 @@ import 'package:moodtracker/core/providers/user_notifier.dart';
 import 'package:moodtracker/core/utils/validator.dart';
 import 'package:moodtracker/features/authentication/repos/authentication_repository.dart';
 
-class SignUpViewModel extends AsyncNotifier {
+class SignUpViewModel extends AutoDisposeAsyncNotifier {
   late final AuthenticationRepository _authRepo;
 
   @override
@@ -53,6 +53,6 @@ class SignUpViewModel extends AsyncNotifier {
   }
 }
 
-final signUpProvider = AsyncNotifierProvider<SignUpViewModel, void>(
+final signUpProvider = AsyncNotifierProvider.autoDispose<SignUpViewModel, void>(
   () => SignUpViewModel(),
 );

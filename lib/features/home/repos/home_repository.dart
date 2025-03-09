@@ -21,6 +21,6 @@ class HomeRepository {
   }
 }
 
-final homeRepo = Provider(
+final homeRepo = Provider.autoDispose(
   (ref) => HomeRepository(),
 );

@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:moodtracker/core/utils/validator.dart';
 import 'package:moodtracker/features/authentication/repos/authentication_repository.dart';
 
-class SignInViewModel extends AsyncNotifier {
+class SignInViewModel extends AutoDisposeAsyncNotifier {
   late final AuthenticationRepository _authRepo;
 
   @override
@@ -37,5 +37,6 @@ class SignInViewModel extends AsyncNotifier {
   }
 }
 
-final signInProvider =
-    AsyncNotifierProvider<SignInViewModel, void>(() => SignInViewModel());
+final signInProvider = AsyncNotifierProvider.autoDispose<SignInViewModel, void>(
+  () => SignInViewModel(),
+);

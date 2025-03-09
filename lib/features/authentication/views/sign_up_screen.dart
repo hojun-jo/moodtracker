@@ -126,12 +126,17 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
           _formData["password"]!,
         );
         _setIsLoading(false);
-        context.go(RoutePath.home);
+
+        if (mounted) {
+          context.go(RoutePath.home);
+        }
       } catch (e) {
-        showErrorDialog(
-          context: context,
-          text: e.toString(),
-        );
+        if (mounted) {
+          showErrorDialog(
+            context: context,
+            text: e.toString(),
+          );
+        }
       }
     }
   }

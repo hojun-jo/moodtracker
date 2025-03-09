@@ -15,4 +15,6 @@ class UserRepository {
   }
 }
 
-final userRepo = Provider((ref) => UserRepository());
+final userRepo = Provider.autoDispose(
+  (ref) => UserRepository(),
+);

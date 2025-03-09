@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:moodtracker/core/repos/theme_repository.dart';
 import 'package:moodtracker/core/theme/app_theme_type.dart';
 
-class ThemeNotifier extends AsyncNotifier<AppThemeType> {
+class ThemeNotifier extends AutoDisposeAsyncNotifier<AppThemeType> {
   late final ThemeRepository _themeRepository;
 
   @override
@@ -29,6 +29,7 @@ class ThemeNotifier extends AsyncNotifier<AppThemeType> {
   }
 }
 
-final themeProvider = AsyncNotifierProvider<ThemeNotifier, AppThemeType>(
+final themeProvider =
+    AsyncNotifierProvider.autoDispose<ThemeNotifier, AppThemeType>(
   () => ThemeNotifier(),
 );

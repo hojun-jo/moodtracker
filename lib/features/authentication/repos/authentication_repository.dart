@@ -32,4 +32,6 @@ class AuthenticationRepository {
   }
 }
 
-final authRepo = Provider((ref) => AuthenticationRepository());
+final authRepo = Provider.autoDispose(
+  (ref) => AuthenticationRepository(),
+);

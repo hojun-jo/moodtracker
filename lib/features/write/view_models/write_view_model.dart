@@ -7,7 +7,7 @@ import 'package:moodtracker/features/authentication/repos/authentication_reposit
 import 'package:moodtracker/features/write/repos/write_repository.dart';
 import 'package:uuid/uuid.dart';
 
-class WriteViewModel extends AsyncNotifier {
+class WriteViewModel extends AutoDisposeAsyncNotifier {
   late final WriteRepository _writeRepository;
 
   @override
@@ -35,6 +35,6 @@ class WriteViewModel extends AsyncNotifier {
   }
 }
 
-final writeProvider = AsyncNotifierProvider<WriteViewModel, void>(
+final writeProvider = AsyncNotifierProvider.autoDispose<WriteViewModel, void>(
   () => WriteViewModel(),
 );

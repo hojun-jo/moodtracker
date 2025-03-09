@@ -13,6 +13,6 @@ class ThemeRepository {
   }
 }
 
-final themeRepo = Provider(
+final themeRepo = Provider.autoDispose(
   (ref) => ThemeRepository(),
 );

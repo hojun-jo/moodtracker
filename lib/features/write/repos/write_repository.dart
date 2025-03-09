@@ -16,6 +16,6 @@ class WriteRepository {
   }
 }
 
-final writeRepo = Provider(
+final writeRepo = Provider.autoDispose(
   (ref) => WriteRepository(),
 );
