@@ -117,6 +117,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   }
 
   void _signUp() async {
+    if (_isLoading) return;
     if (_formKey.currentState == null) return;
     if (_formKey.currentState!.validate()) {
       try {

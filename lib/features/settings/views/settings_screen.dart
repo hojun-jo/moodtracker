@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:moodtracker/core/providers/theme_notifier.dart';
+import 'package:moodtracker/core/providers/theme_provider.dart';
 import 'package:moodtracker/core/theme/app_theme_type.dart';
 import 'package:moodtracker/core/widgets/center_progress_indicator.dart';
 import 'package:moodtracker/core/widgets/center_text.dart';

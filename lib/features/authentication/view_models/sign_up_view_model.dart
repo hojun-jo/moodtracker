@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:moodtracker/core/providers/user_notifier.dart';
+import 'package:moodtracker/core/providers/user_provider.dart';
 import 'package:moodtracker/core/utils/validator.dart';
 import 'package:moodtracker/features/authentication/repos/authentication_repository.dart';
 

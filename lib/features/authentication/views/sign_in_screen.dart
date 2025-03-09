@@ -109,6 +109,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
   }
 
   void _signIn() async {
+    if (_isLoading) return;
     if (_formKey.currentState == null) return;
     if (_formKey.currentState!.validate()) {
       try {
