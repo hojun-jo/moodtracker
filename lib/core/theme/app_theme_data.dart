@@ -39,5 +39,12 @@ ThemeData appThemeData(AppThemeType appBackground) {
     dialogTheme: const DialogThemeData(
       backgroundColor: AppColor.white,
     ),
+    menuTheme: const MenuThemeData(
+      style: MenuStyle(
+        backgroundColor: WidgetStateColor.fromMap({
+          WidgetState.any: AppColor.white,
+        }),
+      ),
+    ),
   );
 }
