@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:moodtracker/core/widgets/error_dialog.dart';
 import 'package:moodtracker/features/authentication/view_models/sign_up_view_model.dart';
 import 'package:moodtracker/features/authentication/views/widgets/auth_app_bar.dart';
 import 'package:moodtracker/features/authentication/views/widgets/auth_form_field.dart';
@@ -16,6 +17,13 @@ class SignUpScreen extends ConsumerStatefulWidget {
 class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final Map<String, String> _formData = {};
+  late final SignUpViewModel _viewModel;
+
+  @override
+  void initState() {
+    super.initState();
+    _viewModel = ref.read(signUpProvider.notifier);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,41 +43,20 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                   children: [
                     AuthFormField(
                       hintText: "Email",
-                      validator: (value) => ref
-                          .read(signUpProvider.notifier)
-                          .validateEmail(value),
-                      onChanged: (value) {
-                        if (value != null) {
-                          _formData["email"] = value;
-                        }
-                      },
+                      validator: _validateEamil,
+                      onChanged: _changeEmail,
                     ),
                     AuthFormField(
                       obscureText: true,
                       hintText: "Password",
-                      validator: (value) => ref
-                          .read(signUpProvider.notifier)
-                          .validatePassword(value),
-                      onChanged: (value) {
-                        if (value != null) {
-                          _formData["password"] = value;
-                        }
-                      },
+                      validator: _validatePassword,
+                      onChanged: _changePassword,
                     ),
                     AuthFormField(
                       obscureText: true,
                       hintText: "Repeat password",
-                      validator: (value) => ref
-                          .read(signUpProvider.notifier)
-                          .validateRepeatPassword(
-                            value,
-                            _formData["password"],
-                          ),
-                      onChanged: (value) {
-                        if (value != null) {
-                          _formData["repeatPassword"] = value;
-                        }
-                      },
+                      validator: _validateRepeatPassword,
+                      onChanged: _changeRepeatPassword,
                     ),
                   ],
                 ),
@@ -92,14 +79,54 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
     );
   }
 
+  String? _validateEamil(String? value) {
+    return _viewModel.validateEmail(value);
+  }
+
+  void _changeEmail(String? value) {
+    if (value != null) {
+      _formData["email"] = value;
+    }
+  }
+
+  String? _validatePassword(String? value) {
+    return _viewModel.validatePassword(value);
+  }
+
+  void _changePassword(String? value) {
+    if (value != null) {
+      _formData["password"] = value;
+    }
+  }
+
+  String? _validateRepeatPassword(String? value) {
+    return _viewModel.validateRepeatPassword(
+      value,
+      _formData["password"],
+    );
+  }
+
+  void _changeRepeatPassword(String? value) {
+    if (value != null) {
+      _formData["repeatPassword"] = value;
+    }
+  }
+
   void _signUp() {
     if (_formKey.currentState == null) return;
     if (_formKey.currentState!.validate()) {
-      ref.read(signUpProvider.notifier).signUp(
-            _formData["email"]!,
-            _formData["password"]!,
-          );
-      context.go(RoutePath.home);
+      try {
+        _viewModel.signUp(
+          _formData["email"]!,
+          _formData["password"]!,
+        );
+        context.go(RoutePath.home);
+      } catch (e) {
+        showErrorDialog(
+          context: context,
+          text: e.toString(),
+        );
+      }
     }
   }
 }

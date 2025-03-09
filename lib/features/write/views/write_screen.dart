@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:moodtracker/core/models/mood/mood_type.dart';
+import 'package:moodtracker/core/widgets/error_dialog.dart';
 import 'package:moodtracker/features/write/view_models/write_view_model.dart';
 import 'package:moodtracker/features/write/views/widgets/write_icon_button.dart';
 import 'package:moodtracker/route/route_path.dart';
@@ -15,10 +16,17 @@ class WriteScreen extends ConsumerStatefulWidget {
 
 class _WriteScreenState extends ConsumerState<WriteScreen> {
   final TextEditingController _controller = TextEditingController();
+  late final WriteViewModel _viewModel;
 
   MoodType? _selectedMood;
   String? _moodErrorMessage;
   String? _textErrorMessage;
+
+  @override
+  void initState() {
+    super.initState();
+    _viewModel = ref.read(writeProvider.notifier);
+  }
 
   @override
   void dispose() {
@@ -114,11 +122,16 @@ class _WriteScreenState extends ConsumerState<WriteScreen> {
       return;
     }
 
-    final viewModel = ref.read(writeProvider.notifier);
-
-    viewModel.post(_selectedMood!, _controller.text);
-    _resetWriteScreen();
-    context.go(RoutePath.home);
+    try {
+      _viewModel.post(_selectedMood!, _controller.text);
+      _resetWriteScreen();
+      context.go(RoutePath.home);
+    } catch (e) {
+      showErrorDialog(
+        context: context,
+        text: e.toString(),
+      );
+    }
   }
 
   void _resetWriteScreen() {

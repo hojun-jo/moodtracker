@@ -5,6 +5,7 @@ import 'package:moodtracker/core/providers/theme_notifier.dart';
 import 'package:moodtracker/core/theme/app_theme_type.dart';
 import 'package:moodtracker/core/widgets/center_progress_indicator.dart';
 import 'package:moodtracker/core/widgets/center_text.dart';
+import 'package:moodtracker/core/widgets/error_dialog.dart';
 import 'package:moodtracker/features/settings/view_models/settings_view_model.dart';
 import 'package:moodtracker/features/settings/views/widgets/settings_item.dart';
 import 'package:moodtracker/features/settings/views/widgets/theme_menu_item.dart';
@@ -14,11 +15,18 @@ class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
 
   @override
-  ConsumerState<SettingsScreen> createState() => _SignUpScreenState();
+  ConsumerState<SettingsScreen> createState() => _SettingsScreenState();
 }
 
-class _SignUpScreenState extends ConsumerState<SettingsScreen> {
+class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   final MenuController _menuController = MenuController();
+  late final SettingsViewModel _viewModel;
+
+  @override
+  void initState() {
+    super.initState();
+    _viewModel = ref.read(settingsProvider.notifier);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +87,14 @@ class _SignUpScreenState extends ConsumerState<SettingsScreen> {
   }
 
   void _selectTheme(AppThemeType theme) {
-    ref.read(themeProvider.notifier).setTheme(theme);
+    try {
+      ref.read(themeProvider.notifier).setTheme(theme);
+    } catch (e) {
+      showErrorDialog(
+        context: context,
+        text: e.toString(),
+      );
+    }
     _menuController.close();
   }
 
@@ -95,9 +110,14 @@ class _SignUpScreenState extends ConsumerState<SettingsScreen> {
     BuildContext context,
     WidgetRef ref,
   ) {
-    final viewModel = ref.read(settingsProvider.notifier);
-
-    viewModel.signOut();
-    context.go(RoutePath.signIn);
+    try {
+      _viewModel.signOut();
+      context.go(RoutePath.signIn);
+    } catch (e) {
+      showErrorDialog(
+        context: context,
+        text: e.toString(),
+      );
+    }
   }
 }

@@ -13,7 +13,10 @@ class HomeRepository {
         .snapshots();
   }
 
-  Future<void> deleteMood({required String uid, required String id}) async {
+  Future<void> deleteMood({
+    required String uid,
+    required String id,
+  }) async {
     _db.collection("users").doc(uid).collection("moods").doc(id).delete();
   }
 }

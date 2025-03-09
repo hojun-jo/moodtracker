@@ -39,7 +39,10 @@ class SignUpViewModel extends AsyncNotifier {
     return null;
   }
 
-  String? validateRepeatPassword(String? repeatPassword, String? password) {
+  String? validateRepeatPassword(
+    String? repeatPassword,
+    String? password,
+  ) {
     if (password == null ||
         repeatPassword == null ||
         password != repeatPassword) {

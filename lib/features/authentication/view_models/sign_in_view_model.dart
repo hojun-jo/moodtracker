@@ -12,7 +12,10 @@ class SignInViewModel extends AsyncNotifier {
     _authRepo = ref.read(authRepo);
   }
 
-  Future<void> signIn(String email, String password) async {
+  Future<void> signIn(
+    String email,
+    String password,
+  ) async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       await _authRepo.signIn(email, password);

@@ -15,7 +15,10 @@ class WriteViewModel extends AsyncNotifier {
     _repository = ref.read(writeRepo);
   }
 
-  Future<void> post(MoodType mood, String description) async {
+  Future<void> post(
+    MoodType mood,
+    String description,
+  ) async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       final user = ref.read(userProvider).value!;
