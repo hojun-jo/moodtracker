@@ -16,6 +16,8 @@
 ## Detail
 
 ### Firestore
+- user 당 moods 컬렉션 하나만 있으면 되고 상위 문서의 크기는 그대로이기 때문에 이러한 구조 채택.
+
 ```
 {
     "users": [
@@ -36,10 +38,58 @@
     ]
 }
 ```
-- user 당 moods 컬렉션 하나만 있으면 되고 상위 문서의 크기는 그대로이기 때문에 이러한 구조 채택.
+
+
+### Router
+- 각 탭의 상태를 유지하기 위해 StatefulShellRoute 사용.
+
+```dart
+final routerProvider = Provider((ref) {
+  return GoRouter(
+    ...
+    routes: [
+      ...
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, navigationShell) =>
+            MainNavigationBar(navigationShell: navigationShell),
+        branches: [
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: RoutePath.home,
+                builder: (context, state) => const HomeScreen(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: RoutePath.write,
+                builder: (context, state) => const WriteScreen(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: RoutePath.settings,
+                builder: (context, state) => const SettingsScreen(),
+              ),
+            ],
+          ),
+        ],
+      ),
+    ],
+  );
+});
+
+```
 
 
 ### Home Screen
+- Stream으로 데이터 제공.
+- ViewModel의 역할이 화면에 보여줄 데이터를 가공하는 것이기 때문에 HomeViewModel의 build에서 가공.
+
 ```dart
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -97,11 +147,12 @@ class MoodRepository {
 ...
 }
 ```
-- Stream으로 데이터 제공.
-- ViewModel의 역할이 화면에 보여줄 데이터를 가공하는 것이기 때문에 HomeViewModel의 build에서 가공.
 
 
 ### Theme
+- 함수로 ThemeData 제공.
+- SharedPreferencesAsync를 사용하여 테마 저장
+  - String으로 저장한 테마 데이터 변환을 위해 AppThemeType에 fromString 생성자 제공.
 
 ```dart
 ThemeData appThemeData(AppThemeType appBackground) {
@@ -125,6 +176,13 @@ enum AppThemeType {
   }
 ...
 }
+
+class ThemeRepository {
+  final SharedPreferencesAsync _asyncPref = SharedPreferencesAsync();
+
+  Future<void> setTheme(String theme) async {
+    await _asyncPref.setString("theme", theme);
+  }
+...
+}
 ```
-- 함수로 ThemeData 제공.
-- SharedPreferences에 String으로 저장한 테마 데이터 변환을 위해 AppThemeType에 fromString 생성자 제공.
