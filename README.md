@@ -4,11 +4,11 @@
 
 | SignInScreen | SignUpScreen | HomeScreen |
 | :-: | :-: | :-: |
-| <img src="https://github.com/user-attachments/assets/2b8dd956-348a-4cb6-917f-849fce982ea4" with=200/> | <img src="https://github.com/user-attachments/assets/6f3e1f27-c321-4d55-aa56-acdbf49e88df" with=200/> | <img src="https://github.com/user-attachments/assets/9334b08b-af14-4ca0-985e-c2384a7cf51a" with=200/> |
+| <img src="https://github.com/user-attachments/assets/2b8dd956-348a-4cb6-917f-849fce982ea4" height=400 /> | <img src="https://github.com/user-attachments/assets/6f3e1f27-c321-4d55-aa56-acdbf49e88df" height=400 /> | <img src="https://github.com/user-attachments/assets/9334b08b-af14-4ca0-985e-c2384a7cf51a" height=400 /> |
 
 | WriteScreen | SettingsScreen | License Page |
 | :-: | :-: | :-: |
-| <img src="https://github.com/user-attachments/assets/dea82adb-bfac-460c-864b-887b984f882a" with=200/> | <img src="https://github.com/user-attachments/assets/1757253f-fdf0-478e-829b-aa85cb6c1ef2" with=200/> | <img src="https://github.com/user-attachments/assets/e7b26d4a-2ace-407a-ae0c-fe9131545cc5" with=200/> |
+| <img src="https://github.com/user-attachments/assets/dea82adb-bfac-460c-864b-887b984f882a" height=400 /> | <img src="https://github.com/user-attachments/assets/1757253f-fdf0-478e-829b-aa85cb6c1ef2" height=400 /> | <img src="https://github.com/user-attachments/assets/e7b26d4a-2ace-407a-ae0c-fe9131545cc5" height=400 /> |
 
 ## Structure
 <img src="https://github.com/user-attachments/assets/c4c357bf-99f9-454c-8ca4-b7bd3ab08134" />
