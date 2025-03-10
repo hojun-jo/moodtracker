@@ -2,14 +2,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:moodtracker/core/models/mood/mood_model.dart';
 import 'package:moodtracker/core/utils/date_formater.dart';
 import 'package:moodtracker/features/authentication/repos/authentication_repository.dart';
-import 'package:moodtracker/features/home/repos/home_repository.dart';
+import 'package:moodtracker/core/repos/mood_repository.dart';
 
 class HomeViewModel extends AutoDisposeStreamNotifier<List<MoodModel>> {
-  late final HomeRepository _repository;
+  late final MoodRepository _repository;
 
   @override
   Stream<List<MoodModel>> build() {
-    _repository = ref.read(homeRepo);
+    _repository = ref.read(moodRepo);
     final user = ref.read(authRepo).user!;
 
     return _repository.fetchMoods(user.uid).map((snapshot) {

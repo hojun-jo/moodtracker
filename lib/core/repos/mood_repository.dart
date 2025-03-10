@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomeRepository {
+class MoodRepository {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
   Stream<QuerySnapshot<Map<String, dynamic>>> fetchMoods(String uid) {
@@ -13,6 +13,15 @@ class HomeRepository {
         .snapshots();
   }
 
+  Future<void> postMood(Map<String, dynamic> mood) async {
+    await _db
+        .collection("users")
+        .doc(mood["uid"])
+        .collection("moods")
+        .doc(mood["id"])
+        .set(mood);
+  }
+
   Future<void> deleteMood({
     required String uid,
     required String id,
@@ -21,6 +30,6 @@ class HomeRepository {
   }
 }
 
-final homeRepo = Provider.autoDispose(
-  (ref) => HomeRepository(),
+final moodRepo = Provider.autoDispose(
+  (ref) => MoodRepository(),
 );

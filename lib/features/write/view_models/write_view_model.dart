@@ -4,15 +4,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:moodtracker/core/models/mood/mood_model.dart';
 import 'package:moodtracker/core/models/mood/mood_type.dart';
 import 'package:moodtracker/features/authentication/repos/authentication_repository.dart';
-import 'package:moodtracker/features/write/repos/write_repository.dart';
+import 'package:moodtracker/core/repos/mood_repository.dart';
 import 'package:uuid/uuid.dart';
 
 class WriteViewModel extends AutoDisposeAsyncNotifier {
-  late final WriteRepository _writeRepository;
+  late final MoodRepository _writeRepository;
 
   @override
   FutureOr build() {
-    _writeRepository = ref.read(writeRepo);
+    _writeRepository = ref.read(moodRepo);
   }
 
   Future<void> post(
@@ -30,7 +30,7 @@ class WriteViewModel extends AutoDisposeAsyncNotifier {
         createdAt: DateTime.now(),
       );
 
-      await _writeRepository.post(moodModel.toJson());
+      await _writeRepository.postMood(moodModel.toJson());
     });
   }
 }
