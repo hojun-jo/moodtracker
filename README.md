@@ -1,12 +1,26 @@
 # Mood Tracker
+간단한 아이콘과 짧은 글로 기록할 수 있는 감성적인 일기 앱.
+
+**주요 기능**
+
+인증
+  - Firebase Authentication을 이용한 이메일 로그인/회원가입
+
+일기
+  - 아이콘으로 감정 표현
+  - 일기 작성/삭제
+  - Firestore를 이용한 실시간 데이터 동기화
+
+테마
+  - 커스텀 테마
 
 ## Screenshot
 
-| SignInScreen | SignUpScreen | HomeScreen |
+| Sign In Screen | Sign Up Screen | Home Screen |
 | :-: | :-: | :-: |
 | <img src="https://github.com/user-attachments/assets/2b8dd956-348a-4cb6-917f-849fce982ea4" height=400 /> | <img src="https://github.com/user-attachments/assets/6f3e1f27-c321-4d55-aa56-acdbf49e88df" height=400 /> | <img src="https://github.com/user-attachments/assets/9334b08b-af14-4ca0-985e-c2384a7cf51a" height=400 /> |
 
-| WriteScreen | SettingsScreen | License Page |
+| Write Screen | Settings Screen | License Page |
 | :-: | :-: | :-: |
 | <img src="https://github.com/user-attachments/assets/dea82adb-bfac-460c-864b-887b984f882a" height=400 /> | <img src="https://github.com/user-attachments/assets/1757253f-fdf0-478e-829b-aa85cb6c1ef2" height=400 /> | <img src="https://github.com/user-attachments/assets/e7b26d4a-2ace-407a-ae0c-fe9131545cc5" height=400 /> |
 
@@ -16,7 +30,8 @@
 ## Detail
 
 ### Firestore
-- user 당 moods 컬렉션 하나만 있으면 되고 상위 문서의 크기는 그대로이기 때문에 이러한 구조 채택.
+- Firestore에서 유저 문서 하위에 일기 컬렉션을 저장하는 구조 설계.
+- 유저마다 컬렉션 하나만 있으면 되고, Firestore의 경우 상위 문서의 크기는 변하지 않기 때문에 성능 문제도 없을 것이라 판단.
 
 ```
 {
@@ -87,7 +102,7 @@ final routerProvider = Provider((ref) {
 
 
 ### Home Screen
-- Stream으로 데이터 제공.
+- HomeViewModel을 AutoDisposeStreamNotifier로 만들어 Stream으로 데이터 제공.
 - ViewModel의 역할이 화면에 보여줄 데이터를 가공하는 것이기 때문에 HomeViewModel의 build에서 가공.
 
 ```dart
@@ -150,7 +165,7 @@ class MoodRepository {
 
 
 ### Theme
-- 함수로 ThemeData 제공.
+- 전역 함수로 ThemeData 제공.
 - SharedPreferencesAsync를 사용하여 테마 저장
   - String으로 저장한 테마 데이터 변환을 위해 AppThemeType에 fromString 생성자 제공.
 
