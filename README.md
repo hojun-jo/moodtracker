@@ -54,9 +54,68 @@
 }
 ```
 
+### Theme
+- 전역 함수로 `ThemeData` 제공.
+- `SharedPreferencesAsync`를 사용하여 테마 저장- 
+  - `SharedPreferences`는 deprecated 예정이기 때문.
+  - `String`으로 저장한 테마 데이터 변환을 위해 `AppThemeType`에 `fromString` 생성자 제공.
+- `AsyncNotifierProvider`로 App에 테마를 제공하여 앱 전역에서 테마 일관성 유지.
 
-### Router
-- 각 탭의 상태를 유지하기 위해 StatefulShellRoute 사용.
+```dart
+ThemeData appThemeData(AppThemeType appBackground) {
+  return ThemeData(
+    ...
+}
+
+enum AppThemeType {
+  cherryBlossom("cherryBlossom"),
+  apricot("apricot"),
+  almond("almond"),
+  ashGray("ashGray"),
+  thistle("thistle");
+
+  final String text;
+
+  const AppThemeType(this.text);
+
+  factory AppThemeType.fromString(String text) {
+    return values.firstWhere((e) => e.text == text);
+  }
+...
+}
+
+class ThemeRepository {
+  final SharedPreferencesAsync _asyncPref = SharedPreferencesAsync();
+
+  Future<void> setTheme(String theme) async {
+    await _asyncPref.setString("theme", theme);
+  }
+...
+}
+
+class ThemeNotifier extends AutoDisposeAsyncNotifier<AppThemeType> {
+  ...
+}
+
+final themeProvider =
+    AsyncNotifierProvider.autoDispose<ThemeNotifier, AppThemeType>(
+  () => ThemeNotifier(),
+);
+
+class MoodTrackerApp extends ConsumerWidget {
+  const MoodTrackerApp({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final theme = ref.watch(themeProvider);
+    ...
+  }
+}
+```
+
+### UX
+- 유저가 일기 작성 중 다른 탭으로 이동 후에도 내용 유지.
+  - 각 탭의 상태를 유지하기 위해 StatefulShellRoute 사용.
 
 ```dart
 final routerProvider = Provider((ref) {
@@ -98,106 +157,4 @@ final routerProvider = Provider((ref) {
   );
 });
 
-```
-
-
-### Home Screen
-- HomeViewModel을 AutoDisposeStreamNotifier로 만들어 Stream으로 데이터 제공.
-- ViewModel의 역할이 화면에 보여줄 데이터를 가공하는 것이기 때문에 HomeViewModel의 build에서 가공.
-
-```dart
-class HomeScreen extends ConsumerWidget {
-  const HomeScreen({super.key});
-
-  @override
-  Widget build(
-    BuildContext context,
-    WidgetRef ref,
-  ) {
-    final moodModelStream = ref.watch(homeProvider);
-    final viewModel = ref.read(homeProvider.notifier);
-
-    return moodModelStream.when(
-      data: (data) {
-        ...
-    );
-  }
-}
-
-class HomeViewModel extends AutoDisposeStreamNotifier<List<MoodModel>> {
-  late final MoodRepository _repository;
-
-  @override
-  Stream<List<MoodModel>> build() {
-    _repository = ref.read(moodRepo);
-    final user = ref.read(authRepo).user!;
-
-    return _repository.fetchMoods(user.uid).map((snapshot) {
-      List<MoodModel> models = [];
-
-      for (final doc in snapshot.docs) {
-        final json = doc.data();
-        final model = MoodModel.fromJson(json);
-
-        models.add(model);
-      }
-
-      return models;
-    });
-  }
-...
-}
-
-class MoodRepository {
-  final FirebaseFirestore _db = FirebaseFirestore.instance;
-
-  Stream<QuerySnapshot<Map<String, dynamic>>> fetchMoods(String uid) {
-    return _db
-        .collection("users")
-        .doc(uid)
-        .collection("moods")
-        .orderBy("createdAt", descending: true)
-        .snapshots();
-  }
-...
-}
-```
-
-
-### Theme
-- 전역 함수로 ThemeData 제공.
-- SharedPreferencesAsync를 사용하여 테마 저장
-  - String으로 저장한 테마 데이터 변환을 위해 AppThemeType에 fromString 생성자 제공.
-
-```dart
-ThemeData appThemeData(AppThemeType appBackground) {
-  return ThemeData(
-    ...
-}
-
-enum AppThemeType {
-  cherryBlossom("cherryBlossom"),
-  apricot("apricot"),
-  almond("almond"),
-  ashGray("ashGray"),
-  thistle("thistle");
-
-  final String text;
-
-  const AppThemeType(this.text);
-
-  factory AppThemeType.fromString(String text) {
-    return values.firstWhere((e) => e.text == text);
-  }
-...
-}
-
-class ThemeRepository {
-  final SharedPreferencesAsync _asyncPref = SharedPreferencesAsync();
-
-  Future<void> setTheme(String theme) async {
-    await _asyncPref.setString("theme", theme);
-  }
-...
-}
 ```
