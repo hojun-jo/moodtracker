@@ -20,7 +20,13 @@ class SettingsScreen extends ConsumerStatefulWidget {
 
 class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   final MenuController _menuController = MenuController();
-  late final SettingsViewModel _viewModel = ref.read(settingsProvider.notifier);
+  late final SettingsViewModel _viewModel;
+
+  @override
+  void initState() {
+    super.initState();
+    _viewModel = ref.read(settingsProvider.notifier);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,11 +77,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           text: "Lisence",
           trailing: const Icon(Icons.chevron_right),
         ),
-        // SettingsItem(
-        //   onTap: _signOut,
-        //   text: "Sign Out",
-        //   textColor: Colors.red,
-        // ),
+        SettingsItem(
+          onTap: () => _signOut(context, ref),
+          text: "Sign Out",
+          textColor: Colors.red,
+        ),
       ],
     );
   }
@@ -100,7 +106,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     }
   }
 
-  void _signOut() {
+  void _signOut(
+    BuildContext context,
+    WidgetRef ref,
+  ) {
     try {
       _viewModel.signOut();
       context.go(RoutePath.signIn);

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:moodtracker/core/models/mood/mood_type.dart';
 
 class MoodModel {
@@ -15,15 +16,15 @@ class MoodModel {
     required this.createdAt,
   });
 
-  // factory MoodModel.fromJson(Map<String, dynamic> json) {
-  //   return MoodModel(
-  //     uid: json["uid"],
-  //     id: json["id"],
-  //     moodType: MoodType.fromString(json["moodType"]),
-  //     description: json["description"],
-  //     createdAt: (json["createdAt"] as Timestamp).toDate(),
-  //   );
-  // }
+  factory MoodModel.fromJson(Map<String, dynamic> json) {
+    return MoodModel(
+      uid: json["uid"],
+      id: json["id"],
+      moodType: MoodType.fromString(json["moodType"]),
+      description: json["description"],
+      createdAt: (json["createdAt"] as Timestamp).toDate(),
+    );
+  }
 
   Map<String, dynamic> toJson() {
     return {
