@@ -77,11 +77,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           text: "Lisence",
           trailing: const Icon(Icons.chevron_right),
         ),
-        SettingsItem(
-          onTap: () => _signOut(context, ref),
-          text: "Sign Out",
-          textColor: Colors.red,
-        ),
+        // SettingsItem(
+        //   onTap: _signOut,
+        //   text: "Sign Out",
+        //   textColor: Colors.red,
+        // ),
       ],
     );
   }
@@ -106,10 +106,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     }
   }
 
-  void _signOut(
-    BuildContext context,
-    WidgetRef ref,
-  ) {
+  void _signOut() {
     try {
       _viewModel.signOut();
       context.go(RoutePath.signIn);
