@@ -17,10 +17,12 @@ class MoodRepositoryImpl implements MoodRepository {
   }
 
   @override
-  Future<List<MoodModel>> getMoods() async {
+  Stream<List<MoodModel>> watchMoods() async* {
     final datasource = await moodDatasource;
+    final initialData = await datasource.getMoods();
 
-    return await datasource.getMoods();
+    yield initialData;
+    yield* datasource.watchMoods();
   }
 
   @override

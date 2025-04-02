@@ -1,14 +1,22 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:moodtracker/core/models/mood/mood_model.dart';
+import 'package:moodtracker/core/repositories/mood_repository.dart';
 import 'package:moodtracker/core/utils/date_formater.dart';
+import 'package:moodtracker/core/infra/repositories/mood_repository_impl.dart';
 
 class HomeViewModel extends AutoDisposeStreamNotifier<List<MoodModel>> {
+  late final MoodRepository _moodRepository;
+
   @override
   Stream<List<MoodModel>> build() {
-    return Stream.value([]);
+    _moodRepository = ref.read(moodRepository);
+
+    return _moodRepository.watchMoods();
   }
 
-  Future<void> deleteMood(MoodModel mood) async {}
+  Future<void> deleteMood(MoodModel mood) async {
+    await _moodRepository.deleteMood(mood);
+  }
 
   String formatDate(DateTime date) {
     return DateFormater.format(date);
