@@ -1,7 +1,7 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:moodtracker/core/providers/theme_provider.dart';
+import 'package:moodtracker/core/infra/repositories/theme_repository_impl.dart';
 import 'package:moodtracker/core/theme/app_theme_data.dart';
 import 'package:moodtracker/core/widgets/center_progress_indicator.dart';
 import 'package:moodtracker/core/widgets/center_text.dart';
@@ -12,7 +12,7 @@ class MoodTrackerApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(themeProvider);
+    final theme = ref.watch(themeRepository);
 
     return theme.when(
       data: (data) {

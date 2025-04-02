@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:moodtracker/core/providers/theme_provider.dart';
+import 'package:moodtracker/core/infra/repositories/theme_repository_impl.dart';
 import 'package:moodtracker/core/theme/app_theme_type.dart';
 import 'package:moodtracker/core/widgets/center_progress_indicator.dart';
 import 'package:moodtracker/core/widgets/center_text.dart';
@@ -30,7 +30,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = ref.watch(themeProvider);
+    final theme = ref.watch(themeRepository);
 
     return Column(
       spacing: 8,
@@ -88,7 +88,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
   void _selectTheme(AppThemeType theme) {
     try {
-      ref.read(themeProvider.notifier).setTheme(theme);
+      // TODO: 뷰 모델로
+      ref.read(themeRepository.notifier).setTheme(theme);
     } catch (e) {
       showErrorDialog(
         context: context,
