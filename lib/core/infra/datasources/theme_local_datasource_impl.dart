@@ -1,4 +1,3 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:moodtracker/core/datasources/theme_datasource.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,7 +14,3 @@ class ThemeLocalDatasourceImpl extends ThemeDatasource {
     return await _asyncPref.getString("theme");
   }
 }
-
-final themeLocalDatasource = Provider.autoDispose(
-  (ref) => ThemeLocalDatasourceImpl(),
-);

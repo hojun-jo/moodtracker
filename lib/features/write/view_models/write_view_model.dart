@@ -1,8 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-// TODO: di/provider
-import 'package:moodtracker/core/infra/repositories/mood_repository_impl.dart';
+import 'package:moodtracker/core/di/provider.dart';
 import 'package:moodtracker/core/models/mood/mood_model.dart';
 import 'package:moodtracker/core/models/mood/mood_type.dart';
 import 'package:moodtracker/core/repositories/mood_repository.dart';
