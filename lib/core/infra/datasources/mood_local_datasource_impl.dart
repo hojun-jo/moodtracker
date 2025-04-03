@@ -17,13 +17,11 @@ class MoodLocalDatasourceImpl implements MoodDatasource {
   }
 
   @override
-  Future<List<MoodModel>> getMoods() async {
-    return await isar.moodModels.where().sortByCreatedAtDesc().findAll();
-  }
-
-  @override
   Stream<List<MoodModel>> watchMoods() {
-    return isar.moodModels.where().sortByCreatedAtDesc().watch();
+    return isar.moodModels
+        .where()
+        .sortByCreatedAtDesc()
+        .watch(fireImmediately: true);
   }
 
   @override
