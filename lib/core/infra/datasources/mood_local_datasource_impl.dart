@@ -25,7 +25,11 @@ class MoodLocalDatasourceImpl implements MoodDatasource {
   @override
   Future<void> deleteMood(MoodModel mood) async {
     await isar.writeTxn(() async {
-      await isar.moodModels.delete(mood.id);
+      final result = await isar.moodModels.delete(mood.id);
+
+      if (!result) {
+        throw Exception('Failed to delete mood with id: ${mood.id}');
+      }
     });
   }
 }

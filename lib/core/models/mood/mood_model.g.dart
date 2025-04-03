@@ -78,6 +78,7 @@ MoodModel _moodModelDeserialize(
   final object = MoodModel(
     createdAt: reader.readDateTime(offsets[0]),
     description: reader.readString(offsets[1]),
+    id: id,
     moodType:
         _MoodModelmoodTypeValueEnumMap[reader.readByteOrNull(offsets[2])] ??
             MoodType.angry,
