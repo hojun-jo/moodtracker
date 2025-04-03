@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-import 'package:moodtracker/core/di/provider.dart';
 import 'package:moodtracker/core/theme/app_theme_type.dart';
 import 'package:moodtracker/core/widgets/center_progress_indicator.dart';
-import 'package:moodtracker/core/widgets/center_text.dart';
 import 'package:moodtracker/core/widgets/error_dialog.dart';
 import 'package:moodtracker/features/settings/view_models/settings_view_model.dart';
 import 'package:moodtracker/features/settings/views/widgets/settings_item.dart';
 import 'package:moodtracker/features/settings/views/widgets/theme_menu_item.dart';
-import 'package:moodtracker/route/route_path.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
@@ -20,53 +16,50 @@ class SettingsScreen extends ConsumerStatefulWidget {
 
 class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   final MenuController _menuController = MenuController();
-  late final SettingsViewModel _viewModel;
-
-  @override
-  void initState() {
-    super.initState();
-    _viewModel = ref.read(settingsProvider.notifier);
-  }
+  late final SettingsViewModel _viewModel = ref.read(settingsProvider.notifier);
 
   @override
   Widget build(BuildContext context) {
-    final theme = ref.watch(themeRepository);
-
     return Column(
       spacing: 8,
       children: [
         SettingsItem(
           onTap: () {},
           text: "Theme",
-          trailing: MenuAnchor(
-            controller: _menuController,
-            menuChildren: [
-              ...AppThemeType.values.map((theme) {
-                return ThemeMenuItem(
-                  onTap: () => _selectTheme(theme),
-                  color: theme.toColor(),
-                  text: theme.text,
-                );
-              }),
-            ],
-            builder: (
-              BuildContext context,
-              MenuController controller,
-              Widget? child,
-            ) {
-              return theme.when(
-                data: (data) {
+          trailing: FutureBuilder(
+            future: _viewModel.theme,
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return Text(snapshot.error.toString());
+              }
+
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const CenterProgressIndicator();
+              }
+
+              final theme = snapshot.data!;
+
+              return MenuAnchor(
+                controller: _menuController,
+                menuChildren: [
+                  ...AppThemeType.values.map((theme) {
+                    return ThemeMenuItem(
+                      onTap: () => _selectTheme(theme),
+                      color: theme.toColor(),
+                      text: theme.text,
+                    );
+                  }),
+                ],
+                builder: (
+                  BuildContext context,
+                  MenuController controller,
+                  Widget? child,
+                ) {
                   return ThemeMenuItem(
                     onTap: _onTapMenu,
-                    color: data.toColor(),
-                    text: data.text,
+                    color: theme.toColor(),
+                    text: theme.text,
                   );
-                },
-                error: (error, stackTrace) {
-                  return CenterText(text: error.toString());
-                },
-                loading: () {
-                  return const CenterProgressIndicator();
                 },
               );
             },
@@ -88,8 +81,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
   void _selectTheme(AppThemeType theme) {
     try {
-      // TODO: 뷰 모델로
-      ref.read(themeRepository.notifier).setTheme(theme);
+      _viewModel.selectTheme(theme);
     } catch (e) {
       showErrorDialog(
         context: context,
@@ -107,15 +99,15 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     }
   }
 
-  void _signOut() {
-    try {
-      _viewModel.signOut();
-      context.go(RoutePath.signIn);
-    } catch (e) {
-      showErrorDialog(
-        context: context,
-        text: e.toString(),
-      );
-    }
-  }
+  // void _signOut() {
+  //   try {
+  //     _viewModel.signOut();
+  //     context.go(RoutePath.signIn);
+  //   } catch (e) {
+  //     showErrorDialog(
+  //       context: context,
+  //       text: e.toString(),
+  //     );
+  //   }
+  // }
 }
