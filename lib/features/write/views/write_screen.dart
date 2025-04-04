@@ -16,17 +16,11 @@ class WriteScreen extends ConsumerStatefulWidget {
 
 class _WriteScreenState extends ConsumerState<WriteScreen> {
   final TextEditingController _controller = TextEditingController();
-  late final WriteViewModel _viewModel;
+  late final WriteViewModel _viewModel = ref.read(writeProvider.notifier);
 
   MoodType? _selectedMood;
   String? _moodErrorMessage;
   String? _textErrorMessage;
-
-  @override
-  void initState() {
-    super.initState();
-    _viewModel = ref.read(writeProvider.notifier);
-  }
 
   @override
   void dispose() {

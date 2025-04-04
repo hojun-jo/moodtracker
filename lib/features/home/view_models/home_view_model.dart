@@ -1,33 +1,21 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:moodtracker/core/di/provider.dart';
 import 'package:moodtracker/core/models/mood/mood_model.dart';
+import 'package:moodtracker/core/repositories/mood_repository.dart';
 import 'package:moodtracker/core/utils/date_formater.dart';
-import 'package:moodtracker/features/authentication/repos/authentication_repository.dart';
-import 'package:moodtracker/core/repos/mood_repository.dart';
 
 class HomeViewModel extends AutoDisposeStreamNotifier<List<MoodModel>> {
-  late final MoodRepository _repository;
+  late final MoodRepository _moodRepository;
 
   @override
   Stream<List<MoodModel>> build() {
-    _repository = ref.read(moodRepo);
-    final user = ref.read(authRepo).user!;
+    _moodRepository = ref.read(moodRepository);
 
-    return _repository.fetchMoods(user.uid).map((snapshot) {
-      List<MoodModel> models = [];
-
-      for (final doc in snapshot.docs) {
-        final json = doc.data();
-        final model = MoodModel.fromJson(json);
-
-        models.add(model);
-      }
-
-      return models;
-    });
+    return _moodRepository.watchMoods();
   }
 
   Future<void> deleteMood(MoodModel mood) async {
-    await _repository.deleteMood(uid: mood.uid, id: mood.id);
+    await _moodRepository.deleteMood(mood);
   }
 
   String formatDate(DateTime date) {
