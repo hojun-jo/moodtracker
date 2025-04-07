@@ -1,17 +1,23 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:moodtracker/features/authentication/repos/authentication_repository.dart';
+import 'package:moodtracker/core/di/provider.dart';
+import 'package:moodtracker/core/repositories/theme_repository.dart';
+import 'package:moodtracker/core/theme/app_theme_type.dart';
 
 class SettingsViewModel extends AutoDisposeNotifier {
-  late final AuthenticationRepository _authRepository;
+  late final ThemeRepository _themeRepository;
 
   @override
   build() {
-    _authRepository = ref.read(authRepo);
+    _themeRepository = ref.read(themeRepository.notifier);
   }
 
-  Future<void> signOut() async {
-    await _authRepository.signOut();
+  Future<AppThemeType> get theme => _themeRepository.getTheme();
+
+  void selectTheme(AppThemeType theme) {
+    _themeRepository.setTheme(theme);
   }
+
+  Future<void> signOut() async {}
 }
 
 final settingsProvider = NotifierProvider.autoDispose(

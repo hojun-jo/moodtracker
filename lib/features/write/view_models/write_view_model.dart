@@ -1,40 +1,33 @@
 import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:isar/isar.dart';
+import 'package:moodtracker/core/di/provider.dart';
 import 'package:moodtracker/core/models/mood/mood_model.dart';
 import 'package:moodtracker/core/models/mood/mood_type.dart';
-import 'package:moodtracker/features/authentication/repos/authentication_repository.dart';
-import 'package:moodtracker/core/repos/mood_repository.dart';
-import 'package:uuid/uuid.dart';
+import 'package:moodtracker/core/repositories/mood_repository.dart';
 
-class WriteViewModel extends AutoDisposeAsyncNotifier {
-  late final MoodRepository _writeRepository;
+class WriteViewModel extends AutoDisposeNotifier {
+  late final MoodRepository _moodRepository;
 
   @override
-  FutureOr build() {
-    _writeRepository = ref.read(moodRepo);
+  void build() {
+    _moodRepository = ref.read(moodRepository);
   }
 
   Future<void> post(
     MoodType mood,
     String description,
   ) async {
-    state = const AsyncValue.loading();
-    state = await AsyncValue.guard(() async {
-      final user = ref.read(authRepo).user!;
-      final moodModel = MoodModel(
-        uid: user.uid,
-        id: const Uuid().v4(),
-        moodType: mood,
-        description: description,
-        createdAt: DateTime.now(),
-      );
-
-      await _writeRepository.postMood(moodModel.toJson());
-    });
+    await _moodRepository.addMood(MoodModel(
+      id: Isar.autoIncrement,
+      moodType: mood,
+      description: description,
+      createdAt: DateTime.now(),
+    ));
   }
 }
 
-final writeProvider = AsyncNotifierProvider.autoDispose<WriteViewModel, void>(
+final writeProvider = NotifierProvider.autoDispose<WriteViewModel, void>(
   () => WriteViewModel(),
 );
