@@ -9,16 +9,22 @@ import 'package:moodtracker/core/widgets/error_dialog.dart';
 import 'package:moodtracker/features/home/view_models/home_view_model.dart';
 import 'package:moodtracker/features/home/views/widgets/mood_card.dart';
 
-class HomeScreen extends ConsumerWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(
-    BuildContext context,
-    WidgetRef ref,
-  ) {
-    final moodModelStream = ref.watch(homeProvider);
-    final viewModel = ref.read(homeProvider.notifier);
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends ConsumerState<HomeScreen> {
+  late final HomeViewModel _viewModel =
+      ref.read(homeProvider(_selectedDate).notifier);
+
+  DateTime? _selectedDate;
+
+  @override
+  Widget build(BuildContext context) {
+    final moodModelStream = ref.watch(homeProvider(_selectedDate));
 
     return moodModelStream.when(
       data: (data) {
@@ -31,13 +37,9 @@ class HomeScreen extends ConsumerWidget {
                     itemCount: data.length,
                     itemBuilder: (context, index) {
                       return MoodCard(
-                        onTrashTap: () => _showDeleteMoodDialog(
-                          data[index],
-                          context,
-                          ref,
-                        ),
+                        onTrashTap: () => _showDeleteMoodDialog(data[index]),
                         moodType: data[index].moodType,
-                        createdAt: viewModel.formatDate(data[index].createdAt),
+                        createdAt: _viewModel.formatDate(data[index].createdAt),
                         description: data[index].description,
                       );
                     },
@@ -54,11 +56,7 @@ class HomeScreen extends ConsumerWidget {
     );
   }
 
-  void _showDeleteMoodDialog(
-    MoodModel mood,
-    BuildContext context,
-    WidgetRef ref,
-  ) {
+  void _showDeleteMoodDialog(MoodModel mood) {
     showDialog(
       context: context,
       builder: (context) {
@@ -77,7 +75,7 @@ class HomeScreen extends ConsumerWidget {
                     GestureDetector(
                       onTap: () {
                         try {
-                          ref.read(homeProvider.notifier).deleteMood(mood);
+                          _viewModel.deleteMood(mood);
                           context.pop();
                         } catch (e) {
                           context.pop();

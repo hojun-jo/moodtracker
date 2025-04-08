@@ -15,7 +15,18 @@ class MoodLocalDatasourceImpl implements MoodDatasource {
   }
 
   @override
-  Stream<List<MoodModel>> watchMoods() {
+  Stream<List<MoodModel>> watchMoods({DateTime? date}) {
+    if (date != null) {
+      return isar.moodModels
+          .filter()
+          .createdAtBetween(
+            DateTime(date.year, date.month, date.day),
+            DateTime(date.year, date.month, date.day, 23, 59, 59),
+          )
+          .sortByCreatedAtDesc()
+          .watch(fireImmediately: true);
+    }
+
     return isar.moodModels
         .where()
         .sortByCreatedAtDesc()
