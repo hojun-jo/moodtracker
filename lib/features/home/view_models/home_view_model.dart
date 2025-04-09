@@ -4,14 +4,15 @@ import 'package:moodtracker/core/models/mood/mood_model.dart';
 import 'package:moodtracker/core/repositories/mood_repository.dart';
 import 'package:moodtracker/core/utils/date_formater.dart';
 
-class HomeViewModel extends AutoDisposeStreamNotifier<List<MoodModel>> {
+class HomeViewModel
+    extends AutoDisposeFamilyStreamNotifier<List<MoodModel>, DateTime?> {
   late final MoodRepository _moodRepository;
 
   @override
-  Stream<List<MoodModel>> build() {
+  Stream<List<MoodModel>> build(DateTime? date) {
     _moodRepository = ref.read(moodRepository);
 
-    return _moodRepository.watchMoods();
+    return _moodRepository.watchMoods(date: date);
   }
 
   Future<void> deleteMood(MoodModel mood) async {
@@ -19,11 +20,11 @@ class HomeViewModel extends AutoDisposeStreamNotifier<List<MoodModel>> {
   }
 
   String formatDate(DateTime date) {
-    return DateFormater.format(date);
+    return DateFormater.formatMoodCard(date);
   }
 }
 
-final homeProvider =
-    StreamNotifierProvider.autoDispose<HomeViewModel, List<MoodModel>>(
+final homeProvider = StreamNotifierProvider.autoDispose
+    .family<HomeViewModel, List<MoodModel>, DateTime?>(
   () => HomeViewModel(),
 );
