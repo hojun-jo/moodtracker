@@ -48,5 +48,14 @@ ThemeData appThemeData(AppThemeType appBackground) {
         }),
       ),
     ),
+    datePickerTheme: DatePickerThemeData(
+      backgroundColor: AppColor.white,
+      cancelButtonStyle: ButtonStyle(
+        foregroundColor: WidgetStateProperty.all(AppColor.black),
+      ),
+      confirmButtonStyle: ButtonStyle(
+        foregroundColor: WidgetStateProperty.all(AppColor.black),
+      ),
+    ),
   );
 }

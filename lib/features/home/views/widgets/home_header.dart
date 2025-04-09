@@ -40,12 +40,22 @@ class _HomeHeaderState extends State<HomeHeader> {
   }
 
   void _onDateChanged(BuildContext context) async {
+    final theme = Theme.of(context);
     final date = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2020),
       lastDate: DateTime.now(),
       currentDate: _selectedDate,
+      builder: (context, child) => Theme(
+        data: theme.copyWith(
+          colorScheme: theme.colorScheme.copyWith(
+            primary: theme.scaffoldBackgroundColor,
+            onPrimary: theme.textTheme.bodyMedium?.color,
+          ),
+        ),
+        child: child!,
+      ),
     );
 
     if (date != null) {
