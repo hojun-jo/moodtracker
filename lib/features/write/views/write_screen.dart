@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:moodtracker/core/models/mood/mood_type.dart';
-import 'package:moodtracker/core/widgets/error_dialog.dart';
+import 'package:moodtracker/core/widgets/dialog/error_dialog.dart';
 import 'package:moodtracker/features/write/view_models/write_view_model.dart';
 import 'package:moodtracker/features/write/views/widgets/write_icon_button.dart';
 import 'package:moodtracker/route/route_path.dart';

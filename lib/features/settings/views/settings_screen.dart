@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:moodtracker/core/theme/app_theme_type.dart';
 import 'package:moodtracker/core/widgets/center_progress_indicator.dart';
-import 'package:moodtracker/core/widgets/error_dialog.dart';
+import 'package:moodtracker/core/widgets/dialog/error_dialog.dart';
 import 'package:moodtracker/features/settings/view_models/settings_view_model.dart';
 import 'package:moodtracker/features/settings/views/widgets/settings_item.dart';
 import 'package:moodtracker/features/settings/views/widgets/theme_menu_item.dart';
