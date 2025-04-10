@@ -67,7 +67,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         ),
         SettingsItem(
           onTap: () => showLicensePage(context: context),
-          text: "Lisence",
+          text: "Open Source Lisence",
           trailing: const Icon(Icons.chevron_right),
         ),
         // SettingsItem(
