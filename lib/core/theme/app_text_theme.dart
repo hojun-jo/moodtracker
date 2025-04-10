@@ -8,10 +8,12 @@ abstract class AppTextTheme {
     bodyMedium: GoogleFonts.dongle(
       color: AppColor.black,
       fontSize: 30,
+      height: 1.2,
     ),
     bodySmall: GoogleFonts.dongle(
       color: AppColor.grey,
       fontSize: 24,
+      height: 1.2,
     ),
   );
 }
