@@ -26,6 +26,7 @@ ThemeData appThemeData(AppThemeType appBackground) {
       selectionColor: appBackground.toColor(),
       selectionHandleColor: appBackground.toColor(),
     ),
+    cardColor: appBackground.toColor(),
     cardTheme: const CardTheme(
       elevation: 0,
       margin: EdgeInsets.zero,
