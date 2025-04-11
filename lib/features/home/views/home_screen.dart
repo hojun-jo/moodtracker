@@ -5,7 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:moodtracker/core/models/mood/mood_model.dart';
 import 'package:moodtracker/core/widgets/center_progress_indicator.dart';
 import 'package:moodtracker/core/widgets/center_text.dart';
-import 'package:moodtracker/core/widgets/error_dialog.dart';
+import 'package:moodtracker/core/widgets/dialog/error_dialog.dart';
+import 'package:moodtracker/core/widgets/dialog/mood_dialog.dart';
 import 'package:moodtracker/features/home/view_models/home_view_model.dart';
 import 'package:moodtracker/features/home/views/widgets/home_header_delegate.dart';
 import 'package:moodtracker/features/home/views/widgets/mood_card.dart';
@@ -74,51 +75,26 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     showDialog(
       context: context,
       builder: (context) {
-        return Dialog(
-          child: SizedBox(
-            width: 200,
-            height: 150,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text("Confirm Delete?"),
-                const Divider(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        try {
-                          _viewModel.deleteMood(mood);
-                          context.pop();
-                        } catch (e) {
-                          context.pop();
-                          showErrorDialog(
-                            context: context,
-                            text: e.toString(),
-                          );
-                        }
-                      },
-                      child: const Text(
-                        "Delete",
-                        style: TextStyle(
-                          color: Colors.red,
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        context.pop();
-                      },
-                      child: const Text(
-                        "Cancel",
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
+        return MoodDialog(
+          title: "Confirm Delete?",
+          confirmText: "Delete",
+          cancelText: "Cancel",
+          onConfirm: () {
+            try {
+              _viewModel.deleteMood(mood);
+              context.pop();
+            } catch (e) {
+              context.pop();
+              showErrorDialog(
+                context: context,
+                text: e.toString(),
+              );
+            }
+          },
+          onCancel: () {
+            context.pop();
+          },
+          confirmColor: Colors.red,
         );
       },
     );

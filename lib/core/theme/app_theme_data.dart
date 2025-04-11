@@ -26,6 +26,7 @@ ThemeData appThemeData(AppThemeType appBackground) {
       selectionColor: appBackground.toColor(),
       selectionHandleColor: appBackground.toColor(),
     ),
+    cardColor: appBackground.toColor(),
     cardTheme: const CardTheme(
       elevation: 0,
       margin: EdgeInsets.zero,
@@ -46,6 +47,15 @@ ThemeData appThemeData(AppThemeType appBackground) {
         backgroundColor: WidgetStateColor.fromMap({
           WidgetState.any: AppColor.white,
         }),
+      ),
+    ),
+    datePickerTheme: DatePickerThemeData(
+      backgroundColor: AppColor.white,
+      cancelButtonStyle: ButtonStyle(
+        foregroundColor: WidgetStateProperty.all(AppColor.black),
+      ),
+      confirmButtonStyle: ButtonStyle(
+        foregroundColor: WidgetStateProperty.all(AppColor.black),
       ),
     ),
   );

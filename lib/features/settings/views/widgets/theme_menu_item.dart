@@ -17,7 +17,7 @@ class ThemeMenuItem extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 12),
         child: Row(
           spacing: 8,
           children: [
