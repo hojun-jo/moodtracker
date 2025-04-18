@@ -2,15 +2,17 @@ import 'package:moodtracker/core/datasources/theme_datasource.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeLocalDatasourceImpl extends ThemeDatasource {
-  final SharedPreferencesAsync _asyncPref = SharedPreferencesAsync();
+  final SharedPreferencesAsync asyncPref;
+
+  ThemeLocalDatasourceImpl({required this.asyncPref});
 
   @override
   Future<void> setTheme(String theme) async {
-    await _asyncPref.setString("theme", theme);
+    await asyncPref.setString("theme", theme);
   }
 
   @override
   Future<String?> getTheme() async {
-    return await _asyncPref.getString("theme");
+    return await asyncPref.getString("theme");
   }
 }

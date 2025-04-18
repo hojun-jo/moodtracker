@@ -9,9 +9,13 @@ class MoodLocalDatasourceImpl implements MoodDatasource {
 
   @override
   Future<void> addMood(MoodModel mood) async {
-    await isar.writeTxn(() async {
-      await isar.moodModels.put(mood);
-    });
+    try {
+      await isar.writeTxn<void>(() async {
+        await isar.moodModels.put(mood);
+      });
+    } catch (e) {
+      throw Exception('Failed to add mood: $e');
+    }
   }
 
   @override
@@ -31,16 +35,5 @@ class MoodLocalDatasourceImpl implements MoodDatasource {
         .where()
         .sortByCreatedAtDesc()
         .watch(fireImmediately: true);
-  }
-
-  @override
-  Future<void> deleteMood(MoodModel mood) async {
-    await isar.writeTxn(() async {
-      final result = await isar.moodModels.delete(mood.id);
-
-      if (!result) {
-        throw Exception('Failed to delete mood with id: ${mood.id}');
-      }
-    });
   }
 }
