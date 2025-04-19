@@ -15,10 +15,6 @@ class HomeViewModel
     return _moodRepository.watchMoods(date: date);
   }
 
-  Future<void> deleteMood(MoodModel mood) async {
-    await _moodRepository.deleteMood(mood);
-  }
-
   String formatDate(DateTime date) {
     return DateFormater.formatMoodCard(date);
   }

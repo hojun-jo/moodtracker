@@ -7,17 +7,19 @@ import 'package:moodtracker/core/infra/repositories/mood_repository_impl.dart';
 import 'package:moodtracker/core/infra/repositories/theme_repository_impl.dart';
 import 'package:moodtracker/core/models/mood/mood_model.dart';
 import 'package:moodtracker/core/repositories/mood_repository.dart';
+import 'package:moodtracker/core/repositories/theme_repository.dart';
 import 'package:moodtracker/core/theme/app_theme_type.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // theme
 
 final themeLocalDatasource = Provider.autoDispose(
-  (ref) => ThemeLocalDatasourceImpl(),
+  (ref) => ThemeLocalDatasourceImpl(asyncPref: SharedPreferencesAsync()),
 );
 
 final themeRepository =
-    AsyncNotifierProvider.autoDispose<ThemeRepositoryImpl, AppThemeType>(
+    AsyncNotifierProvider.autoDispose<ThemeRepository, AppThemeType>(
   () => ThemeRepositoryImpl(),
 );
 
