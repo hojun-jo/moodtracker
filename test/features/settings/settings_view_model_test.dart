@@ -23,6 +23,18 @@ void main() {
     fakeThemeRepository.reset();
   });
 
+  test('get theme should return default theme when repository returns null',
+      () async {
+    // given
+    const expectedTheme = AppThemeType.almond;
+
+    // when
+    final theme = await container.read(themeRepository.future);
+
+    // then
+    expect(theme, expectedTheme);
+  });
+
   test('get theme should return theme from repository', () async {
     // given
     const expectedTheme = AppThemeType.apricot;
@@ -37,13 +49,13 @@ void main() {
     expect(fakeThemeRepository.getThemeCalled, isTrue);
   });
 
-  test('selectTheme should call setTheme on repository', () async {
+  test('set theme should call setTheme on repository', () async {
     // given
     const themeToSelect = AppThemeType.apricot;
     bool mockSetThemeCalled = false;
 
     fakeThemeRepository.stubSetTheme((theme) async {
-      expect(theme, themeToSelect); // 인자 검증
+      expect(theme, themeToSelect);
       mockSetThemeCalled = true;
     });
 
