@@ -26,18 +26,13 @@ jobs:
       # run: 사용할 shell script
       - name: Chckout code
         # 레포지토리에서 코드를 가져옴
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Install Flutter SDK
-        uses: subosito/flutter-action@v2
+        uses: subosito/flutter-action@v2.12.0
         with:
           channel: "stable"
-          flutter-version: "3.7.0"
-
-      - name: Set up Dart
-        uses: dart-lang/setup-dart@v1
-        with:
-          sdk: 3.5.3
+          flutter-version: "3.24.3"
 
       - name: Import Flutter Packages
         run: |
