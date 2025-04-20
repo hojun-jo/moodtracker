@@ -24,15 +24,20 @@ jobs:
       # name: step 이름
       # uses: 사용할 action(GitHub에서 제공하는 action)
       # run: 사용할 shell script
+      - name: Chckout code
+        # 레포지토리에서 코드를 가져옴
+        uses: actions/checkout@v2
+
       - name: Install Flutter SDK
         uses: subosito/flutter-action@v2
         with:
           channel: "stable"
           flutter-version: "3.7.0"
 
-      - name: Chckout code
-        # 레포지토리에서 코드를 가져옴
-        uses: actions/checkout@v2
+      - name: Set up Dart
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: dev
 
       - name: Import Flutter Packages
         run: |
