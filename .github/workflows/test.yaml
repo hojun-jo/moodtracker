@@ -40,8 +40,4 @@ jobs:
 
       - name: Run Tests
         run: |
-          flutter test --coverage
-          # Generate coverage report
-          genhtml coverage/lcov.info -o coverage/html
-          # Upload coverage report to Codecov
-          bash <(curl -s https://codecov.io/bash) -f coverage/lcov.info -Z
+          flutter test
