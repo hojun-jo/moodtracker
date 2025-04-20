@@ -37,7 +37,7 @@ jobs:
       - name: Set up Dart
         uses: dart-lang/setup-dart@v1
         with:
-          sdk: dev
+          sdk: 3.5.3
 
       - name: Import Flutter Packages
         run: |
