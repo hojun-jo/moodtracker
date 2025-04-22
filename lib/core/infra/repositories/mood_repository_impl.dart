@@ -20,11 +20,4 @@ class MoodRepositoryImpl implements MoodRepository {
 
     yield* datasource.watchMoods(date: date);
   }
-
-  @override
-  Future<void> deleteMood(MoodModel mood) async {
-    final datasource = await moodDatasource;
-
-    await datasource.deleteMood(mood);
-  }
 }

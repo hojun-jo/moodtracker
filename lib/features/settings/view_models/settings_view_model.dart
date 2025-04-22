@@ -3,23 +3,22 @@ import 'package:moodtracker/core/di/provider.dart';
 import 'package:moodtracker/core/repositories/theme_repository.dart';
 import 'package:moodtracker/core/theme/app_theme_type.dart';
 
-class SettingsViewModel extends AutoDisposeNotifier {
-  late final ThemeRepository _themeRepository;
+class SettingsViewModel {
+  final ThemeRepository themeRepository;
 
-  @override
-  build() {
-    _themeRepository = ref.read(themeRepository.notifier);
-  }
+  SettingsViewModel({required this.themeRepository});
 
-  Future<AppThemeType> get theme => _themeRepository.getTheme();
+  Future<AppThemeType> get theme => themeRepository.getTheme();
 
   void selectTheme(AppThemeType theme) {
-    _themeRepository.setTheme(theme);
+    themeRepository.setTheme(theme);
   }
 
   Future<void> signOut() async {}
 }
 
-final settingsProvider = NotifierProvider.autoDispose(
-  () => SettingsViewModel(),
+final settingsProvider = Provider<SettingsViewModel>(
+  (ref) => SettingsViewModel(
+    themeRepository: ref.watch(themeRepository.notifier),
+  ),
 );

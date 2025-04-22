@@ -16,7 +16,7 @@ class SettingsScreen extends ConsumerStatefulWidget {
 
 class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   final MenuController _menuController = MenuController();
-  late final SettingsViewModel _viewModel = ref.read(settingsProvider.notifier);
+  late final SettingsViewModel _viewModel = ref.read(settingsProvider);
 
   @override
   Widget build(BuildContext context) {
