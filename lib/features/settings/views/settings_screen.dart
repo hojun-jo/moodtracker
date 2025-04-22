@@ -27,19 +27,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         SettingsItem(
           onTap: () {},
           text: "Theme".tr(),
-          trailing: FutureBuilder(
-            future: _viewModel.theme,
-            builder: (context, snapshot) {
-              if (snapshot.hasError) {
-                return Text(snapshot.error.toString());
-              }
-
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const CenterProgressIndicator();
-              }
-
-              final theme = snapshot.data!;
-
+          trailing: _viewModel.getTheme(ref).when(
+            data: (currentTheme) {
               return MenuAnchor(
                 controller: _menuController,
                 menuChildren: [
@@ -58,11 +47,17 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 ) {
                   return ThemeMenuItem(
                     onTap: _onTapMenu,
-                    color: theme.toColor(),
-                    text: theme.text,
+                    color: currentTheme.toColor(),
+                    text: currentTheme.text,
                   );
                 },
               );
+            },
+            error: (error, stackTrace) {
+              return Text(error.toString());
+            },
+            loading: () {
+              return const CenterProgressIndicator();
             },
           ),
         ),

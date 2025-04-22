@@ -4,19 +4,21 @@ import 'package:moodtracker/core/repositories/theme_repository.dart';
 import 'package:moodtracker/core/theme/app_theme_type.dart';
 
 class SettingsViewModel {
-  final ThemeRepository themeRepository;
+  final ThemeRepository themeRepo;
 
-  SettingsViewModel({required this.themeRepository});
-// TODO: AsyncValue로 변경
-  Future<AppThemeType> get theme => themeRepository.getTheme();
+  SettingsViewModel({required this.themeRepo});
+
+  AsyncValue<AppThemeType> getTheme(WidgetRef ref) {
+    return ref.watch(themeRepository);
+  }
 
   void selectTheme(AppThemeType theme) {
-    themeRepository.setTheme(theme);
+    themeRepo.setTheme(theme);
   }
 }
 
 final settingsProvider = Provider<SettingsViewModel>(
   (ref) => SettingsViewModel(
-    themeRepository: ref.watch(themeRepository.notifier),
+    themeRepo: ref.watch(themeRepository.notifier),
   ),
 );
