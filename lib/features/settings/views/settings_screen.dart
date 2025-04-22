@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:moodtracker/core/theme/app_theme_type.dart';
@@ -25,7 +26,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       children: [
         SettingsItem(
           onTap: () {},
-          text: "Theme",
+          text: "Theme".tr(),
           trailing: FutureBuilder(
             future: _viewModel.theme,
             builder: (context, snapshot) {
@@ -67,14 +68,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         ),
         SettingsItem(
           onTap: () => showLicensePage(context: context),
-          text: "Open Source Lisence",
+          text: "Open Source Lisence".tr(),
           trailing: const Icon(Icons.chevron_right),
         ),
-        // SettingsItem(
-        //   onTap: _signOut,
-        //   text: "Sign Out",
-        //   textColor: Colors.red,
-        // ),
       ],
     );
   }
@@ -98,16 +94,4 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       _menuController.open();
     }
   }
-
-  // void _signOut() {
-  //   try {
-  //     _viewModel.signOut();
-  //     context.go(RoutePath.signIn);
-  //   } catch (e) {
-  //     showErrorDialog(
-  //       context: context,
-  //       text: e.toString(),
-  //     );
-  //   }
-  // }
 }

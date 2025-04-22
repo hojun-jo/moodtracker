@@ -7,14 +7,12 @@ class SettingsViewModel {
   final ThemeRepository themeRepository;
 
   SettingsViewModel({required this.themeRepository});
-
+// TODO: AsyncValue로 변경
   Future<AppThemeType> get theme => themeRepository.getTheme();
 
   void selectTheme(AppThemeType theme) {
     themeRepository.setTheme(theme);
   }
-
-  Future<void> signOut() async {}
 }
 
 final settingsProvider = Provider<SettingsViewModel>(

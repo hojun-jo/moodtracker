@@ -3,7 +3,7 @@ import 'package:moodtracker/core/theme/app_color.dart';
 
 abstract class AppTextTheme {
   AppTextTheme._();
-
+// TODO: jua, hi melody, cute font
   static final data = GoogleFonts.dongleTextTheme().copyWith(
     bodyMedium: GoogleFonts.dongle(
       color: AppColor.black,

@@ -3,11 +3,11 @@ import 'dart:ui';
 import 'package:moodtracker/core/theme/app_color.dart';
 
 enum AppThemeType {
-  cherryBlossom("cherryBlossom"),
-  apricot("apricot"),
-  almond("almond"),
-  ashGray("ashGray"),
-  thistle("thistle");
+  cherryBlossom("Cherry Blossom"),
+  apricot("Apricot"),
+  almond("Almond"),
+  ashGray("Ash Gray"),
+  thistle("Thistle");
 
   final String text;
 
