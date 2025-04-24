@@ -39,7 +39,7 @@ void main() {
     test('return saved theme when datasource returns saved theme', () async {
       // Given
       when(() => mockThemeLocalDatasource.getTheme())
-          .thenAnswer((_) async => "cherryBlossom");
+          .thenAnswer((_) async => "Cherry Blossom");
 
       // When
       final result = await container.read(themeRepository.future);
@@ -65,7 +65,7 @@ void main() {
     test('return saved theme when datasource returns saved theme', () async {
       // Given
       when(() => mockThemeLocalDatasource.getTheme())
-          .thenAnswer((_) async => "cherryBlossom");
+          .thenAnswer((_) async => "Cherry Blossom");
 
       // When
       final result = await container.read(themeRepository.notifier).getTheme();
@@ -73,12 +73,24 @@ void main() {
       // Then
       expect(result, AppThemeType.cherryBlossom);
     });
+
+    test('return default theme when datasource throws an error', () async {
+      // Given
+      when(() => mockThemeLocalDatasource.getTheme())
+          .thenThrow(Exception("Error"));
+
+      // When
+      final result = await container.read(themeRepository.notifier).getTheme();
+
+      // Then
+      expect(result, AppThemeType.almond);
+    });
   });
 
   group("saveTheme", () {
     test('save theme to datasource', () async {
       // Given
-      when(() => mockThemeLocalDatasource.setTheme("almond"))
+      when(() => mockThemeLocalDatasource.setTheme("Almond"))
           .thenAnswer((_) async => true);
 
       // When
@@ -87,7 +99,7 @@ void main() {
           .setTheme(AppThemeType.almond);
 
       // Then
-      verify(() => mockThemeLocalDatasource.setTheme("almond")).called(1);
+      verify(() => mockThemeLocalDatasource.setTheme("Almond")).called(1);
     });
   });
 }
