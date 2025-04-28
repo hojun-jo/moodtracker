@@ -16,28 +16,30 @@ class MainNavigationBar extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 15,
-            vertical: 10,
+          padding: const EdgeInsets.only(
+            left: 15,
+            right: 15,
+            top: 20,
           ),
           child: navigationShell,
         ),
       ),
-      bottomNavigationBar: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 20),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              ...MainNavigationType.values.map((value) {
-                return MainNavigationBarItem(
-                  onTap: () => _navigateTo(value),
-                  icon: value.toIcon(),
-                  isSelected: navigationShell.currentIndex == value.toIndex(),
-                );
-              }),
-            ],
-          ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.only(
+          top: 20,
+          bottom: 30,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            ...MainNavigationType.values.map((value) {
+              return MainNavigationBarItem(
+                onTap: () => _navigateTo(value),
+                icon: value.toIcon(),
+                isSelected: navigationShell.currentIndex == value.toIndex(),
+              );
+            }),
+          ],
         ),
       ),
     );

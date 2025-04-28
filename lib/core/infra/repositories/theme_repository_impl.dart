@@ -19,13 +19,17 @@ class ThemeRepositoryImpl extends AutoDisposeAsyncNotifier<AppThemeType>
 
   @override
   Future<AppThemeType> getTheme() async {
-    final theme = await _themeLocalDatasource.getTheme();
+    try {
+      final theme = await _themeLocalDatasource.getTheme();
 
-    if (theme == null) {
+      if (theme == null) {
+        return AppThemeType.almond;
+      }
+
+      return AppThemeType.fromString(theme);
+    } catch (e) {
       return AppThemeType.almond;
     }
-
-    return AppThemeType.fromString(theme);
   }
 
   @override

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
@@ -34,8 +35,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         moodModelStream.when(
           data: (data) {
             return data.isEmpty
-                ? const SliverToBoxAdapter(
-                    child: CenterText(text: "Write down how you feel!"),
+                ? SliverToBoxAdapter(
+                    child: CenterText(text: "Write down how you feel!".tr()),
                   )
                 : SliverList.separated(
                     separatorBuilder: (context, index) => const Gap(20),
