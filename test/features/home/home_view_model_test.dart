@@ -16,7 +16,7 @@ void main() {
     registerFallbackValue(Stream.value([
       MoodModel(
         id: 0,
-        moodType: MoodType.smile,
+        moodType: MoodType.happy,
         description: '',
         createdAt: DateTime(0),
       )
@@ -57,7 +57,7 @@ void main() {
     final mockMoods = [
       MoodModel(
         id: 1,
-        moodType: MoodType.smile,
+        moodType: MoodType.happy,
         description: 'Great day!',
         createdAt: date,
       ),
@@ -77,7 +77,7 @@ void main() {
 
     // then
     expect(moods, hasLength(2));
-    expect(moods[0].moodType, equals(MoodType.smile));
+    expect(moods[0].moodType, equals(MoodType.happy));
     expect(moods[1].moodType, equals(MoodType.angry));
     verify(() => mockMoodRepository.watchMoods(date: date)).called(1);
   });
@@ -87,7 +87,7 @@ void main() {
     final mockMoods = [
       MoodModel(
         id: 1,
-        moodType: MoodType.smile,
+        moodType: MoodType.happy,
         description: 'Today is good',
         createdAt: DateTime.now(),
       ),
@@ -101,7 +101,7 @@ void main() {
 
     // then
     expect(moods, hasLength(1));
-    expect(moods[0].moodType, equals(MoodType.smile));
+    expect(moods[0].moodType, equals(MoodType.happy));
     verify(() => mockMoodRepository.watchMoods(date: null)).called(1);
   });
 

@@ -107,13 +107,23 @@ P _moodModelDeserializeProp<P>(
 
 const _MoodModelmoodTypeEnumValueMap = {
   'angry': 0,
-  'blank': 1,
-  'smile': 2,
+  'anxiety': 1,
+  'calm': 2,
+  'excitement': 3,
+  'happy': 4,
+  'joy': 5,
+  'neutral': 6,
+  'sad': 7,
 };
 const _MoodModelmoodTypeValueEnumMap = {
   0: MoodType.angry,
-  1: MoodType.blank,
-  2: MoodType.smile,
+  1: MoodType.anxiety,
+  2: MoodType.calm,
+  3: MoodType.excitement,
+  4: MoodType.happy,
+  5: MoodType.joy,
+  6: MoodType.neutral,
+  7: MoodType.sad,
 };
 
 Id _moodModelGetId(MoodModel object) {

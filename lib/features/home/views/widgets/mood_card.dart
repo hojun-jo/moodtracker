@@ -27,10 +27,10 @@ class MoodCard extends StatelessWidget {
             Row(
               spacing: 10,
               children: [
-                Icon(
-                  moodType.toIcon(),
-                  size: 30,
-                  color: moodType.toColor(),
+                Image.asset(
+                  moodType.assetName,
+                  width: 50,
+                  height: 50,
                 ),
                 Text(
                   createdAt,

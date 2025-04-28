@@ -23,7 +23,7 @@ void main() {
       // given
       final mood = MoodModel(
         id: 1,
-        moodType: MoodType.smile,
+        moodType: MoodType.happy,
         description: "happy",
         createdAt: DateTime.now(),
       );
@@ -40,7 +40,7 @@ void main() {
       // given
       final mood = MoodModel(
         id: 1,
-        moodType: MoodType.smile,
+        moodType: MoodType.happy,
         description: "happy",
         createdAt: DateTime.now(),
       );
@@ -59,7 +59,7 @@ void main() {
       final moods = [
         MoodModel(
           id: 1,
-          moodType: MoodType.smile,
+          moodType: MoodType.happy,
           description: "happy",
           createdAt: DateTime.now(),
         ),
@@ -86,7 +86,7 @@ void main() {
       final moods = [
         MoodModel(
           id: 1,
-          moodType: MoodType.smile,
+          moodType: MoodType.happy,
           description: "happy",
           createdAt: date,
         ),

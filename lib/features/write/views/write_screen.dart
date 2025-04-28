@@ -38,17 +38,42 @@ class _WriteScreenState extends ConsumerState<WriteScreen> {
           Card(
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+              child: Column(
                 children: [
-                  ...MoodType.values.map((mood) {
-                    return WriteIconButton(
-                      onTap: () => _selectMood(mood),
-                      icon: mood.toIcon(),
-                      color: mood.toColor(),
-                      isSelected: _selectedMood == mood,
-                    );
-                  }),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ...[
+                        MoodType.happy,
+                        MoodType.joy,
+                        MoodType.excitement,
+                        MoodType.calm
+                      ].map((mood) {
+                        return WriteIconButton(
+                          onTap: () => _selectMood(mood),
+                          moodType: mood,
+                          isSelected: _selectedMood == mood,
+                        );
+                      }),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ...[
+                        MoodType.neutral,
+                        MoodType.anxiety,
+                        MoodType.sad,
+                        MoodType.angry
+                      ].map((mood) {
+                        return WriteIconButton(
+                          onTap: () => _selectMood(mood),
+                          moodType: mood,
+                          isSelected: _selectedMood == mood,
+                        );
+                      }),
+                    ],
+                  ),
                 ],
               ),
             ),
