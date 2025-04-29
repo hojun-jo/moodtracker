@@ -11,7 +11,7 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   runApp(
     DevicePreview(
-      enabled: true,
+      enabled: false,
       builder: (context) => EasyLocalization(
         supportedLocales: const [
           Locale('en', 'US'),

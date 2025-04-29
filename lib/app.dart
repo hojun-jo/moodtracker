@@ -18,6 +18,7 @@ class MoodTrackerApp extends ConsumerWidget {
     return theme.when(
       data: (data) {
         return MaterialApp.router(
+          debugShowCheckedModeBanner: false,
           routerConfig: ref.watch(routerProvider),
           title: "App Title".tr(),
           theme: appThemeData(data),

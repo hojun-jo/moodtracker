@@ -53,10 +53,20 @@ ThemeData appThemeData(AppThemeType appBackground) {
       backgroundColor: AppColor.white,
       cancelButtonStyle: ButtonStyle(
         foregroundColor: WidgetStateProperty.all(AppColor.black),
+        textStyle: WidgetStateProperty.all(
+          AppTextTheme.data.bodySmall,
+        ),
       ),
       confirmButtonStyle: ButtonStyle(
         foregroundColor: WidgetStateProperty.all(AppColor.black),
+        textStyle: WidgetStateProperty.all(
+          AppTextTheme.data.bodySmall,
+        ),
       ),
+      headerHelpStyle: AppTextTheme.data.bodySmall,
+      weekdayStyle: AppTextTheme.data.bodySmall,
+      dayStyle: AppTextTheme.data.bodySmall,
+      yearStyle: AppTextTheme.data.bodySmall,
     ),
   );
 }
