@@ -21,7 +21,7 @@ class MoodTrackerApp extends ConsumerWidget {
           debugShowCheckedModeBanner: false,
           routerConfig: ref.watch(routerProvider),
           title: "App Title".tr(),
-          theme: appThemeData(data),
+          theme: appThemeData(data, context.locale),
           builder: DevicePreview.appBuilder,
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,
