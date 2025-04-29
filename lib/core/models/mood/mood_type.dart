@@ -1,11 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:moodtracker/core/theme/app_color.dart';
-
 enum MoodType {
   angry("angry"),
-  blank("blank"),
-  smile("smmile");
+  anxiety("anxiety"),
+  calm("calm"),
+  excitement("excitement"),
+  happy("happy"),
+  joy("joy"),
+  neutral("neutral"),
+  sad("sad");
 
   final String text;
 
@@ -15,25 +16,24 @@ enum MoodType {
     return values.firstWhere((e) => e.text == text);
   }
 
-  IconData toIcon() {
+  String get assetName {
     switch (this) {
       case MoodType.angry:
-        return FontAwesomeIcons.faceAngry;
-      case MoodType.blank:
-        return FontAwesomeIcons.faceMehBlank;
-      case MoodType.smile:
-        return FontAwesomeIcons.faceSmile;
-    }
-  }
-
-  Color toColor() {
-    switch (this) {
-      case MoodType.angry:
-        return AppColor.red;
-      case MoodType.blank:
-        return AppColor.yellow;
-      case MoodType.smile:
-        return AppColor.green;
+        return "assets/icons/angry.png";
+      case MoodType.anxiety:
+        return "assets/icons/anxiety.png";
+      case MoodType.calm:
+        return "assets/icons/calm.png";
+      case MoodType.excitement:
+        return "assets/icons/excitement.png";
+      case MoodType.happy:
+        return "assets/icons/happy.png";
+      case MoodType.joy:
+        return "assets/icons/joy.png";
+      case MoodType.neutral:
+        return "assets/icons/neutral.png";
+      case MoodType.sad:
+        return "assets/icons/sad.png";
     }
   }
 }

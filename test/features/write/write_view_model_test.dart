@@ -16,7 +16,7 @@ void main() {
   setUpAll(() {
     registerFallbackValue(MoodModel(
       id: 0,
-      moodType: MoodType.smile,
+      moodType: MoodType.happy,
       description: '',
       createdAt: DateTime(0),
     ));
@@ -38,7 +38,7 @@ void main() {
 
   test('should successfully post mood with valid data', () async {
     // Given
-    const mood = MoodType.smile;
+    const mood = MoodType.happy;
     const description = 'I had a great day!';
 
     when(() => mockMoodRepository.addMood(any())).thenAnswer((_) async {});
@@ -52,7 +52,7 @@ void main() {
 
   test('should handle empty description', () async {
     // Given
-    const mood = MoodType.blank;
+    const mood = MoodType.happy;
     const emptyDescription = '';
 
     when(() => mockMoodRepository.addMood(any())).thenAnswer((_) async {});

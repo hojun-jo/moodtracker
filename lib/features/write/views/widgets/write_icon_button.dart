@@ -1,27 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:moodtracker/core/models/mood/mood_type.dart';
 
 class WriteIconButton extends StatelessWidget {
   final VoidCallback onTap;
-  final IconData icon;
-  final Color color;
+  final MoodType moodType;
   final bool isSelected;
 
   const WriteIconButton({
     super.key,
     required this.onTap,
-    required this.icon,
-    required this.color,
+    required this.moodType,
     required this.isSelected,
   });
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return GestureDetector(
       onTap: onTap,
-      child: Icon(
-        icon,
-        size: 36,
-        color: isSelected ? color : null,
+      child: Container(
+        decoration: BoxDecoration(
+          color:
+              isSelected ? theme.scaffoldBackgroundColor : Colors.transparent,
+          shape: BoxShape.circle,
+        ),
+        padding: const EdgeInsets.all(8),
+        child: Image.asset(
+          moodType.assetName,
+          width: 40,
+          height: 40,
+        ),
       ),
     );
   }
