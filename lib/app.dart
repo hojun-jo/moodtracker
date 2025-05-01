@@ -1,4 +1,3 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -22,11 +21,9 @@ class MoodTrackerApp extends ConsumerWidget {
           routerConfig: ref.watch(routerProvider),
           title: "App Title".tr(),
           theme: appThemeData(data, context.locale),
-          builder: DevicePreview.appBuilder,
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,
-          // locale: context.locale,
-          locale: DevicePreview.locale(context),
+          locale: context.locale,
         );
       },
       error: (error, stackTrace) {

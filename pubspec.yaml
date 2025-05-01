@@ -16,7 +16,6 @@ dependencies:
   go_router: ^14.8.1
   flutter_riverpod: ^2.6.1
   google_fonts: ^6.2.1
-  device_preview: ^1.2.0
   font_awesome_flutter: ^10.8.0
   gap: ^3.0.1
   uuid: ^4.5.1
