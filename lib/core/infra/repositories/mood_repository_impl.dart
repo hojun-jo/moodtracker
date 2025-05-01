@@ -15,16 +15,9 @@ class MoodRepositoryImpl implements MoodRepository {
   }
 
   @override
-  Stream<List<MoodModel>> watchMoods() async* {
+  Stream<List<MoodModel>> watchMoods({DateTime? date}) async* {
     final datasource = await moodDatasource;
 
-    yield* datasource.watchMoods();
-  }
-
-  @override
-  Future<void> deleteMood(MoodModel mood) async {
-    final datasource = await moodDatasource;
-
-    await datasource.deleteMood(mood);
+    yield* datasource.watchMoods(date: date);
   }
 }

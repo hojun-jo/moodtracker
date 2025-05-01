@@ -22,7 +22,7 @@ class SettingsItem extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 14,
-            vertical: 4,
+            vertical: 10,
           ),
           child: Row(
             children: [

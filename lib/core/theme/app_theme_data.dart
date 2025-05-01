@@ -3,7 +3,7 @@ import 'package:moodtracker/core/theme/app_color.dart';
 import 'package:moodtracker/core/theme/app_text_theme.dart';
 import 'package:moodtracker/core/theme/app_theme_type.dart';
 
-ThemeData appThemeData(AppThemeType appBackground) {
+ThemeData appThemeData(AppThemeType appBackground, Locale locale) {
   return ThemeData(
     scaffoldBackgroundColor: appBackground.toColor(),
     appBarTheme: AppBarTheme(
@@ -18,14 +18,15 @@ ThemeData appThemeData(AppThemeType appBackground) {
     ),
     inputDecorationTheme: InputDecorationTheme(
       border: InputBorder.none,
-      hintStyle: AppTextTheme.data.bodySmall,
+      hintStyle: AppTextTheme.data(locale)?.bodySmall,
     ),
-    textTheme: AppTextTheme.data,
+    textTheme: AppTextTheme.data(locale),
     textSelectionTheme: TextSelectionThemeData(
       cursorColor: AppColor.black,
       selectionColor: appBackground.toColor(),
       selectionHandleColor: appBackground.toColor(),
     ),
+    cardColor: appBackground.toColor(),
     cardTheme: const CardTheme(
       elevation: 0,
       margin: EdgeInsets.zero,
@@ -33,7 +34,7 @@ ThemeData appThemeData(AppThemeType appBackground) {
     ),
     listTileTheme: ListTileThemeData(
       tileColor: AppColor.white,
-      titleTextStyle: AppTextTheme.data.bodyMedium,
+      titleTextStyle: AppTextTheme.data(locale)?.bodyMedium,
     ),
     progressIndicatorTheme: const ProgressIndicatorThemeData(
       color: AppColor.black,
@@ -47,6 +48,25 @@ ThemeData appThemeData(AppThemeType appBackground) {
           WidgetState.any: AppColor.white,
         }),
       ),
+    ),
+    datePickerTheme: DatePickerThemeData(
+      backgroundColor: AppColor.white,
+      cancelButtonStyle: ButtonStyle(
+        foregroundColor: WidgetStateProperty.all(AppColor.black),
+        textStyle: WidgetStateProperty.all(
+          AppTextTheme.data(locale)?.bodySmall,
+        ),
+      ),
+      confirmButtonStyle: ButtonStyle(
+        foregroundColor: WidgetStateProperty.all(AppColor.black),
+        textStyle: WidgetStateProperty.all(
+          AppTextTheme.data(locale)?.bodySmall,
+        ),
+      ),
+      headerHelpStyle: AppTextTheme.data(locale)?.bodySmall,
+      weekdayStyle: AppTextTheme.data(locale)?.bodySmall,
+      dayStyle: AppTextTheme.data(locale)?.bodySmall,
+      yearStyle: AppTextTheme.data(locale)?.bodySmall,
     ),
   );
 }

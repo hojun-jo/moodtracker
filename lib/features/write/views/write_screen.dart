@@ -1,8 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:moodtracker/core/models/mood/mood_type.dart';
-import 'package:moodtracker/core/widgets/error_dialog.dart';
+import 'package:moodtracker/core/widgets/dialog/error_dialog.dart';
 import 'package:moodtracker/features/write/view_models/write_view_model.dart';
 import 'package:moodtracker/features/write/views/widgets/write_icon_button.dart';
 import 'package:moodtracker/route/route_path.dart';
@@ -37,17 +38,42 @@ class _WriteScreenState extends ConsumerState<WriteScreen> {
           Card(
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+              child: Column(
                 children: [
-                  ...MoodType.values.map((mood) {
-                    return WriteIconButton(
-                      onTap: () => _selectMood(mood),
-                      icon: mood.toIcon(),
-                      color: mood.toColor(),
-                      isSelected: _selectedMood == mood,
-                    );
-                  }),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ...[
+                        MoodType.happy,
+                        MoodType.joy,
+                        MoodType.excitement,
+                        MoodType.calm
+                      ].map((mood) {
+                        return WriteIconButton(
+                          onTap: () => _selectMood(mood),
+                          moodType: mood,
+                          isSelected: _selectedMood == mood,
+                        );
+                      }),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ...[
+                        MoodType.neutral,
+                        MoodType.anxiety,
+                        MoodType.sad,
+                        MoodType.angry
+                      ].map((mood) {
+                        return WriteIconButton(
+                          onTap: () => _selectMood(mood),
+                          moodType: mood,
+                          isSelected: _selectedMood == mood,
+                        );
+                      }),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -67,8 +93,8 @@ class _WriteScreenState extends ConsumerState<WriteScreen> {
                 autocorrect: false,
                 maxLines: null,
                 style: Theme.of(context).textTheme.bodyMedium,
-                decoration: const InputDecoration(
-                  hintText: "How was your day?",
+                decoration: InputDecoration(
+                  hintText: "How was your day?".tr(),
                 ),
               ),
             ),
@@ -82,13 +108,13 @@ class _WriteScreenState extends ConsumerState<WriteScreen> {
             ),
           GestureDetector(
             onTap: _postMood,
-            child: const Card(
+            child: Card(
               child: Padding(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Post"),
+                    Text("Save".tr()),
                   ],
                 ),
               ),
