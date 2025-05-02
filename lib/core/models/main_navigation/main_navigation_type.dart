@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 enum MainNavigationType {
   home,
   write,
+  chart,
   settings;
 
   int toIndex() {
@@ -12,8 +13,10 @@ enum MainNavigationType {
         return 0;
       case MainNavigationType.write:
         return 1;
-      case MainNavigationType.settings:
+      case MainNavigationType.chart:
         return 2;
+      case MainNavigationType.settings:
+        return 3;
     }
   }
 
@@ -23,6 +26,8 @@ enum MainNavigationType {
         return FontAwesomeIcons.book;
       case MainNavigationType.write:
         return FontAwesomeIcons.featherPointed;
+      case MainNavigationType.chart:
+        return FontAwesomeIcons.chartPie;
       case MainNavigationType.settings:
         return FontAwesomeIcons.bars;
     }

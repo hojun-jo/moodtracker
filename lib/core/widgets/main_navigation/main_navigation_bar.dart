@@ -51,6 +51,8 @@ class MainNavigationBar extends StatelessWidget {
         navigationShell.goBranch(MainNavigationType.home.toIndex());
       case MainNavigationType.write:
         navigationShell.goBranch(MainNavigationType.write.toIndex());
+      case MainNavigationType.chart:
+        navigationShell.goBranch(MainNavigationType.chart.toIndex());
       case MainNavigationType.settings:
         navigationShell.goBranch(MainNavigationType.settings.toIndex());
     }

@@ -1,3 +1,7 @@
+import 'dart:ui';
+
+import 'package:moodtracker/core/theme/app_color.dart';
+
 enum MoodType {
   angry("angry"),
   anxiety("anxiety"),
@@ -34,6 +38,27 @@ enum MoodType {
         return "assets/icons/neutral.png";
       case MoodType.sad:
         return "assets/icons/sad.png";
+    }
+  }
+
+  Color get color {
+    switch (this) {
+      case MoodType.angry:
+        return AppColor.angry;
+      case MoodType.anxiety:
+        return AppColor.anxiety;
+      case MoodType.calm:
+        return AppColor.calm;
+      case MoodType.excitement:
+        return AppColor.excitement;
+      case MoodType.happy:
+        return AppColor.happy;
+      case MoodType.joy:
+        return AppColor.joy;
+      case MoodType.neutral:
+        return AppColor.neutral;
+      case MoodType.sad:
+        return AppColor.sad;
     }
   }
 }
