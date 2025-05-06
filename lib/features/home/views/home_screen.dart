@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:moodtracker/core/di/provider.dart';
 import 'package:moodtracker/core/widgets/center_progress_indicator.dart';
 import 'package:moodtracker/core/widgets/center_text.dart';
 import 'package:moodtracker/features/home/view_models/home_view_model.dart';
@@ -16,21 +17,16 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
-  late final HomeViewModel _viewModel =
-      ref.read(homeProvider(_selectedDateRange).notifier);
-
-  DateTimeRange? _selectedDateRange;
-
   @override
   Widget build(BuildContext context) {
-    final moodModelStream = ref.watch(homeProvider(_selectedDateRange));
+    final dateRange = ref.watch(filterDateRange);
+    final moodModelStream = ref.watch(homeProvider(dateRange));
+    final viewModel = ref.read(homeProvider(dateRange).notifier);
 
     return CustomScrollView(
       slivers: [
         SliverPersistentHeader(
-          delegate: HomeHeaderDelegate(
-            onDateChanged: _onDateChanged,
-          ),
+          delegate: HomeHeaderDelegate(),
         ),
         moodModelStream.when(
           data: (data) {
@@ -44,7 +40,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     itemBuilder: (context, index) {
                       return MoodCard(
                         moodType: data[index].moodType,
-                        createdAt: _viewModel.formatDate(data[index].createdAt),
+                        createdAt: viewModel.formatDate(data[index].createdAt),
                         description: data[index].description,
                       );
                     },
@@ -60,10 +56,5 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ),
       ],
     );
-  }
-
-  void _onDateChanged(DateTimeRange? dateRange) {
-    _selectedDateRange = dateRange;
-    setState(() {});
   }
 }

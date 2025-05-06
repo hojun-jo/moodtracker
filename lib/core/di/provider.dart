@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
 import 'package:moodtracker/core/datasources/mood_datasource.dart';
@@ -42,3 +43,6 @@ final moodLocalDatasource = Provider<Future<MoodDatasource>>((ref) async {
 final moodRepository = Provider<MoodRepository>((ref) {
   return MoodRepositoryImpl(moodDatasource: ref.read(moodLocalDatasource));
 });
+
+// filter date range
+final filterDateRange = StateProvider<DateTimeRange?>((ref) => null);

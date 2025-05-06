@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:moodtracker/core/di/provider.dart';
 import 'package:moodtracker/core/widgets/small_icon_button.dart';
 
-class HomeHeader extends StatefulWidget {
-  final Function(DateTimeRange?) onDateChanged;
-
-  const HomeHeader({
-    super.key,
-    required this.onDateChanged,
-  });
+class HomeHeader extends ConsumerStatefulWidget {
+  const HomeHeader({super.key});
 
   @override
-  State<HomeHeader> createState() => _HomeHeaderState();
+  ConsumerState<HomeHeader> createState() => _HomeHeaderState();
 }
 
-class _HomeHeaderState extends State<HomeHeader> {
-  DateTimeRange? _selectedDateRange;
-
+class _HomeHeaderState extends ConsumerState<HomeHeader> {
   @override
   Widget build(BuildContext context) {
+    final dateRange = ref.watch(filterDateRange);
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Row(
@@ -29,7 +26,7 @@ class _HomeHeaderState extends State<HomeHeader> {
             onTap: () => _onDateChanged(context),
             icon: FontAwesomeIcons.filter,
           ),
-          if (_selectedDateRange != null)
+          if (dateRange != null)
             SmallIconButton(
               onTap: _deleteFilter,
               icon: FontAwesomeIcons.filterCircleXmark,
@@ -69,9 +66,6 @@ class _HomeHeaderState extends State<HomeHeader> {
   }
 
   void _changeDateRange(DateTimeRange? dateRange) {
-    widget.onDateChanged(dateRange);
-    setState(() {
-      _selectedDateRange = dateRange;
-    });
+    ref.read(filterDateRange.notifier).state = dateRange;
   }
 }
