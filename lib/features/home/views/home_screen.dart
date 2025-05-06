@@ -17,13 +17,13 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   late final HomeViewModel _viewModel =
-      ref.read(homeProvider(_selectedDate).notifier);
+      ref.read(homeProvider(_selectedDateRange).notifier);
 
-  DateTime? _selectedDate;
+  DateTimeRange? _selectedDateRange;
 
   @override
   Widget build(BuildContext context) {
-    final moodModelStream = ref.watch(homeProvider(_selectedDate));
+    final moodModelStream = ref.watch(homeProvider(_selectedDateRange));
 
     return CustomScrollView(
       slivers: [
@@ -62,8 +62,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
-  void _onDateChanged(DateTime? date) {
-    _selectedDate = date;
+  void _onDateChanged(DateTimeRange? dateRange) {
+    _selectedDateRange = dateRange;
     setState(() {});
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:moodtracker/features/home/views/widgets/home_header.dart';
 
 class HomeHeaderDelegate extends SliverPersistentHeaderDelegate {
-  final Function(DateTime?) onDateChanged;
+  final Function(DateTimeRange?) onDateChanged;
 
   HomeHeaderDelegate({required this.onDateChanged});
 
@@ -12,9 +12,7 @@ class HomeHeaderDelegate extends SliverPersistentHeaderDelegate {
     double shrinkOffset,
     bool overlapsContent,
   ) {
-    return HomeHeader(
-      onDateChanged: onDateChanged,
-    );
+    return HomeHeader(onDateChanged: onDateChanged);
   }
 
   @override

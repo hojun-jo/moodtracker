@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:moodtracker/core/datasources/mood_datasource.dart';
 import 'package:moodtracker/core/models/mood/mood_model.dart';
 import 'package:moodtracker/core/repositories/mood_repository.dart';
@@ -15,9 +16,9 @@ class MoodRepositoryImpl implements MoodRepository {
   }
 
   @override
-  Stream<List<MoodModel>> watchMoods({DateTime? date}) async* {
+  Stream<List<MoodModel>> watchMoods({DateTimeRange? dateRange}) async* {
     final datasource = await moodDatasource;
 
-    yield* datasource.watchMoods(date: date);
+    yield* datasource.watchMoods(dateRange: dateRange);
   }
 }

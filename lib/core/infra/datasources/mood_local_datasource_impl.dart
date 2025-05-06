@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:isar/isar.dart';
 import 'package:moodtracker/core/datasources/mood_datasource.dart';
 import 'package:moodtracker/core/models/mood/mood_model.dart';
@@ -19,13 +20,15 @@ class MoodLocalDatasourceImpl implements MoodDatasource {
   }
 
   @override
-  Stream<List<MoodModel>> watchMoods({DateTime? date}) {
-    if (date != null) {
+  Stream<List<MoodModel>> watchMoods({DateTimeRange? dateRange}) {
+    if (dateRange != null) {
+      final startDate = dateRange.start;
+      final endDate = dateRange.end;
       return isar.moodModels
           .filter()
           .createdAtBetween(
-            DateTime(date.year, date.month, date.day),
-            DateTime(date.year, date.month, date.day, 23, 59, 59),
+            DateTime(startDate.year, startDate.month, startDate.day),
+            DateTime(endDate.year, endDate.month, endDate.day, 23, 59, 59),
           )
           .sortByCreatedAtDesc()
           .watch(fireImmediately: true);

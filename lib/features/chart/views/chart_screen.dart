@@ -1,3 +1,4 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:moodtracker/core/models/mood/mood_type.dart';
 
@@ -13,17 +14,31 @@ class _ChartScreenState extends State<ChartScreen> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ...MoodType.values.map(
-          (mood) => Container(
-            height: 50,
-            color: mood.color,
-            child: Center(
-              child: Text(
-                mood.name,
-              ),
+        AspectRatio(
+          aspectRatio: 1,
+          child: PieChart(
+            PieChartData(
+              sections: [
+                PieChartSectionData(
+                  color: Colors.red,
+                  value: 40,
+                ),
+                PieChartSectionData(
+                  color: Colors.blue,
+                  value: 30,
+                ),
+                PieChartSectionData(
+                  color: Colors.green,
+                  value: 20,
+                ),
+                PieChartSectionData(
+                  color: Colors.yellow,
+                  value: 10,
+                ),
+              ],
             ),
           ),
-        )
+        ),
       ],
     );
   }

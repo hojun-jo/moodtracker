@@ -9,6 +9,11 @@ abstract class AppTextTheme {
     return locale.languageCode == "ja"
         ? null
         : GoogleFonts.dongleTextTheme().copyWith(
+            titleSmall: GoogleFonts.dongle(
+              color: AppColor.black,
+              fontSize: 24,
+              height: 1.2,
+            ),
             bodyMedium: GoogleFonts.dongle(
               color: AppColor.black,
               fontSize: 30,

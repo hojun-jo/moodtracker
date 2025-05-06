@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:moodtracker/core/widgets/small_icon_button.dart';
 
 class HomeHeader extends StatefulWidget {
-  final Function(DateTime?) onDateChanged;
+  final Function(DateTimeRange?) onDateChanged;
 
   const HomeHeader({
     super.key,
@@ -15,7 +15,7 @@ class HomeHeader extends StatefulWidget {
 }
 
 class _HomeHeaderState extends State<HomeHeader> {
-  DateTime? _selectedDate;
+  DateTimeRange? _selectedDateRange;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class _HomeHeaderState extends State<HomeHeader> {
             onTap: () => _onDateChanged(context),
             icon: FontAwesomeIcons.filter,
           ),
-          if (_selectedDate != null)
+          if (_selectedDateRange != null)
             SmallIconButton(
               onTap: _deleteFilter,
               icon: FontAwesomeIcons.filterCircleXmark,
@@ -41,36 +41,37 @@ class _HomeHeaderState extends State<HomeHeader> {
 
   void _onDateChanged(BuildContext context) async {
     final theme = Theme.of(context);
-    final date = await showDatePicker(
+    final now = DateTime.now();
+    final dateRange = await showDateRangePicker(
       context: context,
-      initialDate: DateTime.now(),
+      initialDateRange: DateTimeRange(start: now, end: now),
       firstDate: DateTime(2020),
-      lastDate: DateTime.now(),
-      currentDate: _selectedDate,
-      builder: (context, child) => Theme(
-        data: theme.copyWith(
-          colorScheme: theme.colorScheme.copyWith(
-            primary: theme.scaffoldBackgroundColor,
-            onPrimary: theme.textTheme.bodyMedium?.color,
+      lastDate: now,
+      builder: (context, child) {
+        return Theme(
+          data: theme.copyWith(
+            textTheme: theme.textTheme.copyWith(
+              headlineSmall: theme.textTheme.bodySmall,
+            ),
           ),
-        ),
-        child: child!,
-      ),
+          child: child!,
+        );
+      },
     );
 
-    if (date != null) {
-      _changeDate(date);
+    if (dateRange != null) {
+      _changeDateRange(dateRange);
     }
   }
 
   void _deleteFilter() {
-    _changeDate(null);
+    _changeDateRange(null);
   }
 
-  void _changeDate(DateTime? date) {
-    widget.onDateChanged(date);
+  void _changeDateRange(DateTimeRange? dateRange) {
+    widget.onDateChanged(dateRange);
     setState(() {
-      _selectedDate = date;
+      _selectedDateRange = dateRange;
     });
   }
 }
