@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:moodtracker/core/datasources/mood_datasource.dart';
@@ -80,9 +81,13 @@ void main() {
       expect(stream, emits(moods));
     });
 
-    test('should stream moods with date filter', () async {
+    test('should stream moods with single day date range', () async {
       // given
       final date = DateTime(2024, 3, 20);
+      final dateRange = DateTimeRange(
+        start: date,
+        end: date,
+      );
       final moods = [
         MoodModel(
           id: 1,
@@ -91,11 +96,49 @@ void main() {
           createdAt: date,
         ),
       ];
-      when(() => mockDatasource.watchMoods(date: date))
+      when(() => mockDatasource.watchMoods(dateRange: dateRange))
           .thenAnswer((_) => Stream.value(moods));
 
       // when
-      final stream = repository.watchMoods(date: date);
+      final stream = repository.watchMoods(dateRange: dateRange);
+
+      // then
+      expect(stream, emits(moods));
+    });
+
+    test('should stream moods with multi-day date range', () async {
+      // given
+      final startDate = DateTime(2024, 3, 20);
+      final endDate = DateTime(2024, 3, 22);
+      final dateRange = DateTimeRange(
+        start: startDate,
+        end: endDate,
+      );
+      final moods = [
+        MoodModel(
+          id: 1,
+          moodType: MoodType.happy,
+          description: "happy",
+          createdAt: DateTime(2024, 3, 20),
+        ),
+        MoodModel(
+          id: 2,
+          moodType: MoodType.sad,
+          description: "sad",
+          createdAt: DateTime(2024, 3, 21),
+        ),
+        MoodModel(
+          id: 3,
+          moodType: MoodType.angry,
+          description: "angry",
+          createdAt: DateTime(2024, 3, 22),
+        ),
+      ];
+      when(() => mockDatasource.watchMoods(dateRange: dateRange))
+          .thenAnswer((_) => Stream.value(moods));
+
+      // when
+      final stream = repository.watchMoods(dateRange: dateRange);
 
       // then
       expect(stream, emits(moods));

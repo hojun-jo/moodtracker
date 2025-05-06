@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -40,20 +41,28 @@ void main() {
   test('should return empty list when no moods exist', () async {
     // given
     final date = DateTime(2024, 3, 20);
-    when(() => mockMoodRepository.watchMoods(date: date))
+    final dateRange = DateTimeRange(
+      start: date,
+      end: date,
+    );
+    when(() => mockMoodRepository.watchMoods(dateRange: dateRange))
         .thenAnswer((_) => Stream.value([]));
 
     // when
-    final futureResult = container.read(homeProvider(date).future);
+    final futureResult = container.read(homeProvider(dateRange).future);
 
     // then
     await expectLater(futureResult, completion(isEmpty));
-    verify(() => mockMoodRepository.watchMoods(date: date)).called(1);
+    verify(() => mockMoodRepository.watchMoods(dateRange: dateRange)).called(1);
   });
 
   test('should return list of moods when they exist', () async {
     // given
     final date = DateTime(2024, 3, 20);
+    final dateRange = DateTimeRange(
+      start: date,
+      end: date,
+    );
     final mockMoods = [
       MoodModel(
         id: 1,
@@ -68,21 +77,21 @@ void main() {
         createdAt: date,
       ),
     ];
-    when(() => mockMoodRepository.watchMoods(date: date))
+    when(() => mockMoodRepository.watchMoods(dateRange: dateRange))
         .thenAnswer((_) => Stream.value(mockMoods));
 
     // when
-    final futureResult = container.read(homeProvider(date).future);
+    final futureResult = container.read(homeProvider(dateRange).future);
     final moods = await futureResult;
 
     // then
     expect(moods, hasLength(2));
     expect(moods[0].moodType, equals(MoodType.happy));
     expect(moods[1].moodType, equals(MoodType.angry));
-    verify(() => mockMoodRepository.watchMoods(date: date)).called(1);
+    verify(() => mockMoodRepository.watchMoods(dateRange: dateRange)).called(1);
   });
 
-  test('should handle null date parameter', () async {
+  test('should handle null date range parameter', () async {
     // given
     final mockMoods = [
       MoodModel(
@@ -92,7 +101,7 @@ void main() {
         createdAt: DateTime.now(),
       ),
     ];
-    when(() => mockMoodRepository.watchMoods(date: null))
+    when(() => mockMoodRepository.watchMoods(dateRange: null))
         .thenAnswer((_) => Stream.value(mockMoods));
 
     // when
@@ -102,7 +111,7 @@ void main() {
     // then
     expect(moods, hasLength(1));
     expect(moods[0].moodType, equals(MoodType.happy));
-    verify(() => mockMoodRepository.watchMoods(date: null)).called(1);
+    verify(() => mockMoodRepository.watchMoods(dateRange: null)).called(1);
   });
 
   test('should format date correctly', () {
@@ -120,15 +129,19 @@ void main() {
   test('should handle stream error gracefully', () async {
     // given
     final date = DateTime(2024, 3, 20);
-    when(() => mockMoodRepository.watchMoods(date: date))
+    final dateRange = DateTimeRange(
+      start: date,
+      end: date,
+    );
+    when(() => mockMoodRepository.watchMoods(dateRange: dateRange))
         .thenAnswer((_) => Stream.error(Exception('Database error')));
 
     // when
     // then
     expect(
-      () => container.read(homeProvider(date).future),
+      () => container.read(homeProvider(dateRange).future),
       throwsA(isA<Exception>()),
     );
-    verify(() => mockMoodRepository.watchMoods(date: date)).called(1);
+    verify(() => mockMoodRepository.watchMoods(dateRange: dateRange)).called(1);
   });
 }
