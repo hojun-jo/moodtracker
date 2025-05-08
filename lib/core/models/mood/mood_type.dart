@@ -61,4 +61,25 @@ enum MoodType {
         return AppColor.sad;
     }
   }
+
+  double get scatterY {
+    switch (this) {
+      case MoodType.angry:
+        return 1;
+      case MoodType.anxiety:
+        return 2;
+      case MoodType.calm:
+        return 3;
+      case MoodType.excitement:
+        return 4;
+      case MoodType.happy:
+        return 5;
+      case MoodType.joy:
+        return 6;
+      case MoodType.neutral:
+        return 7;
+      case MoodType.sad:
+        return 8;
+    }
+  }
 }

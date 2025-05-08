@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
-import 'package:moodtracker/core/di/provider.dart';
 import 'package:moodtracker/core/widgets/center_progress_indicator.dart';
 import 'package:moodtracker/core/widgets/center_text.dart';
 import 'package:moodtracker/features/home/view_models/home_view_model.dart';
@@ -17,11 +16,11 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
+  late final _viewModel = ref.read(homeProvider.notifier);
+
   @override
   Widget build(BuildContext context) {
-    final dateRange = ref.watch(filterDateRange);
-    final moodModelStream = ref.watch(homeProvider(dateRange));
-    final viewModel = ref.read(homeProvider(dateRange).notifier);
+    final moodModelStream = ref.watch(homeProvider);
 
     return CustomScrollView(
       slivers: [
@@ -35,12 +34,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     child: CenterText(text: "Write down how you feel!".tr()),
                   )
                 : SliverList.separated(
-                    separatorBuilder: (context, index) => const Gap(20),
+                    separatorBuilder: (context, index) => const Gap(16),
                     itemCount: data.length,
                     itemBuilder: (context, index) {
                       return MoodCard(
                         moodType: data[index].moodType,
-                        createdAt: viewModel.formatDate(data[index].createdAt),
+                        createdAt: _viewModel.formatDate(data[index].createdAt),
                         description: data[index].description,
                       );
                     },
@@ -48,10 +47,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           },
           error: (error, stackTrace) {
             return SliverToBoxAdapter(
-                child: CenterText(text: error.toString()));
+              child: CenterText(text: error.toString()),
+            );
           },
           loading: () {
-            return const SliverToBoxAdapter(child: CenterProgressIndicator());
+            return const SliverToBoxAdapter(
+              child: CenterProgressIndicator(),
+            );
           },
         ),
       ],

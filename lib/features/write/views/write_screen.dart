@@ -33,7 +33,7 @@ class _WriteScreenState extends ConsumerState<WriteScreen> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
-        spacing: 8,
+        spacing: 16,
         children: [
           Card(
             child: Padding(
