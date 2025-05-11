@@ -1,8 +1,11 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:moodtracker/core/models/mood/mood_model.dart';
 import 'package:moodtracker/features/chart/models/mood_type_count.dart';
 import 'package:moodtracker/features/chart/models/scatter_model.dart';
+import 'package:moodtracker/features/chart/repositories/chart_state_repository.dart';
+import 'package:moodtracker/features/chart/repositories/sample_chart_repository.dart';
 import 'package:moodtracker/features/chart/view_models/mood_frequency_view_model.dart';
 import 'package:moodtracker/features/chart/view_models/pie_chart_view_model.dart';
 import 'package:moodtracker/features/chart/view_models/scatter_chart_view_model.dart';
@@ -13,7 +16,7 @@ final chartDateRangeProvider = StateProvider((ref) {
   final now = DateTime.now();
 
   return DateTimeRange(
-    start: DateTime(now.year, now.month - 1),
+    start: DateTime(now.year, now.month),
     end: now,
   );
 });
@@ -33,4 +36,15 @@ final moodFrequencyProvider = NotifierProvider.autoDispose<
 final scatterChartProvider = NotifierProvider.autoDispose<ScatterChartViewModel,
     AsyncValue<List<ScatterModel>>>(
   () => ScatterChartViewModel(),
+);
+
+// repository
+
+final sampleChartProvider =
+    AsyncNotifierProvider.autoDispose<SampleChartRepository, List<MoodModel>>(
+  () => SampleChartRepository(),
+);
+
+final chartStateProvider = Provider(
+  (ref) => ChartStateRepository(),
 );

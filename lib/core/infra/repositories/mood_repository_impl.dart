@@ -6,7 +6,6 @@ import 'package:moodtracker/core/models/mood/mood_model.dart';
 import 'package:moodtracker/core/models/mood/mood_type.dart';
 import 'package:moodtracker/core/repositories/mood_repository.dart';
 
-// TODO: AutoDisposeStreamNotifier로 만들어서 chart view model에 제공 -> chart view model에서 chart screen이 수행 중인 로직 수행
 class MoodRepositoryImpl
     extends AutoDisposeFamilyStreamNotifier<List<MoodModel>, DateTimeRange?>
     implements MoodRepository {

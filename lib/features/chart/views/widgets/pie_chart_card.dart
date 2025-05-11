@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:moodtracker/core/widgets/center_progress_indicator.dart';
 import 'package:moodtracker/core/widgets/center_text.dart';
+import 'package:moodtracker/features/chart/constants/constants.dart';
 import 'package:moodtracker/features/chart/provider/provider.dart';
 
 class PieChartCard extends ConsumerWidget {
@@ -16,7 +17,7 @@ class PieChartCard extends ConsumerWidget {
       data: (data) {
         return Card(
           child: Padding(
-            padding: const EdgeInsets.all(40),
+            padding: const EdgeInsets.all(chartCardPadding),
             child: AspectRatio(
               aspectRatio: 1,
               child: PieChart(
