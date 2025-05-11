@@ -7,6 +7,7 @@ import 'package:moodtracker/core/widgets/center_text.dart';
 import 'package:moodtracker/features/chart/views/widgets/mood_count_item.dart';
 import 'package:moodtracker/features/home/view_models/home_view_model.dart';
 
+// TODO: 데이터가 없을 때 더미 데이터로 표시
 class ChartScreen extends ConsumerStatefulWidget {
   const ChartScreen({super.key});
 
@@ -114,7 +115,7 @@ class _ChartScreenState extends ConsumerState<ChartScreen> {
                         top: -10,
                         left: -24,
                         child: Column(
-                          spacing: 11.2,
+                          spacing: 11.5,
                           children: [
                             ...MoodType.values.reversed.map((type) {
                               return Image.asset(

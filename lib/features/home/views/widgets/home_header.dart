@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:moodtracker/core/di/provider.dart';
 import 'package:moodtracker/core/widgets/small_icon_button.dart';
+import 'package:moodtracker/features/home/providers/home_date_range_provider.dart';
 
 class HomeHeader extends ConsumerStatefulWidget {
   const HomeHeader({super.key});
@@ -14,7 +14,7 @@ class HomeHeader extends ConsumerStatefulWidget {
 class _HomeHeaderState extends ConsumerState<HomeHeader> {
   @override
   Widget build(BuildContext context) {
-    final dateRange = ref.watch(filterDateRange);
+    final dateRange = ref.watch(homeDateRangeProvider);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -66,6 +66,6 @@ class _HomeHeaderState extends ConsumerState<HomeHeader> {
   }
 
   void _changeDateRange(DateTimeRange? dateRange) {
-    ref.read(filterDateRange.notifier).state = dateRange;
+    ref.read(homeDateRangeProvider.notifier).state = dateRange;
   }
 }

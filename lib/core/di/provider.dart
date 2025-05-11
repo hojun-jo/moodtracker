@@ -7,7 +7,6 @@ import 'package:moodtracker/core/infra/datasources/theme_local_datasource_impl.d
 import 'package:moodtracker/core/infra/repositories/mood_repository_impl.dart';
 import 'package:moodtracker/core/infra/repositories/theme_repository_impl.dart';
 import 'package:moodtracker/core/models/mood/mood_model.dart';
-import 'package:moodtracker/core/repositories/mood_repository.dart';
 import 'package:moodtracker/core/repositories/theme_repository.dart';
 import 'package:moodtracker/core/theme/app_theme_type.dart';
 import 'package:path_provider/path_provider.dart';
@@ -40,9 +39,7 @@ final moodLocalDatasource = Provider<Future<MoodDatasource>>((ref) async {
   return MoodLocalDatasourceImpl(isar: await ref.read(isarProvider));
 });
 
-final moodRepository = Provider<MoodRepository>((ref) {
-  return MoodRepositoryImpl(moodDatasource: ref.read(moodLocalDatasource));
+final moodRepository = StreamNotifierProvider.autoDispose
+    .family<MoodRepositoryImpl, List<MoodModel>, DateTimeRange?>(() {
+  return MoodRepositoryImpl();
 });
-
-// filter date range
-final filterDateRange = StateProvider<DateTimeRange?>((ref) => null);
