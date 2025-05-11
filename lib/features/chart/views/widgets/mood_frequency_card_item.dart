@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class MoodCountItem extends StatelessWidget {
+class MoodFrequencyCardItem extends StatelessWidget {
   static const double width = 66;
 
   final String moodAssetName;
   final int moodCount;
 
-  const MoodCountItem({
+  const MoodFrequencyCardItem({
     super.key,
     required this.moodAssetName,
     required this.moodCount,
