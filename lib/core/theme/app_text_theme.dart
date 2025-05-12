@@ -14,14 +14,19 @@ abstract class AppTextTheme {
               fontSize: 24,
               height: 1.2,
             ),
+            bodyLarge: GoogleFonts.dongle(
+              color: AppColor.black,
+              fontSize: 32,
+              height: 1.2,
+            ),
             bodyMedium: GoogleFonts.dongle(
               color: AppColor.black,
-              fontSize: 30,
+              fontSize: 28,
               height: 1.2,
             ),
             bodySmall: GoogleFonts.dongle(
               color: AppColor.grey,
-              fontSize: 24,
+              fontSize: 22,
               height: 1.2,
             ),
           );

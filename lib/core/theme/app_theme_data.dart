@@ -43,7 +43,7 @@ ThemeData appThemeData(
       style: ButtonStyle(
         foregroundColor: WidgetStateProperty.all(AppColor.black),
         textStyle: WidgetStateProperty.all(
-          textBodySmall,
+          textBodyMedium,
         ),
       ),
     ),
