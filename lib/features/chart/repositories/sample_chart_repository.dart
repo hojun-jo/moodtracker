@@ -1,12 +1,21 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:moodtracker/core/models/mood/mood_model.dart';
 import 'package:moodtracker/core/models/mood/mood_type.dart';
+import 'package:moodtracker/core/utils/file_loader.dart';
 
 class SampleChartRepository extends AutoDisposeAsyncNotifier<List<MoodModel>> {
+  final FileLoader _fileLoader;
+  final String _filePath;
+
+  SampleChartRepository({
+    FileLoader? fileLoader,
+    String? filePath,
+  })  : _fileLoader = fileLoader ?? AssetFileLoader(),
+        _filePath = filePath ?? "assets/samples/sample_mood_ko.json";
+
   @override
   FutureOr<List<MoodModel>> build() async {
     List<MoodModel> samples = [];
@@ -25,10 +34,15 @@ class SampleChartRepository extends AutoDisposeAsyncNotifier<List<MoodModel>> {
   }
 
   Future<List<dynamic>> _getSampleJson() async {
-    final jsonString =
-        await rootBundle.loadString("assets/samples/sample_mood_ko.json");
-
-    return json.decode(jsonString);
+    try {
+      final jsonString = await _fileLoader.loadString(_filePath);
+      return json.decode(jsonString);
+    } catch (e) {
+      if (e is FormatException) {
+        rethrow;
+      }
+      throw Exception('Failed to load sample file: $e');
+    }
   }
 
   MoodType _getMoodType(int index) {
@@ -50,7 +64,7 @@ class SampleChartRepository extends AutoDisposeAsyncNotifier<List<MoodModel>> {
       case 7:
         return MoodType.sad;
       default:
-        return MoodType.angry;
+        throw Exception("Invalid mood type from sample data.");
     }
   }
 }
