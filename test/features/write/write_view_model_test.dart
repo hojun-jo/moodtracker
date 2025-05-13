@@ -2,7 +2,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:moodtracker/core/di/provider.dart';
-import 'package:moodtracker/core/models/mood/mood_model.dart';
 import 'package:moodtracker/core/models/mood/mood_type.dart';
 import 'package:moodtracker/features/write/view_models/write_view_model.dart';
 
@@ -13,20 +12,11 @@ void main() {
   late MockMoodRepository mockMoodRepository;
   late WriteViewModel writeViewModel;
 
-  setUpAll(() {
-    registerFallbackValue(MoodModel(
-      id: 0,
-      moodType: MoodType.happy,
-      description: '',
-      createdAt: DateTime(0),
-    ));
-  });
-
   setUp(() {
     mockMoodRepository = MockMoodRepository();
     container = ProviderContainer(
       overrides: [
-        moodRepository.overrideWith((ref) => mockMoodRepository),
+        moodRepository.overrideWith(() => mockMoodRepository),
       ],
     );
     writeViewModel = container.read(writeProvider.notifier);
@@ -41,13 +31,14 @@ void main() {
     const mood = MoodType.happy;
     const description = 'I had a great day!';
 
-    when(() => mockMoodRepository.addMood(any())).thenAnswer((_) async {});
+    when(() => mockMoodRepository.addMood(mood, description))
+        .thenAnswer((_) async {});
 
     // When
     await writeViewModel.post(mood, description);
 
     // Then
-    verify(() => mockMoodRepository.addMood(any())).called(1);
+    verify(() => mockMoodRepository.addMood(mood, description)).called(1);
   });
 
   test('should handle empty description', () async {
@@ -55,13 +46,14 @@ void main() {
     const mood = MoodType.happy;
     const emptyDescription = '';
 
-    when(() => mockMoodRepository.addMood(any())).thenAnswer((_) async {});
+    when(() => mockMoodRepository.addMood(mood, emptyDescription))
+        .thenAnswer((_) async {});
 
     // When
     await writeViewModel.post(mood, emptyDescription);
 
     // Then
-    verify(() => mockMoodRepository.addMood(any())).called(1);
+    verify(() => mockMoodRepository.addMood(mood, emptyDescription)).called(1);
   });
 
   test('should handle very long description', () async {
@@ -69,13 +61,14 @@ void main() {
     const mood = MoodType.angry;
     final longDescription = 'a' * 1000;
 
-    when(() => mockMoodRepository.addMood(any())).thenAnswer((_) async {});
+    when(() => mockMoodRepository.addMood(mood, longDescription))
+        .thenAnswer((_) async {});
 
     // When
     await writeViewModel.post(mood, longDescription);
 
     // Then
-    verify(() => mockMoodRepository.addMood(any())).called(1);
+    verify(() => mockMoodRepository.addMood(mood, longDescription)).called(1);
   });
 
   test('should handle repository error', () async {
@@ -83,7 +76,7 @@ void main() {
     const mood = MoodType.angry;
     const description = 'I am frustrated';
 
-    when(() => mockMoodRepository.addMood(any()))
+    when(() => mockMoodRepository.addMood(mood, description))
         .thenThrow(Exception('Database error'));
 
     // When & Then
@@ -98,8 +91,9 @@ void main() {
     const allMoodTypes = MoodType.values;
     const description = 'Testing all mood types';
 
-    for (final _ in allMoodTypes) {
-      when(() => mockMoodRepository.addMood(any())).thenAnswer((_) async {});
+    for (final mood in allMoodTypes) {
+      when(() => mockMoodRepository.addMood(mood, description))
+          .thenAnswer((_) async {});
     }
 
     // When
@@ -108,6 +102,8 @@ void main() {
     }
 
     // Then
-    verify(() => mockMoodRepository.addMood(any())).called(allMoodTypes.length);
+    for (final mood in allMoodTypes) {
+      verify(() => mockMoodRepository.addMood(mood, description)).called(1);
+    }
   });
 }

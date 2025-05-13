@@ -1,56 +1,64 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:moodtracker/core/datasources/mood_datasource.dart';
-import 'package:moodtracker/core/infra/repositories/mood_repository_impl.dart';
+import 'package:moodtracker/core/di/provider.dart';
 import 'package:moodtracker/core/models/mood/mood_model.dart';
 import 'package:moodtracker/core/models/mood/mood_type.dart';
 
 import '../../../mock.dart';
 
 void main() {
-  late MoodRepositoryImpl repository;
   late MockMoodLocalDatasource mockDatasource;
   late Future<MoodDatasource> futureDatasource;
+  late ProviderContainer container;
 
   setUp(() {
     mockDatasource = MockMoodLocalDatasource();
     futureDatasource = Future.value(mockDatasource);
-    repository = MoodRepositoryImpl(moodDatasource: futureDatasource);
+    container = ProviderContainer(
+      overrides: [
+        moodLocalDatasource.overrideWithValue(futureDatasource),
+      ],
+    );
+  });
+
+  tearDown(() {
+    container.dispose();
   });
 
   group('addMood', () {
     test('should successfully add mood', () async {
       // given
-      final mood = MoodModel(
-        id: 1,
-        moodType: MoodType.happy,
-        description: "happy",
-        createdAt: DateTime.now(),
-      );
-      when(() => mockDatasource.addMood(mood)).thenAnswer((_) async {});
+      const moodType = MoodType.happy;
+      const description = "happy";
+      when(() => mockDatasource.addMood(moodType, description))
+          .thenAnswer((_) async {});
 
       // when
-      await repository.addMood(mood);
+      await container
+          .read(moodRepository(null).notifier)
+          .addMood(moodType, description);
 
       // then
-      verify(() => mockDatasource.addMood(mood)).called(1);
+      verify(() => mockDatasource.addMood(moodType, description)).called(1);
     });
 
     test('should handle error when adding mood fails', () async {
       // given
-      final mood = MoodModel(
-        id: 1,
-        moodType: MoodType.happy,
-        description: "happy",
-        createdAt: DateTime.now(),
-      );
-      when(() => mockDatasource.addMood(mood))
+      const moodType = MoodType.happy;
+      const description = "happy";
+      when(() => mockDatasource.addMood(moodType, description))
           .thenThrow(Exception('Failed to add mood'));
 
       // when
       // then
-      expect(() => repository.addMood(mood), throwsException);
+      expect(
+          () => container
+              .read(moodRepository(null).notifier)
+              .addMood(moodType, description),
+          throwsException);
     });
   });
 
@@ -75,7 +83,7 @@ void main() {
           .thenAnswer((_) => Stream.value(moods));
 
       // when
-      final stream = repository.watchMoods();
+      final stream = container.read(moodRepository(null).notifier).watchMoods();
 
       // then
       expect(stream, emits(moods));
@@ -100,7 +108,9 @@ void main() {
           .thenAnswer((_) => Stream.value(moods));
 
       // when
-      final stream = repository.watchMoods(dateRange: dateRange);
+      final stream = container
+          .read(moodRepository(null).notifier)
+          .watchMoods(dateRange: dateRange);
 
       // then
       expect(stream, emits(moods));
@@ -138,7 +148,9 @@ void main() {
           .thenAnswer((_) => Stream.value(moods));
 
       // when
-      final stream = repository.watchMoods(dateRange: dateRange);
+      final stream = container
+          .read(moodRepository(null).notifier)
+          .watchMoods(dateRange: dateRange);
 
       // then
       expect(stream, emits(moods));
@@ -150,7 +162,7 @@ void main() {
           .thenAnswer((_) => Stream.value([]));
 
       // when
-      final stream = repository.watchMoods();
+      final stream = container.read(moodRepository(null).notifier).watchMoods();
 
       // then
       expect(stream, emits([]));
@@ -162,7 +174,7 @@ void main() {
           .thenAnswer((_) => Stream.error(Exception('Stream error')));
 
       // when
-      final stream = repository.watchMoods();
+      final stream = container.read(moodRepository(null).notifier).watchMoods();
 
       // then
       expect(stream, emitsError(isA<Exception>()));

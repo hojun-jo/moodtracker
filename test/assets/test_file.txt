@@ -1,0 +1,2 @@
+This is a test file for AssetFileLoader test.
+It contains some sample text to verify file loading functionality.
