@@ -1,7 +1,5 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:moodtracker/core/theme/app_color.dart';
 import 'package:moodtracker/core/utils/date_formater.dart';
 import 'package:moodtracker/features/chart/provider/provider.dart';
 import 'package:moodtracker/features/chart/views/widgets/month_picker_dialog.dart';
@@ -49,10 +47,6 @@ class _ChartScreenState extends ConsumerState<ChartScreen> {
           const PieChartCard(),
           const MoodFrequencyCard(),
           const ScatterChartCard(),
-          Text(
-            "Scatter Chart Explain".tr(),
-            style: textTheme.bodySmall!.copyWith(color: AppColor.black),
-          ),
         ],
       ),
     );

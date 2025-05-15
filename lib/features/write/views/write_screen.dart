@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:moodtracker/core/models/mood/mood_type.dart';
+import 'package:moodtracker/core/models/mood/mood_category.dart';
 import 'package:moodtracker/core/widgets/dialog/error_dialog.dart';
 import 'package:moodtracker/features/write/view_models/write_view_model.dart';
 import 'package:moodtracker/features/write/views/widgets/write_icon_button.dart';
@@ -19,7 +19,7 @@ class _WriteScreenState extends ConsumerState<WriteScreen> {
   final TextEditingController _controller = TextEditingController();
   late final WriteViewModel _viewModel = ref.read(writeProvider.notifier);
 
-  MoodType? _selectedMood;
+  MoodCategory? _selectedMood;
   String? _moodErrorMessage;
   String? _textErrorMessage;
 
@@ -38,44 +38,61 @@ class _WriteScreenState extends ConsumerState<WriteScreen> {
           Card(
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      ...[
-                        MoodType.happy,
-                        MoodType.joy,
-                        MoodType.excitement,
-                        MoodType.calm
-                      ].map((mood) {
-                        return WriteIconButton(
-                          onTap: () => _selectMood(mood),
-                          moodType: mood,
-                          isSelected: _selectedMood == mood,
-                        );
-                      }),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      ...[
-                        MoodType.neutral,
-                        MoodType.anxiety,
-                        MoodType.sad,
-                        MoodType.angry
-                      ].map((mood) {
-                        return WriteIconButton(
-                          onTap: () => _selectMood(mood),
-                          moodType: mood,
-                          isSelected: _selectedMood == mood,
-                        );
-                      }),
-                    ],
-                  ),
-                ],
+              child: GridView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: MoodCategory.values.length,
+                shrinkWrap: true,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4,
+                  mainAxisExtent: 60,
+                ),
+                itemBuilder: (context, index) {
+                  final mood = MoodCategory.fromIndex(index);
+                  return WriteIconButton(
+                    onTap: () => _selectMood(mood),
+                    moodCategory: mood,
+                    isSelected: _selectedMood == mood,
+                  );
+                },
               ),
+              // child: Column(
+              //   children: [
+              //     Row(
+              //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //       children: [
+              //         ...[
+              //           MoodCategory.happy,
+              //           MoodCategory.joy,
+              //           MoodCategory.excitement,
+              //           MoodCategory.calm
+              //         ].map((mood) {
+              //           return WriteIconButton(
+              //             onTap: () => _selectMood(mood),
+              //             moodType: mood,
+              //             isSelected: _selectedMood == mood,
+              //           );
+              //         }),
+              //       ],
+              //     ),
+              //     Row(
+              //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //       children: [
+              //         ...[
+              //           MoodCategory.neutral,
+              //           MoodCategory.anxiety,
+              //           MoodCategory.sad,
+              //           MoodCategory.angry
+              //         ].map((mood) {
+              //           return WriteIconButton(
+              //             onTap: () => _selectMood(mood),
+              //             moodType: mood,
+              //             isSelected: _selectedMood == mood,
+              //           );
+              //         }),
+              //       ],
+              //     ),
+              //   ],
+              // ),
             ),
           ),
           if (_moodErrorMessage != null)
@@ -125,7 +142,7 @@ class _WriteScreenState extends ConsumerState<WriteScreen> {
     );
   }
 
-  void _selectMood(MoodType mood) {
+  void _selectMood(MoodCategory mood) {
     _selectedMood = mood;
     setState(() {});
   }

@@ -38,7 +38,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     itemCount: data.length,
                     itemBuilder: (context, index) {
                       return MoodCard(
-                        moodType: data[index].moodType,
+                        moodType: data[index].moodCategory,
                         createdAt: _viewModel.formatDate(data[index].createdAt),
                         description: data[index].description,
                       );

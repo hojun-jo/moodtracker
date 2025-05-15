@@ -1,5 +1,5 @@
 import 'package:isar/isar.dart';
-import 'package:moodtracker/core/models/mood/mood_type.dart';
+import 'package:moodtracker/core/models/mood/mood_category.dart';
 
 part 'mood_model.g.dart';
 
@@ -7,13 +7,13 @@ part 'mood_model.g.dart';
 class MoodModel {
   final Id id;
   @enumerated
-  final MoodType moodType;
+  final MoodCategory moodCategory;
   final String description;
   final DateTime createdAt;
 
   MoodModel({
     required this.id,
-    required this.moodType,
+    required this.moodCategory,
     required this.description,
     required this.createdAt,
   });

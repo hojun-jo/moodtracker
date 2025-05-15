@@ -43,7 +43,8 @@ class ScatterChartViewModel
       final moods = data.where((mood) => mood.createdAt.hour == hour);
 
       for (final type in MoodType.values) {
-        final count = moods.where((mood) => mood.moodType == type).length;
+        final count =
+            moods.where((mood) => mood.moodCategory.type == type).length;
 
         if (count > 0) {
           scatterModels.add(ScatterModel(hour: hour, type: type, count: count));

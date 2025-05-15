@@ -66,7 +66,7 @@ void _moodModelSerialize(
 ) {
   writer.writeDateTime(offsets[0], object.createdAt);
   writer.writeString(offsets[1], object.description);
-  writer.writeByte(offsets[2], object.moodType.index);
+  writer.writeByte(offsets[2], object.moodCategory.index);
 }
 
 MoodModel _moodModelDeserialize(
@@ -79,9 +79,9 @@ MoodModel _moodModelDeserialize(
     createdAt: reader.readDateTime(offsets[0]),
     description: reader.readString(offsets[1]),
     id: id,
-    moodType:
+    moodCategory:
         _MoodModelmoodTypeValueEnumMap[reader.readByteOrNull(offsets[2])] ??
-            MoodType.angry,
+            MoodCategory.angry,
   );
   return object;
 }
@@ -99,7 +99,7 @@ P _moodModelDeserializeProp<P>(
       return (reader.readString(offset)) as P;
     case 2:
       return (_MoodModelmoodTypeValueEnumMap[reader.readByteOrNull(offset)] ??
-          MoodType.angry) as P;
+          MoodCategory.angry) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -116,14 +116,14 @@ const _MoodModelmoodTypeEnumValueMap = {
   'sad': 7,
 };
 const _MoodModelmoodTypeValueEnumMap = {
-  0: MoodType.angry,
-  1: MoodType.anxiety,
-  2: MoodType.calm,
-  3: MoodType.excitement,
-  4: MoodType.happy,
-  5: MoodType.joy,
-  6: MoodType.neutral,
-  7: MoodType.sad,
+  0: MoodCategory.angry,
+  1: MoodCategory.anxiety,
+  2: MoodCategory.calm,
+  3: MoodCategory.excitement,
+  4: MoodCategory.happy,
+  5: MoodCategory.joy,
+  6: MoodCategory.neutral,
+  7: MoodCategory.sad,
 };
 
 Id _moodModelGetId(MoodModel object) {
@@ -457,7 +457,7 @@ extension MoodModelQueryFilter
   }
 
   QueryBuilder<MoodModel, MoodModel, QAfterFilterCondition> moodTypeEqualTo(
-      MoodType value) {
+      MoodCategory value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'moodType',
@@ -467,7 +467,7 @@ extension MoodModelQueryFilter
   }
 
   QueryBuilder<MoodModel, MoodModel, QAfterFilterCondition> moodTypeGreaterThan(
-    MoodType value, {
+    MoodCategory value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -480,7 +480,7 @@ extension MoodModelQueryFilter
   }
 
   QueryBuilder<MoodModel, MoodModel, QAfterFilterCondition> moodTypeLessThan(
-    MoodType value, {
+    MoodCategory value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -493,8 +493,8 @@ extension MoodModelQueryFilter
   }
 
   QueryBuilder<MoodModel, MoodModel, QAfterFilterCondition> moodTypeBetween(
-    MoodType lower,
-    MoodType upper, {
+    MoodCategory lower,
+    MoodCategory upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
@@ -647,7 +647,7 @@ extension MoodModelQueryProperty
     });
   }
 
-  QueryBuilder<MoodModel, MoodType, QQueryOperations> moodTypeProperty() {
+  QueryBuilder<MoodModel, MoodCategory, QQueryOperations> moodTypeProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'moodType');
     });

@@ -1,14 +1,14 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:moodtracker/core/di/provider.dart';
 import 'package:moodtracker/core/models/mood/mood_model.dart';
-import 'package:moodtracker/core/models/mood/mood_type.dart';
-import 'package:moodtracker/features/chart/models/mood_type_count.dart';
+import 'package:moodtracker/core/models/mood/mood_category.dart';
+import 'package:moodtracker/features/chart/models/mood_category_count.dart';
 import 'package:moodtracker/features/chart/provider/provider.dart';
 
 class MoodFrequencyViewModel
-    extends AutoDisposeNotifier<AsyncValue<List<MoodTypeCount>>> {
+    extends AutoDisposeNotifier<AsyncValue<List<MoodCategoryCount>>> {
   @override
-  AsyncValue<List<MoodTypeCount>> build() {
+  AsyncValue<List<MoodCategoryCount>> build() {
     final dateRange = ref.watch(chartDateRangeProvider);
     final moods = ref.watch(moodRepository(dateRange));
     final chartState = ref.read(chartStateProvider);
@@ -36,10 +36,10 @@ class MoodFrequencyViewModel
     );
   }
 
-  List<MoodTypeCount> _createMoodTypeCountList(List<MoodModel> data) {
-    return MoodType.values.map((moodType) {
-      final count = data.where((mood) => mood.moodType == moodType).length;
-      return MoodTypeCount(type: moodType, count: count);
+  List<MoodCategoryCount> _createMoodTypeCountList(List<MoodModel> data) {
+    return MoodCategory.values.map((moodType) {
+      final count = data.where((mood) => mood.moodCategory == moodType).length;
+      return MoodCategoryCount(category: moodType, count: count);
     }).toList()
       ..sort((a, b) => b.count.compareTo(a.count));
   }

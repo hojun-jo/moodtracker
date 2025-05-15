@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:moodtracker/core/models/mood/mood_model.dart';
-import 'package:moodtracker/core/models/mood/mood_type.dart';
+import 'package:moodtracker/core/models/mood/mood_category.dart';
 import 'package:moodtracker/core/utils/file_loader.dart';
 
 class SampleChartRepository extends AutoDisposeAsyncNotifier<List<MoodModel>> {
@@ -24,7 +24,7 @@ class SampleChartRepository extends AutoDisposeAsyncNotifier<List<MoodModel>> {
     for (final model in json) {
       samples.add(MoodModel(
         id: model["id"],
-        moodType: _getMoodType(model["moodType"]),
+        moodCategory: _getMoodType(model["moodType"]),
         description: model["description"],
         createdAt: DateTime.fromMicrosecondsSinceEpoch(model["createdAt"]),
       ));
@@ -45,24 +45,24 @@ class SampleChartRepository extends AutoDisposeAsyncNotifier<List<MoodModel>> {
     }
   }
 
-  MoodType _getMoodType(int index) {
+  MoodCategory _getMoodType(int index) {
     switch (index) {
       case 0:
-        return MoodType.angry;
+        return MoodCategory.angry;
       case 1:
-        return MoodType.anxiety;
+        return MoodCategory.anxiety;
       case 2:
-        return MoodType.calm;
+        return MoodCategory.calm;
       case 3:
-        return MoodType.excitement;
+        return MoodCategory.excitement;
       case 4:
-        return MoodType.happy;
+        return MoodCategory.happy;
       case 5:
-        return MoodType.joy;
+        return MoodCategory.joy;
       case 6:
-        return MoodType.neutral;
+        return MoodCategory.neutral;
       case 7:
-        return MoodType.sad;
+        return MoodCategory.sad;
       default:
         throw Exception("Invalid mood type from sample data.");
     }

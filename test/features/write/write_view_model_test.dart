@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:moodtracker/core/di/provider.dart';
-import 'package:moodtracker/core/models/mood/mood_type.dart';
+import 'package:moodtracker/core/models/mood/mood_category.dart';
 import 'package:moodtracker/features/write/view_models/write_view_model.dart';
 
 import '../../mock.dart';
@@ -28,7 +28,7 @@ void main() {
 
   test('should successfully post mood with valid data', () async {
     // Given
-    const mood = MoodType.happy;
+    const mood = MoodCategory.happy;
     const description = 'I had a great day!';
 
     when(() => mockMoodRepository.addMood(mood, description))
@@ -43,7 +43,7 @@ void main() {
 
   test('should handle empty description', () async {
     // Given
-    const mood = MoodType.happy;
+    const mood = MoodCategory.happy;
     const emptyDescription = '';
 
     when(() => mockMoodRepository.addMood(mood, emptyDescription))
@@ -58,7 +58,7 @@ void main() {
 
   test('should handle very long description', () async {
     // Given
-    const mood = MoodType.angry;
+    const mood = MoodCategory.angry;
     final longDescription = 'a' * 1000;
 
     when(() => mockMoodRepository.addMood(mood, longDescription))
@@ -73,7 +73,7 @@ void main() {
 
   test('should handle repository error', () async {
     // Given
-    const mood = MoodType.angry;
+    const mood = MoodCategory.angry;
     const description = 'I am frustrated';
 
     when(() => mockMoodRepository.addMood(mood, description))
@@ -88,7 +88,7 @@ void main() {
 
   test('should handle all mood types', () async {
     // Given
-    const allMoodTypes = MoodType.values;
+    const allMoodTypes = MoodCategory.values;
     const description = 'Testing all mood types';
 
     for (final mood in allMoodTypes) {

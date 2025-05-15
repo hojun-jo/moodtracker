@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:moodtracker/core/di/provider.dart';
 import 'package:moodtracker/core/models/mood/mood_model.dart';
-import 'package:moodtracker/core/models/mood/mood_type.dart';
+import 'package:moodtracker/core/models/mood/mood_category.dart';
 import 'package:moodtracker/features/home/provider/provider.dart';
 
 import '../../mock.dart';
@@ -54,13 +54,13 @@ void main() {
     final mockMoods = [
       MoodModel(
         id: 1,
-        moodType: MoodType.happy,
+        moodCategory: MoodCategory.happy,
         description: 'Great day!',
         createdAt: dateRange.start,
       ),
       MoodModel(
         id: 2,
-        moodType: MoodType.angry,
+        moodCategory: MoodCategory.angry,
         description: 'Not so good day',
         createdAt: dateRange.start,
       ),
@@ -73,8 +73,8 @@ void main() {
     container.read(homeProvider).when(
           data: (data) {
             expect(data.length, 2);
-            expect(data[0].moodType, equals(MoodType.happy));
-            expect(data[1].moodType, equals(MoodType.angry));
+            expect(data[0].moodCategory, equals(MoodCategory.happy));
+            expect(data[1].moodCategory, equals(MoodCategory.angry));
           },
           error: (error, stackTrace) {},
           loading: () {},
@@ -87,7 +87,7 @@ void main() {
     final mockMoods = [
       MoodModel(
         id: 1,
-        moodType: MoodType.happy,
+        moodCategory: MoodCategory.happy,
         description: 'Today is good',
         createdAt: DateTime.now(),
       ),
@@ -105,7 +105,7 @@ void main() {
     container.read(homeProvider).when(
           data: (data) {
             expect(data.length, 1);
-            expect(data[0].moodType, equals(MoodType.happy));
+            expect(data[0].moodCategory, equals(MoodCategory.happy));
           },
           error: (error, stackTrace) {},
           loading: () {},
@@ -156,7 +156,7 @@ void main() {
     final initialMoods = [
       MoodModel(
         id: 1,
-        moodType: MoodType.happy,
+        moodCategory: MoodCategory.happy,
         description: 'Initial mood',
         createdAt: initialDateRange.start,
       ),
@@ -164,7 +164,7 @@ void main() {
     final newMoods = [
       MoodModel(
         id: 2,
-        moodType: MoodType.sad,
+        moodCategory: MoodCategory.sad,
         description: 'New mood',
         createdAt: newDateRange.start,
       ),
@@ -185,7 +185,7 @@ void main() {
     container.read(homeProvider).when(
           data: (data) {
             expect(data.length, 1);
-            expect(data[0].moodType, equals(MoodType.sad));
+            expect(data[0].moodCategory, equals(MoodCategory.sad));
             expect(data[0].description, equals('New mood'));
           },
           error: (error, stackTrace) {},

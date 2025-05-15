@@ -1,17 +1,21 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:moodtracker/core/models/mood/mood_type.dart';
+import 'package:moodtracker/core/theme/app_color.dart';
 import 'package:moodtracker/core/widgets/center_progress_indicator.dart';
 import 'package:moodtracker/core/widgets/center_text.dart';
 import 'package:moodtracker/features/chart/constants/chart_constants.dart';
 import 'package:moodtracker/features/chart/provider/provider.dart';
+import 'package:moodtracker/features/chart/views/widgets/scatter_chart_legend.dart';
 
 class ScatterChartCard extends ConsumerWidget {
   const ScatterChartCard({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final textTheme = Theme.of(context).textTheme;
     final scatterModels = ref.watch(scatterChartProvider);
 
     return scatterModels.when(
@@ -19,24 +23,9 @@ class ScatterChartCard extends ConsumerWidget {
         return Card(
           child: Padding(
             padding: const EdgeInsets.all(chartCardPadding),
-            child: Stack(
-              clipBehavior: Clip.none,
+            child: Column(
+              spacing: 20,
               children: [
-                Positioned(
-                  top: -10,
-                  left: -24,
-                  child: Column(
-                    spacing: 11.5,
-                    children: [
-                      ...MoodType.values.reversed.map((type) {
-                        return Image.asset(
-                          type.assetName,
-                          width: 20,
-                        );
-                      }),
-                    ],
-                  ),
-                ),
                 AspectRatio(
                   aspectRatio: 1,
                   child: ScatterChart(
@@ -48,7 +37,7 @@ class ScatterChartCard extends ConsumerWidget {
                             mood.type.scatterY,
                             dotPainter: FlDotCirclePainter(
                               radius: (40 * mood.count) / (mood.count + 9),
-                              color: mood.type.color.withAlpha(200),
+                              color: mood.type.color.withAlpha(220),
                             ),
                           );
                         }),
@@ -56,7 +45,7 @@ class ScatterChartCard extends ConsumerWidget {
                       minX: 0,
                       maxX: 24,
                       minY: 0,
-                      maxY: MoodType.values.length.toDouble(),
+                      maxY: MoodType.values.length.toDouble() + 0.5,
                       titlesData: const FlTitlesData(
                         topTitles: AxisTitles(
                           sideTitles: SideTitles(showTitles: false),
@@ -70,6 +59,18 @@ class ScatterChartCard extends ConsumerWidget {
                       ),
                     ),
                   ),
+                ),
+                const Column(
+                  spacing: 8,
+                  children: [
+                    ScatterChartLegend(moodType: MoodType.positive),
+                    ScatterChartLegend(moodType: MoodType.neutrality),
+                    ScatterChartLegend(moodType: MoodType.negative),
+                  ],
+                ),
+                Text(
+                  "Scatter Chart Explain".tr(),
+                  style: textTheme.bodySmall!.copyWith(color: AppColor.black),
                 ),
               ],
             ),

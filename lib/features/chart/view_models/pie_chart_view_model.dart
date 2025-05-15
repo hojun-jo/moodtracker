@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:moodtracker/core/di/provider.dart';
 import 'package:moodtracker/core/models/mood/mood_model.dart';
-import 'package:moodtracker/core/models/mood/mood_type.dart';
+import 'package:moodtracker/core/models/mood/mood_category.dart';
 import 'package:moodtracker/features/chart/provider/provider.dart';
 
 class PieChartViewModel
@@ -40,9 +40,9 @@ class PieChartViewModel
   List<PieChartSectionData> _createPieChartDataList(List<MoodModel> data) {
     final length = data.length;
 
-    return MoodType.values.map((moodType) {
+    return MoodCategory.values.map((moodType) {
       final moodTypeCount =
-          data.where((mood) => mood.moodType == moodType).length;
+          data.where((mood) => mood.moodCategory == moodType).length;
       final moodTypeRatio = moodTypeCount / length * 100;
 
       return PieChartSectionData(

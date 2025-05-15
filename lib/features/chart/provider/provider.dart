@@ -2,7 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:moodtracker/core/models/mood/mood_model.dart';
-import 'package:moodtracker/features/chart/models/mood_type_count.dart';
+import 'package:moodtracker/features/chart/models/mood_category_count.dart';
 import 'package:moodtracker/features/chart/models/scatter_model.dart';
 import 'package:moodtracker/features/chart/repositories/chart_date_range_repository.dart';
 import 'package:moodtracker/features/chart/repositories/chart_state_repository.dart';
@@ -26,7 +26,7 @@ final pieChartProvider = NotifierProvider.autoDispose<PieChartViewModel,
 );
 
 final moodFrequencyProvider = NotifierProvider.autoDispose<
-    MoodFrequencyViewModel, AsyncValue<List<MoodTypeCount>>>(
+    MoodFrequencyViewModel, AsyncValue<List<MoodCategoryCount>>>(
   () => MoodFrequencyViewModel(),
 );
 

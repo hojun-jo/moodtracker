@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:moodtracker/core/datasources/mood_datasource.dart';
 import 'package:moodtracker/core/di/provider.dart';
 import 'package:moodtracker/core/models/mood/mood_model.dart';
-import 'package:moodtracker/core/models/mood/mood_type.dart';
+import 'package:moodtracker/core/models/mood/mood_category.dart';
 import 'package:moodtracker/core/repositories/mood_repository.dart';
 
 class MoodRepositoryImpl
@@ -20,7 +20,7 @@ class MoodRepositoryImpl
 
   @override
   Future<void> addMood(
-    MoodType mood,
+    MoodCategory mood,
     String description,
   ) async {
     final datasource = await moodDatasource;

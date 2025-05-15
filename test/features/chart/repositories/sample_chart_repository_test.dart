@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:moodtracker/core/models/mood/mood_type.dart';
+import 'package:moodtracker/core/models/mood/mood_category.dart';
 import 'package:moodtracker/features/chart/repositories/sample_chart_repository.dart';
 
 import '../../../mock.dart';
@@ -46,13 +46,13 @@ void main() {
     // then
     expect(result.length, 2);
     expect(result[0].id, 1);
-    expect(result[0].moodType, MoodType.happy);
+    expect(result[0].moodCategory, MoodCategory.happy);
     expect(result[0].description, "드디어 새 달 시작!");
     expect(result[0].createdAt,
         DateTime.fromMicrosecondsSinceEpoch(1743403800000000));
 
     expect(result[1].id, 2);
-    expect(result[1].moodType, MoodType.calm);
+    expect(result[1].moodCategory, MoodCategory.calm);
     expect(result[1].description, "오후에는 그냥 내가 좋아하는 노래 들으면서 좀 쉬었어.");
     expect(result[1].createdAt,
         DateTime.fromMicrosecondsSinceEpoch(1743424500000000));

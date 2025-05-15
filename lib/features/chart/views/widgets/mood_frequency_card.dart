@@ -21,7 +21,7 @@ class MoodFrequencyCard extends ConsumerWidget {
               children: [
                 ...data.map((moodTypeCount) {
                   return MoodFrequencyCardItem(
-                    moodAssetName: moodTypeCount.type.assetName,
+                    moodAssetName: moodTypeCount.category.assetName,
                     moodCount: moodTypeCount.count,
                   );
                 }),

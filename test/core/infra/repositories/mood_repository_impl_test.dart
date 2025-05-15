@@ -5,7 +5,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:moodtracker/core/datasources/mood_datasource.dart';
 import 'package:moodtracker/core/di/provider.dart';
 import 'package:moodtracker/core/models/mood/mood_model.dart';
-import 'package:moodtracker/core/models/mood/mood_type.dart';
+import 'package:moodtracker/core/models/mood/mood_category.dart';
 
 import '../../../mock.dart';
 
@@ -31,7 +31,7 @@ void main() {
   group('addMood', () {
     test('should successfully add mood', () async {
       // given
-      const moodType = MoodType.happy;
+      const moodType = MoodCategory.happy;
       const description = "happy";
       when(() => mockDatasource.addMood(moodType, description))
           .thenAnswer((_) async {});
@@ -47,7 +47,7 @@ void main() {
 
     test('should handle error when adding mood fails', () async {
       // given
-      const moodType = MoodType.happy;
+      const moodType = MoodCategory.happy;
       const description = "happy";
       when(() => mockDatasource.addMood(moodType, description))
           .thenThrow(Exception('Failed to add mood'));
@@ -68,13 +68,13 @@ void main() {
       final moods = [
         MoodModel(
           id: 1,
-          moodType: MoodType.happy,
+          moodCategory: MoodCategory.happy,
           description: "happy",
           createdAt: DateTime.now(),
         ),
         MoodModel(
           id: 2,
-          moodType: MoodType.angry,
+          moodCategory: MoodCategory.angry,
           description: "bad",
           createdAt: DateTime.now(),
         ),
@@ -99,7 +99,7 @@ void main() {
       final moods = [
         MoodModel(
           id: 1,
-          moodType: MoodType.happy,
+          moodCategory: MoodCategory.happy,
           description: "happy",
           createdAt: date,
         ),
@@ -127,19 +127,19 @@ void main() {
       final moods = [
         MoodModel(
           id: 1,
-          moodType: MoodType.happy,
+          moodCategory: MoodCategory.happy,
           description: "happy",
           createdAt: DateTime(2024, 3, 20),
         ),
         MoodModel(
           id: 2,
-          moodType: MoodType.sad,
+          moodCategory: MoodCategory.sad,
           description: "sad",
           createdAt: DateTime(2024, 3, 21),
         ),
         MoodModel(
           id: 3,
-          moodType: MoodType.angry,
+          moodCategory: MoodCategory.angry,
           description: "angry",
           createdAt: DateTime(2024, 3, 22),
         ),

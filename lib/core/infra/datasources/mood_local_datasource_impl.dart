@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:isar/isar.dart';
 import 'package:moodtracker/core/datasources/mood_datasource.dart';
 import 'package:moodtracker/core/models/mood/mood_model.dart';
-import 'package:moodtracker/core/models/mood/mood_type.dart';
+import 'package:moodtracker/core/models/mood/mood_category.dart';
 
 class MoodLocalDatasourceImpl implements MoodDatasource {
   final Isar isar;
@@ -11,14 +11,14 @@ class MoodLocalDatasourceImpl implements MoodDatasource {
 
   @override
   Future<void> addMood(
-    MoodType mood,
+    MoodCategory mood,
     String description,
   ) async {
     try {
       await isar.writeTxn<void>(() async {
         await isar.moodModels.put(MoodModel(
           id: Isar.autoIncrement,
-          moodType: mood,
+          moodCategory: mood,
           description: description,
           createdAt: DateTime.now(),
         ));
