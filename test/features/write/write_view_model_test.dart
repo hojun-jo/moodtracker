@@ -94,15 +94,11 @@ void main() {
     for (final mood in allMoodTypes) {
       when(() => mockMoodRepository.addMood(mood, description))
           .thenAnswer((_) async {});
-    }
 
-    // When
-    for (final mood in allMoodTypes) {
+      // When
       await writeViewModel.post(mood, description);
-    }
 
-    // Then
-    for (final mood in allMoodTypes) {
+      // Then
       verify(() => mockMoodRepository.addMood(mood, description)).called(1);
     }
   });
