@@ -1,23 +1,37 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:moodtracker/core/datasources/mood_datasource.dart';
+import 'package:moodtracker/core/di/provider.dart';
 import 'package:moodtracker/core/models/mood/mood_model.dart';
+import 'package:moodtracker/core/models/mood/mood_category.dart';
 import 'package:moodtracker/core/repositories/mood_repository.dart';
 
-class MoodRepositoryImpl implements MoodRepository {
-  final Future<MoodDatasource> moodDatasource;
-
-  MoodRepositoryImpl({required this.moodDatasource});
+class MoodRepositoryImpl
+    extends AutoDisposeFamilyStreamNotifier<List<MoodModel>, DateTimeRange?>
+    implements MoodRepository {
+  late final Future<MoodDatasource> moodDatasource;
 
   @override
-  Future<void> addMood(MoodModel mood) async {
-    final datasource = await moodDatasource;
+  Stream<List<MoodModel>> build(DateTimeRange? dateRange) {
+    moodDatasource = ref.read(moodLocalDatasource);
 
-    await datasource.addMood(mood);
+    return watchMoods(dateRange: dateRange);
   }
 
   @override
-  Stream<List<MoodModel>> watchMoods({DateTime? date}) async* {
+  Future<void> addMood(
+    MoodCategory mood,
+    String description,
+  ) async {
     final datasource = await moodDatasource;
 
-    yield* datasource.watchMoods(date: date);
+    await datasource.addMood(mood, description);
+  }
+
+  @override
+  Stream<List<MoodModel>> watchMoods({DateTimeRange? dateRange}) async* {
+    final datasource = await moodDatasource;
+
+    yield* datasource.watchMoods(dateRange: dateRange);
   }
 }

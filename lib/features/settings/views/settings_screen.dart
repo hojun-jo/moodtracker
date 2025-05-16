@@ -22,7 +22,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      spacing: 8,
+      spacing: 16,
       children: [
         SettingsItem(
           onTap: () {},

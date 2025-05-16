@@ -4,5 +4,9 @@
     "How was your day?": "今日はどんな一日でしたか？",
     "Save": "Save",
     "Theme": "Theme",
-    "Open Source Lisence": "Open Source Lisence"
+    "Open Source Lisence": "Open Source Lisence",
+    "Scatter Chart Explain": "一日の中でどの時間帯にどんな気分が多かったかを視覚的に確認できます。",
+    "positive": "ポジティブ",
+    "neutrality": "ニュートラル",
+    "negative": "ネガティブ"
 }
