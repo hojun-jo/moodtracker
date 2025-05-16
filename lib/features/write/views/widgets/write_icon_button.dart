@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:moodtracker/core/models/mood/mood_type.dart';
+import 'package:moodtracker/core/models/mood/mood_category.dart';
 
 class WriteIconButton extends StatelessWidget {
   final VoidCallback onTap;
-  final MoodType moodType;
+  final MoodCategory moodCategory;
   final bool isSelected;
 
   const WriteIconButton({
     super.key,
     required this.onTap,
-    required this.moodType,
+    required this.moodCategory,
     required this.isSelected,
   });
 
@@ -27,7 +27,7 @@ class WriteIconButton extends StatelessWidget {
         ),
         padding: const EdgeInsets.all(8),
         child: Image.asset(
-          moodType.assetName,
+          moodCategory.assetName,
           width: 40,
           height: 40,
         ),

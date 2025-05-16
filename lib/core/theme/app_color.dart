@@ -20,7 +20,12 @@ abstract class AppColor {
   static const Color lightgrey = Color(0xffBFBFBF);
 
   // mood
-  static const Color red = Color(0xfffa897b);
-  static const Color yellow = Color(0xffffdd94);
-  static const Color green = Color(0xff86e3ce);
+  static const Color angry = Color(0xffeea983);
+  static const Color anxiety = Color(0xffb8c7cb);
+  static const Color calm = Color(0xffbad1b7);
+  static const Color excitement = Color(0xfffcb58e);
+  static const Color happy = Color(0xfffee4a1);
+  static const Color joy = Color(0xfffdc9a2);
+  static const Color neutral = Color(0xffe0e0e0);
+  static const Color sad = Color(0xffc4c9cc);
 }

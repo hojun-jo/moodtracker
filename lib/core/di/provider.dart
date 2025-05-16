@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
 import 'package:moodtracker/core/datasources/mood_datasource.dart';
@@ -39,6 +40,7 @@ final moodLocalDatasource = Provider<Future<MoodDatasource>>((ref) async {
   return MoodLocalDatasourceImpl(isar: await ref.read(isarProvider));
 });
 
-final moodRepository = Provider<MoodRepository>((ref) {
-  return MoodRepositoryImpl(moodDatasource: ref.read(moodLocalDatasource));
+final moodRepository = StreamNotifierProvider.autoDispose
+    .family<MoodRepository, List<MoodModel>, DateTimeRange?>(() {
+  return MoodRepositoryImpl();
 });
