@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:moodtracker/core/widgets/small_icon_button.dart';
@@ -27,30 +26,6 @@ class _HomeHeaderState extends ConsumerState<HomeHeader> {
         right: 8,
         bottom: 8,
       ),
-=======
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:moodtracker/core/widgets/small_icon_button.dart';
-
-class HomeHeader extends StatefulWidget {
-  final Function(DateTime?) onDateChanged;
-
-  const HomeHeader({
-    super.key,
-    required this.onDateChanged,
-  });
-
-  @override
-  State<HomeHeader> createState() => _HomeHeaderState();
-}
-
-class _HomeHeaderState extends State<HomeHeader> {
-  DateTime? _selectedDate;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
->>>>>>> origin/main
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         spacing: 10,
@@ -59,11 +34,7 @@ class _HomeHeaderState extends State<HomeHeader> {
             onTap: () => _onDateChanged(context),
             icon: FontAwesomeIcons.filter,
           ),
-<<<<<<< HEAD
           if (dateRange != null)
-=======
-          if (_selectedDate != null)
->>>>>>> origin/main
             SmallIconButton(
               onTap: _deleteFilter,
               icon: FontAwesomeIcons.filterCircleXmark,
@@ -75,7 +46,6 @@ class _HomeHeaderState extends State<HomeHeader> {
 
   void _onDateChanged(BuildContext context) async {
     final theme = Theme.of(context);
-<<<<<<< HEAD
     final now = DateTime.now();
     final dateRange = await showDateRangePicker(
       context: context,
@@ -96,46 +66,14 @@ class _HomeHeaderState extends State<HomeHeader> {
 
     if (dateRange != null) {
       _changeDateRange(dateRange);
-=======
-    final date = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2020),
-      lastDate: DateTime.now(),
-      currentDate: _selectedDate,
-      builder: (context, child) => Theme(
-        data: theme.copyWith(
-          colorScheme: theme.colorScheme.copyWith(
-            primary: theme.scaffoldBackgroundColor,
-            onPrimary: theme.textTheme.bodyMedium?.color,
-          ),
-        ),
-        child: child!,
-      ),
-    );
-
-    if (date != null) {
-      _changeDate(date);
->>>>>>> origin/main
     }
   }
 
   void _deleteFilter() {
-<<<<<<< HEAD
     _changeDateRange(null);
   }
 
   void _changeDateRange(DateTimeRange? dateRange) {
     ref.read(homeDateRangeProvider.notifier).state = dateRange;
-=======
-    _changeDate(null);
-  }
-
-  void _changeDate(DateTime? date) {
-    widget.onDateChanged(date);
-    setState(() {
-      _selectedDate = date;
-    });
->>>>>>> origin/main
   }
 }

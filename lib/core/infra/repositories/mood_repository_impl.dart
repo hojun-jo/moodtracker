@@ -19,7 +19,6 @@ class MoodRepositoryImpl
   }
 
   @override
-<<<<<<< HEAD
   Future<void> addMood(
     MoodCategory mood,
     String description,
@@ -34,11 +33,5 @@ class MoodRepositoryImpl
     final datasource = await moodDatasource;
 
     yield* datasource.watchMoods(dateRange: dateRange);
-=======
-  Stream<List<MoodModel>> watchMoods({DateTime? date}) async* {
-    final datasource = await moodDatasource;
-
-    yield* datasource.watchMoods(date: date);
->>>>>>> origin/main
   }
 }

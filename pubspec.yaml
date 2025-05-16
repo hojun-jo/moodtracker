@@ -26,10 +26,7 @@ dependencies:
   path_provider: ^2.1.5
   mocktail: ^1.0.4
   easy_localization: ^3.0.7+1
-<<<<<<< HEAD
   fl_chart: ^1.0.0
-=======
->>>>>>> origin/main
 
 dev_dependencies:
   flutter_test:
@@ -44,8 +41,5 @@ flutter:
   assets:
     - assets/translations/
     - assets/icons/
-<<<<<<< HEAD
     - assets/samples/
     - test/assets/
-=======
->>>>>>> origin/main
