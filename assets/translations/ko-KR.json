@@ -4,9 +4,13 @@
     "How was your day?": "오늘 하루는 어땠나요?",
     "Save": "저장하기",
     "Theme": "테마",
+<<<<<<< HEAD
     "Open Source Lisence": "오픈소스 라이센스",
     "Scatter Chart Explain": "하루 중 어떤 시간에 어떤 기분이 많았는지 감정의 흐름을 확인할 수 있어요.",
     "positive": "긍정",
     "neutrality": "중립",
     "negative": "부정"
+=======
+    "Open Source Lisence": "오픈소스 라이센스"
+>>>>>>> origin/main
 }

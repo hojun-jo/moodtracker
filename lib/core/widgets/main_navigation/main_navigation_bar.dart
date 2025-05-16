@@ -35,8 +35,13 @@ class MainNavigationBar extends StatelessWidget {
             ...MainNavigationType.values.map((value) {
               return MainNavigationBarItem(
                 onTap: () => _navigateTo(value),
+<<<<<<< HEAD
                 icon: value.icon,
                 isSelected: navigationShell.currentIndex == value.index,
+=======
+                icon: value.toIcon(),
+                isSelected: navigationShell.currentIndex == value.toIndex(),
+>>>>>>> origin/main
               );
             }),
           ],

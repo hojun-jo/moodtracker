@@ -10,6 +10,7 @@ class MoodLocalDatasourceImpl implements MoodDatasource {
   MoodLocalDatasourceImpl({required this.isar});
 
   @override
+<<<<<<< HEAD
   Future<void> addMood(
     MoodCategory mood,
     String description,
@@ -22,6 +23,12 @@ class MoodLocalDatasourceImpl implements MoodDatasource {
           description: description,
           createdAt: DateTime.now(),
         ));
+=======
+  Future<void> addMood(MoodModel mood) async {
+    try {
+      await isar.writeTxn<void>(() async {
+        await isar.moodModels.put(mood);
+>>>>>>> origin/main
       });
     } catch (e) {
       throw Exception('Failed to add mood: $e');
@@ -29,6 +36,7 @@ class MoodLocalDatasourceImpl implements MoodDatasource {
   }
 
   @override
+<<<<<<< HEAD
   Stream<List<MoodModel>> watchMoods({DateTimeRange? dateRange}) {
     if (dateRange != null) {
       final startDate = dateRange.start;
@@ -38,6 +46,15 @@ class MoodLocalDatasourceImpl implements MoodDatasource {
           .createdAtBetween(
             DateTime(startDate.year, startDate.month, startDate.day),
             DateTime(endDate.year, endDate.month, endDate.day, 23, 59, 59),
+=======
+  Stream<List<MoodModel>> watchMoods({DateTime? date}) {
+    if (date != null) {
+      return isar.moodModels
+          .filter()
+          .createdAtBetween(
+            DateTime(date.year, date.month, date.day),
+            DateTime(date.year, date.month, date.day, 23, 59, 59),
+>>>>>>> origin/main
           )
           .sortByCreatedAtDesc()
           .watch(fireImmediately: true);

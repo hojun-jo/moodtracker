@@ -2,7 +2,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+<<<<<<< HEAD
 import 'package:moodtracker/core/models/mood/mood_category.dart';
+=======
+import 'package:moodtracker/core/models/mood/mood_type.dart';
+>>>>>>> origin/main
 import 'package:moodtracker/core/widgets/dialog/error_dialog.dart';
 import 'package:moodtracker/features/write/view_models/write_view_model.dart';
 import 'package:moodtracker/features/write/views/widgets/write_icon_button.dart';
@@ -38,6 +42,7 @@ class _WriteScreenState extends ConsumerState<WriteScreen> {
           Card(
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
+<<<<<<< HEAD
               child: GridView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: MoodCategory.values.length,
@@ -54,6 +59,45 @@ class _WriteScreenState extends ConsumerState<WriteScreen> {
                     isSelected: _selectedMood == mood,
                   );
                 },
+=======
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ...[
+                        MoodType.happy,
+                        MoodType.joy,
+                        MoodType.excitement,
+                        MoodType.calm
+                      ].map((mood) {
+                        return WriteIconButton(
+                          onTap: () => _selectMood(mood),
+                          moodType: mood,
+                          isSelected: _selectedMood == mood,
+                        );
+                      }),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ...[
+                        MoodType.neutral,
+                        MoodType.anxiety,
+                        MoodType.sad,
+                        MoodType.angry
+                      ].map((mood) {
+                        return WriteIconButton(
+                          onTap: () => _selectMood(mood),
+                          moodType: mood,
+                          isSelected: _selectedMood == mood,
+                        );
+                      }),
+                    ],
+                  ),
+                ],
+>>>>>>> origin/main
               ),
               // child: Column(
               //   children: [

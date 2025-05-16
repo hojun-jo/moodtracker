@@ -1,8 +1,12 @@
+<<<<<<< HEAD
 import 'package:flutter/material.dart';
+=======
+>>>>>>> origin/main
 import 'package:isar/isar.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:moodtracker/core/datasources/mood_datasource.dart';
 import 'package:moodtracker/core/infra/datasources/theme_local_datasource_impl.dart';
+<<<<<<< HEAD
 import 'package:moodtracker/core/models/mood/mood_model.dart';
 import 'package:moodtracker/core/repositories/mood_repository.dart';
 import 'package:moodtracker/core/utils/file_loader.dart';
@@ -13,18 +17,27 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 // theme
 
+=======
+import 'package:moodtracker/core/repositories/mood_repository.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+>>>>>>> origin/main
 class MockSharedPreferencesAsync extends Mock
     implements SharedPreferencesAsync {}
 
 class MockThemeLocalDatasource extends Mock
     implements ThemeLocalDatasourceImpl {}
 
+<<<<<<< HEAD
 // mood
 
+=======
+>>>>>>> origin/main
 class MockIsar extends Mock implements Isar {}
 
 class MockMoodLocalDatasource extends Mock implements MoodDatasource {}
 
+<<<<<<< HEAD
 class MockMoodRepository extends MoodRepository with Mock {
   @override
   Stream<List<MoodModel>> build(DateTimeRange? dateRange) {
@@ -81,3 +94,6 @@ class MockFileLoader implements FileLoader {
     return mockData!;
   }
 }
+=======
+class MockMoodRepository extends Mock implements MoodRepository {}
+>>>>>>> origin/main
