@@ -6,4 +6,8 @@ abstract class DateFormater {
   static String formatMoodCard(DateTime date) {
     return DateFormat.MMMEd().format(date);
   }
+
+  static String formatChartFilter(DateTime date) {
+    return DateFormat.yM().format(date);
+  }
 }

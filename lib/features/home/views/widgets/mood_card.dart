@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:moodtracker/core/models/mood/mood_type.dart';
+import 'package:moodtracker/core/models/mood/mood_category.dart';
 
 class MoodCard extends StatelessWidget {
-  final MoodType moodType;
+  final MoodCategory moodType;
   final String createdAt;
   final String description;
 

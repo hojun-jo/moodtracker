@@ -4,27 +4,15 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 enum MainNavigationType {
   home,
   write,
+  chart,
   settings;
 
-  int toIndex() {
-    switch (this) {
-      case MainNavigationType.home:
-        return 0;
-      case MainNavigationType.write:
-        return 1;
-      case MainNavigationType.settings:
-        return 2;
-    }
-  }
+  static const _properties = {
+    MainNavigationType.home: (icon: FontAwesomeIcons.book,),
+    MainNavigationType.write: (icon: FontAwesomeIcons.featherPointed,),
+    MainNavigationType.chart: (icon: FontAwesomeIcons.chartPie,),
+    MainNavigationType.settings: (icon: FontAwesomeIcons.bars,),
+  };
 
-  IconData toIcon() {
-    switch (this) {
-      case MainNavigationType.home:
-        return FontAwesomeIcons.book;
-      case MainNavigationType.write:
-        return FontAwesomeIcons.featherPointed;
-      case MainNavigationType.settings:
-        return FontAwesomeIcons.bars;
-    }
-  }
+  IconData get icon => _properties[this]!.icon;
 }

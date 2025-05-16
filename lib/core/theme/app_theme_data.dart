@@ -3,12 +3,24 @@ import 'package:moodtracker/core/theme/app_color.dart';
 import 'package:moodtracker/core/theme/app_text_theme.dart';
 import 'package:moodtracker/core/theme/app_theme_type.dart';
 
-ThemeData appThemeData(AppThemeType appBackground, Locale locale) {
+ThemeData appThemeData(
+  AppThemeType appBackground,
+  Locale locale,
+) {
+  final appBackgroundColor = appBackground.toColor();
+  final textBodySmall = AppTextTheme.data(locale)?.bodySmall;
+  final textBodyMedium = AppTextTheme.data(locale)?.bodyMedium;
+
   return ThemeData(
-    scaffoldBackgroundColor: appBackground.toColor(),
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: appBackgroundColor,
+      primary: appBackgroundColor,
+      onPrimary: AppColor.black,
+    ),
+    scaffoldBackgroundColor: appBackgroundColor,
     appBarTheme: AppBarTheme(
-      backgroundColor: appBackground.toColor(),
-      surfaceTintColor: appBackground.toColor(),
+      backgroundColor: appBackgroundColor,
+      surfaceTintColor: appBackgroundColor,
       iconTheme: const IconThemeData(
         color: AppColor.darkgrey,
       ),
@@ -18,15 +30,24 @@ ThemeData appThemeData(AppThemeType appBackground, Locale locale) {
     ),
     inputDecorationTheme: InputDecorationTheme(
       border: InputBorder.none,
-      hintStyle: AppTextTheme.data(locale)?.bodySmall,
+      hintStyle: textBodySmall,
+      labelStyle: textBodySmall,
     ),
     textTheme: AppTextTheme.data(locale),
     textSelectionTheme: TextSelectionThemeData(
       cursorColor: AppColor.black,
-      selectionColor: appBackground.toColor(),
-      selectionHandleColor: appBackground.toColor(),
+      selectionColor: appBackgroundColor,
+      selectionHandleColor: appBackgroundColor,
     ),
-    cardColor: appBackground.toColor(),
+    textButtonTheme: TextButtonThemeData(
+      style: ButtonStyle(
+        foregroundColor: WidgetStateProperty.all(AppColor.black),
+        textStyle: WidgetStateProperty.all(
+          textBodyMedium,
+        ),
+      ),
+    ),
+    cardColor: appBackgroundColor,
     cardTheme: const CardTheme(
       elevation: 0,
       margin: EdgeInsets.zero,
@@ -34,7 +55,7 @@ ThemeData appThemeData(AppThemeType appBackground, Locale locale) {
     ),
     listTileTheme: ListTileThemeData(
       tileColor: AppColor.white,
-      titleTextStyle: AppTextTheme.data(locale)?.bodyMedium,
+      titleTextStyle: textBodyMedium,
     ),
     progressIndicatorTheme: const ProgressIndicatorThemeData(
       color: AppColor.black,
@@ -51,22 +72,11 @@ ThemeData appThemeData(AppThemeType appBackground, Locale locale) {
     ),
     datePickerTheme: DatePickerThemeData(
       backgroundColor: AppColor.white,
-      cancelButtonStyle: ButtonStyle(
-        foregroundColor: WidgetStateProperty.all(AppColor.black),
-        textStyle: WidgetStateProperty.all(
-          AppTextTheme.data(locale)?.bodySmall,
-        ),
-      ),
-      confirmButtonStyle: ButtonStyle(
-        foregroundColor: WidgetStateProperty.all(AppColor.black),
-        textStyle: WidgetStateProperty.all(
-          AppTextTheme.data(locale)?.bodySmall,
-        ),
-      ),
-      headerHelpStyle: AppTextTheme.data(locale)?.bodySmall,
-      weekdayStyle: AppTextTheme.data(locale)?.bodySmall,
-      dayStyle: AppTextTheme.data(locale)?.bodySmall,
-      yearStyle: AppTextTheme.data(locale)?.bodySmall,
+      rangePickerBackgroundColor: AppColor.white,
+      rangeSelectionBackgroundColor: appBackgroundColor,
+      rangePickerHeaderHelpStyle: textBodySmall,
+      headerHeadlineStyle: textBodySmall,
+      headerHelpStyle: textBodySmall,
     ),
   );
 }

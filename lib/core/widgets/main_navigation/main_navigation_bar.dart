@@ -35,8 +35,8 @@ class MainNavigationBar extends StatelessWidget {
             ...MainNavigationType.values.map((value) {
               return MainNavigationBarItem(
                 onTap: () => _navigateTo(value),
-                icon: value.toIcon(),
-                isSelected: navigationShell.currentIndex == value.toIndex(),
+                icon: value.icon,
+                isSelected: navigationShell.currentIndex == value.index,
               );
             }),
           ],
@@ -48,11 +48,13 @@ class MainNavigationBar extends StatelessWidget {
   void _navigateTo(MainNavigationType value) {
     switch (value) {
       case MainNavigationType.home:
-        navigationShell.goBranch(MainNavigationType.home.toIndex());
+        navigationShell.goBranch(MainNavigationType.home.index);
       case MainNavigationType.write:
-        navigationShell.goBranch(MainNavigationType.write.toIndex());
+        navigationShell.goBranch(MainNavigationType.write.index);
+      case MainNavigationType.chart:
+        navigationShell.goBranch(MainNavigationType.chart.index);
       case MainNavigationType.settings:
-        navigationShell.goBranch(MainNavigationType.settings.toIndex());
+        navigationShell.goBranch(MainNavigationType.settings.index);
     }
   }
 }

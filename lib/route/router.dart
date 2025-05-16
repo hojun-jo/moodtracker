@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:moodtracker/features/chart/views/chart_screen.dart';
 import 'package:moodtracker/route/route_path.dart';
 import 'package:moodtracker/core/widgets/main_navigation/main_navigation_bar.dart';
 import 'package:moodtracker/features/home/views/home_screen.dart';
@@ -27,6 +28,14 @@ final routerProvider = Provider((ref) {
               GoRoute(
                 path: RoutePath.write,
                 builder: (context, state) => const WriteScreen(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: RoutePath.chart,
+                builder: (context, state) => const ChartScreen(),
               ),
             ],
           ),

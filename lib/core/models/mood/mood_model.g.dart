@@ -27,11 +27,11 @@ const MoodModelSchema = CollectionSchema(
       name: r'description',
       type: IsarType.string,
     ),
-    r'moodType': PropertySchema(
+    r'moodCategory': PropertySchema(
       id: 2,
-      name: r'moodType',
+      name: r'moodCategory',
       type: IsarType.byte,
-      enumMap: _MoodModelmoodTypeEnumValueMap,
+      enumMap: _MoodModelmoodCategoryEnumValueMap,
     )
   },
   estimateSize: _moodModelEstimateSize,
@@ -66,7 +66,7 @@ void _moodModelSerialize(
 ) {
   writer.writeDateTime(offsets[0], object.createdAt);
   writer.writeString(offsets[1], object.description);
-  writer.writeByte(offsets[2], object.moodType.index);
+  writer.writeByte(offsets[2], object.moodCategory.index);
 }
 
 MoodModel _moodModelDeserialize(
@@ -79,9 +79,9 @@ MoodModel _moodModelDeserialize(
     createdAt: reader.readDateTime(offsets[0]),
     description: reader.readString(offsets[1]),
     id: id,
-    moodType:
-        _MoodModelmoodTypeValueEnumMap[reader.readByteOrNull(offsets[2])] ??
-            MoodType.angry,
+    moodCategory:
+        _MoodModelmoodCategoryValueEnumMap[reader.readByteOrNull(offsets[2])] ??
+            MoodCategory.excitement,
   );
   return object;
 }
@@ -98,32 +98,33 @@ P _moodModelDeserializeProp<P>(
     case 1:
       return (reader.readString(offset)) as P;
     case 2:
-      return (_MoodModelmoodTypeValueEnumMap[reader.readByteOrNull(offset)] ??
-          MoodType.angry) as P;
+      return (_MoodModelmoodCategoryValueEnumMap[
+              reader.readByteOrNull(offset)] ??
+          MoodCategory.excitement) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
 }
 
-const _MoodModelmoodTypeEnumValueMap = {
-  'angry': 0,
-  'anxiety': 1,
-  'calm': 2,
-  'excitement': 3,
-  'happy': 4,
-  'joy': 5,
-  'neutral': 6,
-  'sad': 7,
+const _MoodModelmoodCategoryEnumValueMap = {
+  'excitement': 0,
+  'joy': 1,
+  'happy': 2,
+  'calm': 3,
+  'neutral': 4,
+  'anxiety': 5,
+  'sad': 6,
+  'angry': 7,
 };
-const _MoodModelmoodTypeValueEnumMap = {
-  0: MoodType.angry,
-  1: MoodType.anxiety,
-  2: MoodType.calm,
-  3: MoodType.excitement,
-  4: MoodType.happy,
-  5: MoodType.joy,
-  6: MoodType.neutral,
-  7: MoodType.sad,
+const _MoodModelmoodCategoryValueEnumMap = {
+  0: MoodCategory.excitement,
+  1: MoodCategory.joy,
+  2: MoodCategory.happy,
+  3: MoodCategory.calm,
+  4: MoodCategory.neutral,
+  5: MoodCategory.anxiety,
+  6: MoodCategory.sad,
+  7: MoodCategory.angry,
 };
 
 Id _moodModelGetId(MoodModel object) {
@@ -456,51 +457,53 @@ extension MoodModelQueryFilter
     });
   }
 
-  QueryBuilder<MoodModel, MoodModel, QAfterFilterCondition> moodTypeEqualTo(
-      MoodType value) {
+  QueryBuilder<MoodModel, MoodModel, QAfterFilterCondition> moodCategoryEqualTo(
+      MoodCategory value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'moodType',
+        property: r'moodCategory',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<MoodModel, MoodModel, QAfterFilterCondition> moodTypeGreaterThan(
-    MoodType value, {
+  QueryBuilder<MoodModel, MoodModel, QAfterFilterCondition>
+      moodCategoryGreaterThan(
+    MoodCategory value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'moodType',
+        property: r'moodCategory',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<MoodModel, MoodModel, QAfterFilterCondition> moodTypeLessThan(
-    MoodType value, {
+  QueryBuilder<MoodModel, MoodModel, QAfterFilterCondition>
+      moodCategoryLessThan(
+    MoodCategory value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'moodType',
+        property: r'moodCategory',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<MoodModel, MoodModel, QAfterFilterCondition> moodTypeBetween(
-    MoodType lower,
-    MoodType upper, {
+  QueryBuilder<MoodModel, MoodModel, QAfterFilterCondition> moodCategoryBetween(
+    MoodCategory lower,
+    MoodCategory upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'moodType',
+        property: r'moodCategory',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -541,15 +544,15 @@ extension MoodModelQuerySortBy on QueryBuilder<MoodModel, MoodModel, QSortBy> {
     });
   }
 
-  QueryBuilder<MoodModel, MoodModel, QAfterSortBy> sortByMoodType() {
+  QueryBuilder<MoodModel, MoodModel, QAfterSortBy> sortByMoodCategory() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'moodType', Sort.asc);
+      return query.addSortBy(r'moodCategory', Sort.asc);
     });
   }
 
-  QueryBuilder<MoodModel, MoodModel, QAfterSortBy> sortByMoodTypeDesc() {
+  QueryBuilder<MoodModel, MoodModel, QAfterSortBy> sortByMoodCategoryDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'moodType', Sort.desc);
+      return query.addSortBy(r'moodCategory', Sort.desc);
     });
   }
 }
@@ -592,15 +595,15 @@ extension MoodModelQuerySortThenBy
     });
   }
 
-  QueryBuilder<MoodModel, MoodModel, QAfterSortBy> thenByMoodType() {
+  QueryBuilder<MoodModel, MoodModel, QAfterSortBy> thenByMoodCategory() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'moodType', Sort.asc);
+      return query.addSortBy(r'moodCategory', Sort.asc);
     });
   }
 
-  QueryBuilder<MoodModel, MoodModel, QAfterSortBy> thenByMoodTypeDesc() {
+  QueryBuilder<MoodModel, MoodModel, QAfterSortBy> thenByMoodCategoryDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'moodType', Sort.desc);
+      return query.addSortBy(r'moodCategory', Sort.desc);
     });
   }
 }
@@ -620,9 +623,9 @@ extension MoodModelQueryWhereDistinct
     });
   }
 
-  QueryBuilder<MoodModel, MoodModel, QDistinct> distinctByMoodType() {
+  QueryBuilder<MoodModel, MoodModel, QDistinct> distinctByMoodCategory() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'moodType');
+      return query.addDistinctBy(r'moodCategory');
     });
   }
 }
@@ -647,9 +650,10 @@ extension MoodModelQueryProperty
     });
   }
 
-  QueryBuilder<MoodModel, MoodType, QQueryOperations> moodTypeProperty() {
+  QueryBuilder<MoodModel, MoodCategory, QQueryOperations>
+      moodCategoryProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'moodType');
+      return query.addPropertyName(r'moodCategory');
     });
   }
 }
