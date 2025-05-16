@@ -25,6 +25,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return CustomScrollView(
       slivers: [
         SliverPersistentHeader(
+          pinned: true,
+          floating: true,
           delegate: HomeHeaderDelegate(),
         ),
         moodModelStream.when(

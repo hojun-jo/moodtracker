@@ -14,10 +14,18 @@ class HomeHeader extends ConsumerStatefulWidget {
 class _HomeHeaderState extends ConsumerState<HomeHeader> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final dateRange = ref.watch(homeDateRangeProvider);
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
+    return Container(
+      decoration: BoxDecoration(
+        color: theme.scaffoldBackgroundColor,
+      ),
+      padding: const EdgeInsets.only(
+        left: 8,
+        right: 8,
+        bottom: 8,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         spacing: 10,
