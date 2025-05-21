@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:moodtracker/core/repositories/theme_repository.dart';
+import 'package:moodtracker/core/repositories/interface/theme_repository.dart';
 import 'package:moodtracker/core/theme/app_theme_type.dart';
 
 class FakeThemeRepository extends AutoDisposeAsyncNotifier<AppThemeType>

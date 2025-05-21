@@ -1,4 +1,4 @@
-import 'package:moodtracker/core/datasources/theme_datasource.dart';
+import 'package:moodtracker/core/datasources/interface/theme_datasource.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeLocalDatasourceImpl extends ThemeDatasource {
