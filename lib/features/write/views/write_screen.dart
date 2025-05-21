@@ -55,44 +55,6 @@ class _WriteScreenState extends ConsumerState<WriteScreen> {
                   );
                 },
               ),
-              // child: Column(
-              //   children: [
-              //     Row(
-              //       mainAxisAlignment: MainAxisAlignment.spaceAround,
-              //       children: [
-              //         ...[
-              //           MoodCategory.happy,
-              //           MoodCategory.joy,
-              //           MoodCategory.excitement,
-              //           MoodCategory.calm
-              //         ].map((mood) {
-              //           return WriteIconButton(
-              //             onTap: () => _selectMood(mood),
-              //             moodType: mood,
-              //             isSelected: _selectedMood == mood,
-              //           );
-              //         }),
-              //       ],
-              //     ),
-              //     Row(
-              //       mainAxisAlignment: MainAxisAlignment.spaceAround,
-              //       children: [
-              //         ...[
-              //           MoodCategory.neutral,
-              //           MoodCategory.anxiety,
-              //           MoodCategory.sad,
-              //           MoodCategory.angry
-              //         ].map((mood) {
-              //           return WriteIconButton(
-              //             onTap: () => _selectMood(mood),
-              //             moodType: mood,
-              //             isSelected: _selectedMood == mood,
-              //           );
-              //         }),
-              //       ],
-              //     ),
-              //   ],
-              // ),
             ),
           ),
           if (_moodErrorMessage != null)
@@ -109,6 +71,8 @@ class _WriteScreenState extends ConsumerState<WriteScreen> {
                 controller: _controller,
                 autocorrect: false,
                 maxLines: null,
+                onTapOutside: (event) =>
+                    FocusManager.instance.primaryFocus?.unfocus(),
                 style: Theme.of(context).textTheme.bodyMedium,
                 decoration: InputDecoration(
                   hintText: "How was your day?".tr(),
