@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:moodtracker/core/datasources/interface/theme_datasource.dart';
+import 'package:moodtracker/core/datasources/interfaces/theme_datasource.dart';
 import 'package:moodtracker/core/di/provider.dart';
-import 'package:moodtracker/core/repositories/interface/theme_repository.dart';
+import 'package:moodtracker/core/repositories/interfaces/theme_repository.dart';
 import 'package:moodtracker/core/theme/app_theme_type.dart';
 
 class ThemeRepositoryImpl extends AutoDisposeAsyncNotifier<AppThemeType>

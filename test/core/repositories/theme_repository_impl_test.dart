@@ -4,7 +4,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:moodtracker/core/di/provider.dart';
 import 'package:moodtracker/core/theme/app_theme_type.dart';
 
-import '../../../mock.dart';
+import '../../mock.dart';
 
 void main() {
   late ProviderContainer container;

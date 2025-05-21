@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:moodtracker/core/datasources/implement/theme_local_datasource_impl.dart';
+import 'package:moodtracker/core/datasources/implements/theme_local_datasource_impl.dart';
 
-import '../../../mock.dart';
+import '../../mock.dart';
 
 void main() {
   late MockSharedPreferencesAsync mockAsyncPref;
