@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:moodtracker/core/widgets/center_progress_indicator.dart';
 import 'package:moodtracker/core/widgets/center_text.dart';
 import 'package:moodtracker/features/chart/constants/chart_constants.dart';
-import 'package:moodtracker/features/chart/provider/provider.dart';
+import 'package:moodtracker/features/chart/providers/provider.dart';
 
 class PieChartCard extends ConsumerWidget {
   const PieChartCard({super.key});

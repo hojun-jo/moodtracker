@@ -7,7 +7,7 @@ import 'package:moodtracker/core/theme/app_color.dart';
 import 'package:moodtracker/core/widgets/center_progress_indicator.dart';
 import 'package:moodtracker/core/widgets/center_text.dart';
 import 'package:moodtracker/features/chart/constants/chart_constants.dart';
-import 'package:moodtracker/features/chart/provider/provider.dart';
+import 'package:moodtracker/features/chart/providers/provider.dart';
 import 'package:moodtracker/features/chart/views/widgets/scatter_chart_legend.dart';
 
 class ScatterChartCard extends ConsumerWidget {

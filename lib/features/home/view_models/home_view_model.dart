@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:moodtracker/core/di/provider.dart';
 import 'package:moodtracker/core/models/mood/mood_model.dart';
 import 'package:moodtracker/core/utils/date_formater.dart';
-import 'package:moodtracker/features/home/provider/provider.dart';
+import 'package:moodtracker/features/home/providers/provider.dart';
 
 class HomeViewModel extends AutoDisposeNotifier<AsyncValue<List<MoodModel>>> {
   @override

@@ -6,7 +6,7 @@ import 'package:moodtracker/core/theme/app_color.dart';
 import 'package:moodtracker/core/theme/app_fonts_type.dart';
 import 'package:moodtracker/core/widgets/center_progress_indicator.dart';
 import 'package:moodtracker/core/widgets/center_text.dart';
-import 'package:moodtracker/features/settings/view_models/fonts_view_model.dart';
+import 'package:moodtracker/features/settings/providers/provider.dart';
 import 'package:moodtracker/features/settings/views/widgets/fonts_select_radio.dart';
 
 class FontsScreen extends ConsumerStatefulWidget {

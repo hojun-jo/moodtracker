@@ -3,7 +3,7 @@ import 'package:moodtracker/core/di/provider.dart';
 import 'package:moodtracker/core/models/mood/mood_model.dart';
 import 'package:moodtracker/core/models/mood/mood_type.dart';
 import 'package:moodtracker/features/chart/models/scatter_model.dart';
-import 'package:moodtracker/features/chart/provider/provider.dart';
+import 'package:moodtracker/features/chart/providers/provider.dart';
 
 class ScatterChartViewModel
     extends AutoDisposeNotifier<AsyncValue<List<ScatterModel>>> {

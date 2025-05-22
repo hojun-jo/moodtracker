@@ -5,7 +5,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:moodtracker/core/di/provider.dart';
 import 'package:moodtracker/core/models/mood/mood_model.dart';
 import 'package:moodtracker/core/models/mood/mood_category.dart';
-import 'package:moodtracker/features/home/provider/provider.dart';
+import 'package:moodtracker/features/home/providers/provider.dart';
 
 import '../../mock.dart';
 

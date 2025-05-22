@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:moodtracker/core/widgets/small_icon_button.dart';
-import 'package:moodtracker/features/home/provider/provider.dart';
+import 'package:moodtracker/features/home/providers/provider.dart';
 
 class HomeHeader extends ConsumerStatefulWidget {
   const HomeHeader({super.key});

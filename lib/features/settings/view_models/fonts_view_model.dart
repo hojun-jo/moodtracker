@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:moodtracker/core/di/provider.dart';
 import 'package:moodtracker/core/theme/app_fonts_type.dart';
 
-class FontsViewModel extends Notifier<AsyncValue<AppFontsType>> {
+class FontsViewModel extends AutoDisposeNotifier<AsyncValue<AppFontsType>> {
   @override
   AsyncValue<AppFontsType> build() {
     return ref.watch(themeRepository).when(
@@ -18,8 +18,3 @@ class FontsViewModel extends Notifier<AsyncValue<AppFontsType>> {
     ref.read(themeRepository.notifier).setFonts(fonts);
   }
 }
-
-final fontsProvider =
-    NotifierProvider<FontsViewModel, AsyncValue<AppFontsType>>(
-  () => FontsViewModel(),
-);
