@@ -9,7 +9,7 @@ import 'package:moodtracker/core/repositories/implements/theme_repository_impl.d
 import 'package:moodtracker/core/models/mood/mood_model.dart';
 import 'package:moodtracker/core/repositories/interfaces/mood_repository.dart';
 import 'package:moodtracker/core/repositories/interfaces/theme_repository.dart';
-import 'package:moodtracker/core/theme/app_theme_type.dart';
+import 'package:moodtracker/core/theme/app_theme_data.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -20,7 +20,7 @@ final themeLocalDatasource = Provider.autoDispose(
 );
 
 final themeRepository =
-    AsyncNotifierProvider.autoDispose<ThemeRepository, AppThemeType>(
+    AsyncNotifierProvider.autoDispose<ThemeRepository, AppThemeData>(
   () => ThemeRepositoryImpl(),
 );
 

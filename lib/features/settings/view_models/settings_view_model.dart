@@ -9,7 +9,13 @@ class SettingsViewModel {
   SettingsViewModel({required this.themeRepo});
 
   AsyncValue<AppThemeType> getTheme(WidgetRef ref) {
-    return ref.watch(themeRepository);
+    return ref.watch(themeRepository).when(
+          data: (data) {
+            return AsyncValue.data(data.theme);
+          },
+          error: (error, stackTrace) => AsyncValue.error(error, stackTrace),
+          loading: () => const AsyncValue.loading(),
+        );
   }
 
   void selectTheme(AppThemeType theme) {

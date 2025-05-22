@@ -1,12 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:moodtracker/core/theme/app_theme_type.dart';
 import 'package:moodtracker/core/widgets/center_progress_indicator.dart';
 import 'package:moodtracker/core/widgets/dialog/error_dialog.dart';
 import 'package:moodtracker/features/settings/view_models/settings_view_model.dart';
 import 'package:moodtracker/features/settings/views/widgets/settings_item.dart';
 import 'package:moodtracker/features/settings/views/widgets/theme_menu_item.dart';
+import 'package:moodtracker/route/route_path.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
@@ -61,6 +63,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             },
           ),
         ),
+        if (context.locale.languageCode != "ja")
+          SettingsItem(
+            onTap: () {
+              context.push(RoutePath.fonts);
+            },
+            text: "Fonts",
+            trailing: const Icon(Icons.chevron_right),
+          ),
         SettingsItem(
           onTap: () => showLicensePage(context: context),
           text: "Open Source Lisence".tr(),
