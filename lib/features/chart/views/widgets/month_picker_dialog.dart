@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:moodtracker/core/utils/date_formater.dart';
-import 'package:moodtracker/features/chart/provider/provider.dart';
+import 'package:moodtracker/features/chart/providers/provider.dart';
 
 class MonthPickerDialog extends ConsumerWidget {
   const MonthPickerDialog({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:isar/isar.dart';
-import 'package:moodtracker/core/datasources/mood_datasource.dart';
+import 'package:moodtracker/core/datasources/interfaces/mood_datasource.dart';
 import 'package:moodtracker/core/models/mood/mood_model.dart';
 import 'package:moodtracker/core/models/mood/mood_category.dart';
 

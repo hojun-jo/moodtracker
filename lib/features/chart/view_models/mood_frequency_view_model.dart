@@ -3,7 +3,7 @@ import 'package:moodtracker/core/di/provider.dart';
 import 'package:moodtracker/core/models/mood/mood_model.dart';
 import 'package:moodtracker/core/models/mood/mood_category.dart';
 import 'package:moodtracker/features/chart/models/mood_category_count.dart';
-import 'package:moodtracker/features/chart/provider/provider.dart';
+import 'package:moodtracker/features/chart/providers/provider.dart';
 
 class MoodFrequencyViewModel
     extends AutoDisposeNotifier<AsyncValue<List<MoodCategoryCount>>> {

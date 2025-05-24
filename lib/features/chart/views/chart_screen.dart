@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:moodtracker/core/utils/date_formater.dart';
-import 'package:moodtracker/features/chart/provider/provider.dart';
+import 'package:moodtracker/features/chart/providers/provider.dart';
 import 'package:moodtracker/features/chart/views/widgets/month_picker_dialog.dart';
 import 'package:moodtracker/features/chart/views/widgets/mood_frequency_card.dart';
 import 'package:moodtracker/features/chart/views/widgets/pie_chart_card.dart';

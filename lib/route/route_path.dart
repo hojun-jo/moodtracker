@@ -10,4 +10,6 @@ abstract class RoutePath {
   static const String write = "/write";
   static const String chart = "/chart";
   static const String settings = "/settings";
+
+  static const String fonts = "/settings/fonts";
 }
