@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:moodtracker/core/di/provider.dart';
 import 'package:moodtracker/core/models/mood/mood_model.dart';
 import 'package:moodtracker/core/models/mood/mood_category.dart';
-import 'package:moodtracker/features/chart/provider/provider.dart';
+import 'package:moodtracker/features/chart/providers/provider.dart';
 
 class PieChartViewModel
     extends AutoDisposeNotifier<AsyncValue<List<PieChartSectionData>>> {

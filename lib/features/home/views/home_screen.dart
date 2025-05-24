@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:moodtracker/core/widgets/center_progress_indicator.dart';
 import 'package:moodtracker/core/widgets/center_text.dart';
-import 'package:moodtracker/features/home/provider/provider.dart';
+import 'package:moodtracker/features/home/providers/provider.dart';
 import 'package:moodtracker/features/home/views/widgets/home_header_delegate.dart';
 import 'package:moodtracker/features/home/views/widgets/mood_card.dart';
 

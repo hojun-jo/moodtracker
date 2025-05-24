@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:moodtracker/features/chart/views/chart_screen.dart';
+import 'package:moodtracker/features/settings/views/fonts_screen.dart';
 import 'package:moodtracker/route/route_path.dart';
 import 'package:moodtracker/core/widgets/main_navigation/main_navigation_bar.dart';
 import 'package:moodtracker/features/home/views/home_screen.dart';
@@ -44,6 +45,11 @@ final routerProvider = Provider((ref) {
               GoRoute(
                 path: RoutePath.settings,
                 builder: (context, state) => const SettingsScreen(),
+                routes: const [],
+              ),
+              GoRoute(
+                path: RoutePath.fonts,
+                builder: (context, state) => const FontsScreen(),
               ),
             ],
           ),
