@@ -19,17 +19,21 @@ class WriteIconButton extends StatelessWidget {
 
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          color:
-              isSelected ? theme.scaffoldBackgroundColor : Colors.transparent,
-          shape: BoxShape.circle,
-        ),
-        padding: const EdgeInsets.all(8),
-        child: Image.asset(
-          moodCategory.assetName,
-          width: 40,
-          height: 40,
+      child: AnimatedScale(
+        scale: isSelected ? 1.2 : 1,
+        duration: const Duration(milliseconds: 200),
+        child: Container(
+          decoration: BoxDecoration(
+            color:
+                isSelected ? theme.scaffoldBackgroundColor : Colors.transparent,
+            shape: BoxShape.circle,
+          ),
+          padding: const EdgeInsets.all(8),
+          child: Image.asset(
+            moodCategory.assetName,
+            width: 40,
+            height: 40,
+          ),
         ),
       ),
     );
