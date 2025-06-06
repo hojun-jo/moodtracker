@@ -66,7 +66,7 @@ class AppThemeData {
         ),
       ),
       cardColor: appBackgroundColor,
-      cardTheme: const CardTheme(
+      cardTheme: const CardThemeData(
         elevation: 0,
         margin: EdgeInsets.zero,
         color: AppColor.white,
