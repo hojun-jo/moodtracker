@@ -28,6 +28,8 @@ dependencies:
   easy_localization: ^3.0.7+1
   fl_chart: ^1.0.0
   firebase_core: ^3.15.1
+  firebase_auth: ^5.6.2
+  google_sign_in: ^7.1.0
 
 dev_dependencies:
   flutter_test:
