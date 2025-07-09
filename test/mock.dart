@@ -25,7 +25,7 @@ class MockIsar extends Mock implements Isar {}
 
 class MockMoodLocalDatasource extends Mock implements MoodDatasource {}
 
-class MockMoodRepository extends MoodRepository with Mock {
+class MockMoodRepository with Mock implements MoodRepository {
   @override
   Stream<List<MoodModel>> build(DateTimeRange? dateRange) {
     return watchMoods(dateRange: dateRange);

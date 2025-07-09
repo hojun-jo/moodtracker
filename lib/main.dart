@@ -6,7 +6,6 @@ import 'package:isar/isar.dart';
 import 'package:moodtracker/app.dart';
 import 'package:moodtracker/firebase_options.dart';
 
-// TODO:  interface
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
