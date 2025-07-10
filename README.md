@@ -51,7 +51,6 @@ Flutter, Riverpod, GoRouter, Isar, Mocktail, MVVM, Repository Pattern
 ## Detail
 
 ### Theme
-- 전역 함수로 `ThemeData` 제공.
 - `SharedPreferencesAsync`를 사용하여 테마 저장.
   - `SharedPreferences`는 deprecated 예정이기 때문.
   - `String`으로 저장한 테마 데이터 변환을 위해 `AppThemeType`에 `fromString` 생성자 제공.
