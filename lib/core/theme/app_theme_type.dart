@@ -14,7 +14,10 @@ enum AppThemeType {
   const AppThemeType(this.text);
 
   factory AppThemeType.fromString(String text) {
-    return values.firstWhere((e) => e.text == text);
+    return values.firstWhere(
+      (e) => e.text == text,
+      orElse: () => AppThemeType.cherryBlossom,
+    );
   }
 
   Color toColor() {
