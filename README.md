@@ -2,7 +2,7 @@
 아이콘 하나로 직관적이게, 매일 짧고 가볍게 기록할 수 있는 감정 일기 앱.
 
 ### 기술 스택
-Flutter, Riverpod, GoRouter, Isar, MVVM, Repository Pattern
+Flutter, Riverpod, GoRouter, Isar, Mocktail, MVVM, Repository Pattern
 
 ## 주요 기능
 
@@ -29,6 +29,7 @@ Flutter, Riverpod, GoRouter, Isar, MVVM, Repository Pattern
     - 한국어, 영어, 일본어 지원.
 - **기타**
     - GitHub Actions를 사용하여 유닛 테스트 자동화.
+    - `Mocktail`을 사용하여 Mocking.
 
 ## Screenshot
 
@@ -45,7 +46,7 @@ Flutter, Riverpod, GoRouter, Isar, MVVM, Repository Pattern
 | <img src=".github/attachments/settings_screen.png" height=400 /> |
 
 ## Structure
-<img src=".github/attachments/structure1.png" />
+<img src=".github/attachments/structure1.jpg" />
 
 ## Detail
 
@@ -54,14 +55,9 @@ Flutter, Riverpod, GoRouter, Isar, MVVM, Repository Pattern
 - `SharedPreferencesAsync`를 사용하여 테마 저장.
   - `SharedPreferences`는 deprecated 예정이기 때문.
   - `String`으로 저장한 테마 데이터 변환을 위해 `AppThemeType`에 `fromString` 생성자 제공.
-- `AsyncNotifierProvider`로 App에 테마를 제공하여 앱 전역에서 테마 일관성 유지.
+- `AsyncNotifierProvider`로 테마를 제공하여 앱 전역에서 테마 일관성 유지.
 
 ```dart
-ThemeData appThemeData(AppThemeType appBackground) {
-  return ThemeData(
-    ...
-}
-
 enum AppThemeType {
   cherryBlossom("Cherry Blossom"),
   apricot("Apricot"),
@@ -74,39 +70,12 @@ enum AppThemeType {
   const AppThemeType(this.text);
 
   factory AppThemeType.fromString(String text) {
-    return values.firstWhere((e) => e.text == text);
+    return values.firstWhere(
+      (e) => e.text == text,
+      orElse: () => AppThemeType.cherryBlossom,
+    );
   }
 ...
-}
-
-class ThemeLocalDatasourceImpl extends ThemeDatasource {
-  final SharedPreferencesAsync asyncPref;
-...
-}
-
-class ThemeRepositoryImpl extends AutoDisposeAsyncNotifier<AppThemeType>
-    implements ThemeRepository {
-  late final ThemeDatasource _themeLocalDatasource;
-...
-}
-
-final themeLocalDatasource = Provider.autoDispose(
-  (ref) => ThemeLocalDatasourceImpl(asyncPref: SharedPreferencesAsync()),
-);
-
-final themeRepository =
-    AsyncNotifierProvider.autoDispose<ThemeRepository, AppThemeType>(
-  () => ThemeRepositoryImpl(),
-);
-
-class MoodTrackerApp extends ConsumerWidget {
-  const MoodTrackerApp({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(themeProvider);
-    ...
-  }
 }
 ```
 
