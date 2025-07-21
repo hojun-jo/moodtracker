@@ -4,7 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:moodtracker/core/theme/app_theme_type.dart';
 import 'package:moodtracker/core/widgets/center_progress_indicator.dart';
+import 'package:moodtracker/core/widgets/center_text.dart';
 import 'package:moodtracker/core/widgets/dialog/error_dialog.dart';
+import 'package:moodtracker/core/widgets/dialog/mood_dialog.dart';
 import 'package:moodtracker/features/settings/providers/provider.dart';
 import 'package:moodtracker/features/settings/views/widgets/settings_item.dart';
 import 'package:moodtracker/features/settings/views/widgets/theme_menu_item.dart';
@@ -22,6 +24,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final authState = ref.watch(authenticationProvider);
+
     return Column(
       spacing: 16,
       children: [
@@ -75,6 +79,36 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           text: "Open Source Lisence".tr(),
           trailing: const Icon(Icons.chevron_right),
         ),
+        authState.when(
+          data: (isLoggedIn) {
+            if (isLoggedIn) {
+              return Column(
+                spacing: 16,
+                children: [
+                  SettingsItem(
+                    onTap: _signOut,
+                    text: "Sign out",
+                    trailing: const Icon(Icons.chevron_right),
+                  ),
+                  SettingsItem(
+                    onTap: _deleteAccount,
+                    text: "Delete account",
+                    textColor: Colors.red,
+                  ),
+                ],
+              );
+            } else {
+              return SettingsItem(
+                onTap: () => context.push(RoutePath.signIn),
+                text: "Sign in",
+                trailing: const Icon(Icons.chevron_right),
+              );
+            }
+          },
+          error: (Object error, StackTrace stackTrace) =>
+              CenterText(text: error.toString()),
+          loading: () => const CenterProgressIndicator(),
+        ),
       ],
     );
   }
@@ -96,6 +130,37 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       _menuController.close();
     } else {
       _menuController.open();
+    }
+  }
+
+  void _signOut() {
+    try {
+      ref.read(authenticationProvider.notifier).signOut();
+    } catch (e) {
+      showErrorDialog(
+        context: context,
+        text: e.toString(),
+      );
+    }
+  }
+
+  void _deleteAccount() {
+    try {
+      showMoodDialog(
+        context: context,
+        title: "delete account alert".tr(),
+        confirmText: "delete".tr(),
+        cancelText: "cancel".tr(),
+        onConfirm: () =>
+            ref.read(authenticationProvider.notifier).deleteAccount(),
+        onCancel: () => context.pop(),
+        confirmColor: Colors.red,
+      );
+    } catch (e) {
+      showErrorDialog(
+        context: context,
+        text: e.toString(),
+      );
     }
   }
 }
