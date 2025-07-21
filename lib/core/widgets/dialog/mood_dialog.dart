@@ -24,7 +24,7 @@ class MoodDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 14),
+        padding: const EdgeInsets.all(14),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
@@ -59,4 +59,30 @@ class MoodDialog extends StatelessWidget {
       ),
     );
   }
+}
+
+void showMoodDialog({
+  required BuildContext context,
+  required String title,
+  required String confirmText,
+  required String cancelText,
+  required VoidCallback onConfirm,
+  required VoidCallback onCancel,
+  Color? confirmColor,
+  Color? cancelColor,
+}) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return MoodDialog(
+        title: title,
+        confirmText: confirmText,
+        cancelText: cancelText,
+        onConfirm: onConfirm,
+        onCancel: onCancel,
+        confirmColor: confirmColor,
+        cancelColor: cancelColor,
+      );
+    },
+  );
 }
