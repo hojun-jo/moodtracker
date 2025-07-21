@@ -8,5 +8,9 @@
     "Scatter Chart Explain": "一日の中でどの時間帯にどんな気分が多かったかを視覚的に確認できます。",
     "positive": "ポジティブ",
     "neutrality": "ニュートラル",
-    "negative": "ネガティブ"
+    "negative": "ネガティブ",
+    "Sign in to sync your saved entries.": "ログインすると、記録した内容を同期できます。",
+    "delete account alert": "本当にアカウントを削除しますか？削除すると、すべての記録が永久に失われ、復元できません。",
+    "delete": "削除",
+    "cancel": "キャンセル"
 }

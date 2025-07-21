@@ -9,5 +9,9 @@
     "positive": "Positive",
     "neutrality": "Neutral",
     "negative": "Negative",
-    "Select Fonts": "Select Fonts"
+    "Select Fonts": "Select Fonts",
+    "Sign in to sync your saved entries.": "Sign in to sync your saved entries.",
+    "delete account alert": "Are you sure you want to delete your account? All entries will be permanently lost and cannot be recovered.",
+    "delete": "Delete",
+    "cancel": "Cancel"
 }
