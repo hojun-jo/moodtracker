@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:moodtracker/core/widgets/dialog/error_dialog.dart';
 import 'package:moodtracker/features/authentication/views/widgets/auth_button.dart';
 import 'package:moodtracker/features/settings/providers/provider.dart';
@@ -41,11 +42,16 @@ class LoginScreen extends ConsumerWidget {
   void _googleSignIn(
     BuildContext context,
     WidgetRef ref,
-  ) {
+  ) async {
     try {
-      ref.read(authenticationProvider.notifier).googleSignIn();
+      await ref.read(authenticationProvider.notifier).googleSignIn();
+      if (context.mounted) {
+        context.pop();
+      }
     } catch (e) {
-      showErrorDialog(context: context, text: e.toString());
+      if (context.mounted) {
+        showErrorDialog(context: context, text: e.toString());
+      }
     }
   }
 }
