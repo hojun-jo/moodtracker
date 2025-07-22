@@ -24,22 +24,24 @@ class MainNavigationBar extends StatelessWidget {
           child: navigationShell,
         ),
       ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(
-          top: 20,
-          bottom: 30,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            ...MainNavigationType.values.map((value) {
-              return MainNavigationBarItem(
-                onTap: () => _navigateTo(value),
-                icon: value.icon,
-                isSelected: navigationShell.currentIndex == value.index,
-              );
-            }),
-          ],
+      bottomNavigationBar: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.only(
+            top: 20,
+            bottom: 30,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              ...MainNavigationType.values.map((value) {
+                return MainNavigationBarItem(
+                  onTap: () => _navigateTo(value),
+                  icon: value.icon,
+                  isSelected: navigationShell.currentIndex == value.index,
+                );
+              }),
+            ],
+          ),
         ),
       ),
     );
