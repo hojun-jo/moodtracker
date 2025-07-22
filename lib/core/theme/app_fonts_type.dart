@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 enum AppFontsType {
@@ -12,37 +12,28 @@ enum AppFontsType {
   static final _properties = {
     AppFontsType.jua: (
       text: "Jua",
-      style:
-          kDebugMode ? const TextStyle(fontFamily: 'Jua') : GoogleFonts.jua(),
+      style: kDebugMode ? const TextStyle() : GoogleFonts.jua(),
       theme: kDebugMode ? const TextTheme() : GoogleFonts.juaTextTheme(),
     ),
     AppFontsType.hiMelody: (
       text: "Hi Melody",
-      style: kDebugMode
-          ? const TextStyle(fontFamily: 'Hi Melody')
-          : GoogleFonts.hiMelody(),
+      style: kDebugMode ? const TextStyle() : GoogleFonts.hiMelody(),
       theme: kDebugMode ? const TextTheme() : GoogleFonts.hiMelodyTextTheme(),
     ),
     AppFontsType.cute: (
       text: "Cute",
-      style: kDebugMode
-          ? const TextStyle(fontFamily: 'Cute')
-          : GoogleFonts.cuteFont(),
+      style: kDebugMode ? const TextStyle() : GoogleFonts.cuteFont(),
       theme: kDebugMode ? const TextTheme() : GoogleFonts.cuteFontTextTheme(),
     ),
     AppFontsType.nanumGothic: (
       text: "Nanum Gothic",
-      style: kDebugMode
-          ? const TextStyle(fontFamily: 'Nanum Gothic')
-          : GoogleFonts.nanumGothic(),
+      style: kDebugMode ? const TextStyle() : GoogleFonts.nanumGothic(),
       theme:
           kDebugMode ? const TextTheme() : GoogleFonts.nanumGothicTextTheme(),
     ),
     AppFontsType.nanumMyeongjo: (
       text: "Nanum Myeongjo",
-      style: kDebugMode
-          ? const TextStyle(fontFamily: 'Nanum Myeongjo')
-          : GoogleFonts.nanumMyeongjo(),
+      style: kDebugMode ? const TextStyle() : GoogleFonts.nanumMyeongjo(),
       theme:
           kDebugMode ? const TextTheme() : GoogleFonts.nanumMyeongjoTextTheme(),
     ),

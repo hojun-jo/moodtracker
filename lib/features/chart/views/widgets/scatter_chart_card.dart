@@ -56,6 +56,13 @@ class ScatterChartCard extends ConsumerWidget {
                         rightTitles: AxisTitles(
                           sideTitles: SideTitles(showTitles: false),
                         ),
+                        bottomTitles: AxisTitles(
+                          sideTitles: SideTitles(
+                            showTitles: true,
+                            reservedSize: 50,
+                            interval: 3,
+                          ),
+                        ),
                       ),
                     ),
                   ),
