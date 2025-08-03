@@ -155,6 +155,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       onConfirm: () async {
         try {
           await ref.read(authenticationProvider.notifier).deleteAccount();
+
+          if (mounted) {
+            context.pop();
+          }
         } catch (e) {
           if (mounted) {
             showErrorDialog(
