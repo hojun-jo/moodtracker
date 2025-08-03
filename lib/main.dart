@@ -1,12 +1,18 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
 import 'package:moodtracker/app.dart';
+import 'package:moodtracker/firebase_options.dart';
 
-// TODO: 스캐터차트 화면 아래 글자 잘림(다이나믹타입?), interface
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await Isar.initializeIsarCore();
   await EasyLocalization.ensureInitialized();
   runApp(

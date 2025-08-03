@@ -100,5 +100,12 @@ Temporary Items
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,flutter
 
+# Firebase/Google Services config files
+/android/app/google-services.json
+/ios/GoogleService-Info.plist
+/lib/firebase_options.dart
+
 debug_info/
 .jks
+.env*
+ios/Runner/GoogleService-Info.plist

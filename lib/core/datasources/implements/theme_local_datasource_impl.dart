@@ -1,7 +1,7 @@
 import 'package:moodtracker/core/datasources/interfaces/theme_datasource.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ThemeLocalDatasourceImpl extends ThemeDatasource {
+class ThemeLocalDatasourceImpl implements ThemeDatasource {
   static const _theme = "theme";
   static const _fonts = "fonts";
 
