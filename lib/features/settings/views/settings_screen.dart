@@ -133,14 +133,16 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     }
   }
 
-  void _signOut() {
+  void _signOut() async {
     try {
-      ref.read(authenticationProvider.notifier).signOut();
+      await ref.read(authenticationProvider.notifier).signOut();
     } catch (e) {
-      showErrorDialog(
-        context: context,
-        text: e.toString(),
-      );
+      if (mounted) {
+        showErrorDialog(
+          context: context,
+          text: e.toString(),
+        );
+      }
     }
   }
 
@@ -150,14 +152,16 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       title: "delete account alert".tr(),
       confirmText: "delete".tr(),
       cancelText: "cancel".tr(),
-      onConfirm: () {
+      onConfirm: () async {
         try {
-          ref.read(authenticationProvider.notifier).deleteAccount();
+          await ref.read(authenticationProvider.notifier).deleteAccount();
         } catch (e) {
-          showErrorDialog(
-            context: context,
-            text: e.toString(),
-          );
+          if (mounted) {
+            showErrorDialog(
+              context: context,
+              text: e.toString(),
+            );
+          }
         }
       },
       onCancel: () => context.pop(),
