@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>GIDClientID</key>
-	<string>611116803522-0mq52mgsdia1v7fmuuobh0m59kakfd7g.apps.googleusercontent.com</string>
+	<string>$(GID_CLIENT_ID)</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>

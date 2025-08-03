@@ -102,7 +102,7 @@ Temporary Items
 
 # Firebase/Google Services config files
 /android/app/google-services.json
-/ios/Runner/GoogleService-Info.plist
+/ios/GoogleService-Info.plist
 /lib/firebase_options.dart
 
 debug_info/

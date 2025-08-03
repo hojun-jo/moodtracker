@@ -1,0 +1,10 @@
+//
+//  Config.xcconfig
+//  Runner
+//
+//  Created by 조호준 on 8/3/25.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+GID_CLIENT_ID = $(MY_APP_GID_CLIENT_ID)
