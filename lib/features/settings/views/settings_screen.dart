@@ -145,22 +145,23 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   }
 
   void _deleteAccount() {
-    try {
-      showMoodDialog(
-        context: context,
-        title: "delete account alert".tr(),
-        confirmText: "delete".tr(),
-        cancelText: "cancel".tr(),
-        onConfirm: () =>
-            ref.read(authenticationProvider.notifier).deleteAccount(),
-        onCancel: () => context.pop(),
-        confirmColor: Colors.red,
-      );
-    } catch (e) {
-      showErrorDialog(
-        context: context,
-        text: e.toString(),
-      );
-    }
+    showMoodDialog(
+      context: context,
+      title: "delete account alert".tr(),
+      confirmText: "delete".tr(),
+      cancelText: "cancel".tr(),
+      onConfirm: () {
+        try {
+          ref.read(authenticationProvider.notifier).deleteAccount();
+        } catch (e) {
+          showErrorDialog(
+            context: context,
+            text: e.toString(),
+          );
+        }
+      },
+      onCancel: () => context.pop(),
+      confirmColor: Colors.red,
+    );
   }
 }
