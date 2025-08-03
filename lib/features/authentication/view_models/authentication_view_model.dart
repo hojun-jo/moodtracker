@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:moodtracker/features/authentication/providers/provider.dart';
+import 'package:moodtracker/features/authentication/utils/authentication_error.dart';
 
 class AuthenticationViewModel extends AutoDisposeNotifier<AsyncValue<bool>> {
   @override
@@ -12,7 +13,13 @@ class AuthenticationViewModel extends AutoDisposeNotifier<AsyncValue<bool>> {
   }
 
   Future<void> googleSignIn() async {
-    await ref.read(authenticationRepositoryProvider.notifier).googleSignIn();
+    try {
+      await ref.read(authenticationRepositoryProvider.notifier).googleSignIn();
+    } on AuthenticationError catch (e) {
+      if (e == AuthenticationError.canceled) {
+        return;
+      }
+    }
   }
 
   Future<void> signOut() async {
