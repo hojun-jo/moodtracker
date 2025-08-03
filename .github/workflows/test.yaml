@@ -3,11 +3,10 @@ name: Test_GitHub_Actions
 
 # 이벤트 정의
 on:
-  # main, develop 브랜치에 푸시될 때
+  # main 브랜치에 푸시될 때
   push:
     branches:
       - main
-      - develop
   # main, develop 브랜치에 Pull Request가 생성될 때
   pull_request:
     branches:
@@ -37,6 +36,11 @@ jobs:
       - name: Import Flutter Packages
         run: |
           flutter pub get
+
+      - name: Create dummy .env file for tests
+        run: |
+          echo "DUMMY_API_KEY=test_key" > .env
+          echo "DUMMY_BASE_URL=http://localhost:8080" >> .env
 
       - name: Run Tests
         run: |
